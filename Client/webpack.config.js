@@ -5,7 +5,7 @@ module.exports = {
       index: "./view/component/index.jsx",
     },
     output: {
-      path: path.join(__dirname, "../server/view"),
+      path: path.join(__dirname, "../server/public"),
       filename: "bundle.js",
     },
     module: {
