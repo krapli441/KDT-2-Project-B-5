@@ -7,12 +7,12 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(@Res()res: Response): void{
+  gethtml(@Res()res: Response): void{
     res.sendFile('index.html',{root: 'public'})
   }
   @Get('/bundle.js')
   getjs(@Res()res: Response): void{
-    res.sendFile('bundle.js',{root: '/public'})
+    res.sendFile('bundle.js',{root: 'public'})
   }
 }
 
