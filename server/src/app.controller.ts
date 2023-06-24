@@ -8,11 +8,11 @@ export class AppController {
 
   @Get()
   getHello(@Res()res: Response): void{
-    res.sendFile('index.html',{root: '../public'})
+    res.sendFile('index.html',{root: 'public'})
   }
   @Get('/bundle.js')
   getjs(@Res()res: Response): void{
-    res.sendFile('bundle.js',{root: '../public'})
+    res.sendFile('bundle.js',{root: '/public'})
   }
 }
 
