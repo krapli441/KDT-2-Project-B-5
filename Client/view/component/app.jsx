@@ -2,14 +2,14 @@
 import React, { Component, useState } from "react";
 
 // 리액트 컴포넌트
-import Map from "../utils/map";
+import KakaoMap from "../utils/kakaoMap";
 
 function App() {
   return (
     <>
       <div>
         <p>hello 포람페!</p>
-        <Map></Map>
+        <KakaoMap></KakaoMap>
       </div>
     </>
   );
