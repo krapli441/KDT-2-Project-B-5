@@ -11,11 +11,11 @@ function App() {
   return (
     <>
       <div>
-        <p>hello 포람페!</p>
+        <p>포르쉐 람보르기니 페라리 오우너 클럽 모바일 테스트</p>
         <Map></Map>
-        <Link>
+        {/* <Link>
           <LocationTest></LocationTest>
-        </Link>
+        </Link> */}
       </div>
     </>
   );
