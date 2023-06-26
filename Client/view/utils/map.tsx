@@ -4,11 +4,14 @@ import React, { useEffect } from "react";
 // 리액트 컴포넌트
 import useGeoLocation from "./geolocation";
 
+// ...import 문 생략...
+
 declare global {
   interface Window {
     kakao: any;
   }
 }
+
 const MapContainer = () => {
   const userLocation = useGeoLocation();
 
@@ -17,7 +20,7 @@ const MapContainer = () => {
       return new Promise<void>((resolve) => {
         if (!window.kakao) {
           const script = document.createElement("script");
-          script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=584005aa7fee37a3ef459f49ebfc7e70 &autoload=false`;
+          script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_JAVASCRIPT_KEY&autoload=false`;
           script.onload = () => {
             window.kakao.maps.load(() => {
               resolve();
@@ -42,10 +45,37 @@ const MapContainer = () => {
       new window.kakao.maps.Map(container, options);
     };
 
-    loadKakaoMap().then(() => {
-      initMap();
-    });
+    const requestLocationPermission = () => {
+      return new Promise<boolean>((resolve) => {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            () => {
+              resolve(true); // 위치 정보 권한이 허용된 경우
+            },
+            () => {
+              resolve(false); // 위치 정보 권한이 거부된 경우
+            }
+          );
+        } else {
+          resolve(false); // 위치 정보를 지원하지 않는 경우
+        }
+      });
+    };
+
+    const handleLocationPermission = async () => {
+      const granted = await requestLocationPermission();
+      if (granted) {
+        loadKakaoMap().then(() => {
+          initMap();
+        });
+      } else {
+        console.log("Location permission denied.");
+      }
+    };
+
+    handleLocationPermission();
   }, [userLocation]);
+
   return (
     <>
       <div id="map" style={{ width: "50vw", height: "50vh" }} />
