@@ -3,8 +3,11 @@ import React, { useEffect } from "react";
 
 // 리액트 컴포넌트
 
-// @ts-ignore
-const { kakao } = window;
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 
 export default function Map() {
   if (navigator.geolocation) {
@@ -12,7 +15,7 @@ export default function Map() {
       let lat = position.coords.latitude;
       let lng = position.coords.longitude;
 
-      let locPosition = new kakao.maps.LatLng(lat, lng),
+      let locPosition = new window.kakao.maps.LatLng(lat, lng),
         message = `<div>현재 위치</div>`;
 
       displayMarker(locPosition, message);
@@ -20,17 +23,17 @@ export default function Map() {
   } else {
     // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+    var locPosition = new window.kakao.maps.LatLng(33.450701, 126.570667),
       message = "geolocation을 사용할수 없어요..";
 
     displayMarker(locPosition, message);
   }
 
   // 지도에 마커와 인포윈도우를 표시하는 함수입니다
-  function displayMarker(locPosition, message) {
+  function displayMarker(locPosition: number, message: string) {
     // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-      map: map,
+    var marker = new window.kakao.maps.Marker({
+      map: window.kakao.map,
       position: locPosition,
     });
 
@@ -38,7 +41,7 @@ export default function Map() {
       iwRemoveable = true;
 
     // 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
+    var infowindow = new window.kakao.maps.InfoWindow({
       content: iwContent,
       removable: iwRemoveable,
     });
@@ -52,9 +55,9 @@ export default function Map() {
   useEffect(() => {
     const container = document.getElementsByClassName("map");
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
     };
-    const map = new kakao.maps.Map(container, options);
+    const map = new window.kakao.maps.Map(container, options);
   }, []);
 
   return (
