@@ -19,8 +19,8 @@ const MapContainer = () => {
         };
         const map = new window.kakao.maps.Map(container, options); // 지도 생성
 
-        // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
-        map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC);
+        // // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
+        // map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC);
       });
     };
   }, []);
