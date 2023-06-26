@@ -1,10 +1,16 @@
+// 리액트 라이브러리
 import React, { useEffect } from "react";
+
+// 리액트 컴포넌트
+import useGeoLocation from "./geolocation";
+
 declare global {
   interface Window {
     kakao: any;
   }
 }
 const MapContainer = () => {
+  const location = useGeoLocation();
   useEffect(() => {
     const container = document.getElementById("map");
     const script = document.createElement("script");
@@ -21,6 +27,15 @@ const MapContainer = () => {
       });
     };
   }, []);
-  return <div id="map" style={{ width: "100vw", height: "100vh" }} />;
+  return (
+    <>
+      <div id="map" style={{ width: "50vw", height: "50vh" }} />
+      <div className="geolocation">
+        {location.loaded
+          ? JSON.stringify(location)
+          : "Location data not available yet."}
+      </div>
+    </>
+  );
 };
 export default MapContainer;
