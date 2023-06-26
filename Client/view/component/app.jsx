@@ -1,10 +1,10 @@
 import React, {Component, useState} from 'react';
-import KakaoMap from './kakaoMap';
+import MapContainer from './MapContainer';
 
 function App(){
     return (
         <div>
-            <KakaoMap/>
+            <MapContainer/>
         </div>
     )
 }
