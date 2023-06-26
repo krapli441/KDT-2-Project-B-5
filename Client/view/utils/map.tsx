@@ -10,17 +10,23 @@ declare global {
   }
 }
 const MapContainer = () => {
-  const location = useGeoLocation();
+  const userLocation = useGeoLocation();
+  const userLocationLat = userLocation.coordinates?.lat;
+  const userLocationLng = userLocation.coordinates?.lng;
+
   useEffect(() => {
     const container = document.getElementById("map");
     const script = document.createElement("script");
     script.async = true;
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=584005aa7fee37a3ef459f49ebfc7e70&autoload=false`;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=584005aa7fee37a3ef459f49ebfc7e70&autoload=true`;
     document.head.appendChild(script);
     script.onload = () => {
       window.kakao.maps.load(() => {
         const options = {
-          center: new window.kakao.maps.LatLng(36.3016838, 127.3789012),
+          center: new window.kakao.maps.LatLng(
+            { userLocationLat },
+            { userLocationLng }
+          ),
           level: 3,
         };
         new window.kakao.maps.Map(container, options);
@@ -31,7 +37,7 @@ const MapContainer = () => {
     <>
       <div id="map" style={{ width: "50vw", height: "50vh" }} />
       <div className="geolocation">
-        {location.loaded
+        {userLocation.loaded
           ? JSON.stringify(location)
           : "Location data not available yet."}
       </div>
