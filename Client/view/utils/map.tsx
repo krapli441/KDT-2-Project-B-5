@@ -1,29 +1,29 @@
-// 리액트 라이브러리
 import React, { useEffect } from "react";
-
-// 리액트 컴포넌트
-
-// @ts-ignore
-const { kakao } = window;
-
-export default function Map() {
-  useEffect(() => {
-    const container = document.getElementsByClassName("map");
-    const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-    };
-    const map = new kakao.maps.Map(container, options);
-  }, []);
-
-  return (
-    <>
-      <div
-        className="map"
-        style={{
-          width: "500px",
-          height: "500px",
-        }}
-      ></div>
-    </>
-  );
+declare global {
+  interface Window {
+    kakao: any;
+  }
 }
+const MapContainer = () => {
+  useEffect(() => {
+    const container = document.getElementById("map");
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=584005aa7fee37a3ef459f49ebfc7e70&autoload=false`;
+    document.head.appendChild(script);
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        const options = {
+          center: new window.kakao.maps.LatLng(36.3016838, 127.3789012),
+          level: 3,
+        };
+        const map = new window.kakao.maps.Map(container, options); // 지도 생성
+
+        // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
+        map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC);
+      });
+    };
+  }, []);
+  return <div id="map" style={{ width: "100vw", height: "100vh" }} />;
+};
+export default MapContainer;
