@@ -16,7 +16,7 @@ const MapContainer = () => {
   useEffect(() => {
     const script = document.createElement("script");
     script.async = true;
-    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qGdB41Ygrom686bqIH1TBDaBgwBlIdp7VwAjy3RN&submodules=geocoder`;
+    script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9wujphq98b&submodules=geocoder`;
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -30,7 +30,7 @@ const MapContainer = () => {
   return (
     <>
       <Helmet>
-        <script src="`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=qGdB41Ygrom686bqIH1TBDaBgwBlIdp7VwAjy3RN&submodules=geocoder`"></script>
+        <script src="`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9wujphq98b&submodules=geocoder`"></script>
       </Helmet>
       <div id="map" style={{ width: "50vw", height: "50vh" }} />
     </>
