@@ -51,6 +51,13 @@ const MapContainer = () => {
         ),
         zoom: 15,
       });
+      let marker = new window.naver.maps.Marker({
+        position: new window.naver.maps.LatLng(
+          userLocation?.latitude,
+          userLocation?.longitude
+        ),
+        map: map,
+      });
     };
   }, [userLocation]);
 
