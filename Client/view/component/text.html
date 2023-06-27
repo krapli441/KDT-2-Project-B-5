@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>현재 위치의 교통 상태 확인</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b3da2e1025f79e2251178086a01fa93b&libraries=services"></script>
+</head>
+<body>
+    <h1>현재 위치의 교통 상태 확인</h1>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            // 지도 생성
+            var mapOptions = {
+                center: new kakao.maps.LatLng(37.5665, 126.9780), // 초기 지도 중심 위치 (서울)
+                level: 15 // 초기 줌 레벨
+            };
+            var map = new kakao.maps.Map(document.getElementById('map'), mapOptions);
+
+            // 현재 위치 가져오기
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lat = position.coords.latitude; // 위도
+                    var lng = position.coords.longitude; // 경도
+                    var currentPosition = new kakao.maps.LatLng(lat, lng);
+
+                    // 현재 위치 마커 생성
+                    var marker = new kakao.maps.Marker({
+                        position: currentPosition,
+                        map: map
+                    });
+
+                    // 현재 위치 기준으로 교통 상태 확인
+                    var traffic = new kakao.maps.Traffic();
+                    traffic.search(currentPosition, function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            var congestion = result[0].congestion; // 혼잡도 (1: 원할, 2: 보통, 3: 혼잡, 4: 매우혼잡)
+
+                            // 교통 상태에 따라 메시지 출력
+                            if (congestion >= 3) {
+                                alert('교통상태가 혼잡합니다.');
+                            } else {
+                                alert('교통상황이 원활합니다.');
+                            }
+                        }
+                    });
+
+                    // 지도 중심 위치를 현재 위치로 설정
+                    map.setCenter(currentPosition);
+                });
+            } else {
+                alert('Geolocation을 지원하지 않는 브라우저입니다.');
+            }
+        }
+
+        // initMap 함수 호출
+        window.onload = initMap;
+    </script>
+</body>
+</html>
