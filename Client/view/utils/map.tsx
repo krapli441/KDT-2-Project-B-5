@@ -21,6 +21,10 @@ const MapContainer = () => {
 
         // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
         map.addOverlayMapTypeId(window.kakao.maps.MapTypeId.TRAFFIC);
+        var marker = new window.kakao.maps.Marker({
+          position: new window.kakao.maps.LatLng(36.3016838, 127.3789012), // 마커의 좌표
+          map: map, // 마커를 표시할 지도 객체
+        });
       });
     };
   }, []);
