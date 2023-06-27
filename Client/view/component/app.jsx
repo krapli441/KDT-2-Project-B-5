@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { useKakaoMaps } from 'react-kakao-maps';
 
 function TrafficStatus() {
-  const REACT_APP_KAKAO_MAPS_API_KEY='b3da2e1025f79e2251178086a01fa93b'
-  const { kakao, mapRef } = useKakaoMaps(process.env.REACT_APP_KAKAO_MAPS_API_KEY);
+  
+  const apiKey = 'b3da2e1025f79e2251178086a01fa93b'; // 본인의 Kakao Maps API 키로 대체
+
+  const { kakao, mapRef } = useKakaoMaps(apiKey);
+
 
   useEffect(() => {
     if (kakao) {
@@ -50,7 +53,7 @@ function TrafficStatus() {
   return (
     <div>
       <h1>현재 위치의 교통 상태 확인</h1>
-      <div ref={mapRef} style={{ width: '100%', height: '400px' }}></div>
+      {/* <div ref={mapRef} style={{ width: '100%', height: '400px' }}></div> */}
     </div>
   );
 }
