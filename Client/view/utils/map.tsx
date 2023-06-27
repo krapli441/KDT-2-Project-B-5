@@ -1,8 +1,8 @@
 // 리액트 라이브러리
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // 리액트 컴포넌트
-import LocationComponent from "../component/userLocation";
+import LocationComponent from "../components/userLocation";
 
 // 카카오 지도 타입 선언
 declare global {
@@ -11,7 +11,29 @@ declare global {
   }
 }
 const MapContainer = () => {
+  // * userLocation 훅을 불러혼다
+  const [userLocation, setUserLocation] =
+    useState<GeolocationCoordinates | null>(null);
+
   useEffect(() => {
+    // ? 사용자 위치 정보를 가져오는 로직
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation(position.coords);
+        },
+        (error) => {
+          console.log("사용자 위치 정보를 가져오는데 실패했습니다.", error);
+        },
+        {
+          enableHighAccuracy: true,
+        }
+      );
+    } else {
+      console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
+    }
+
+    // * 카카오 지도 API 로직
     const container = document.getElementById("map");
     const script = document.createElement("script");
     script.async = true;
