@@ -11,6 +11,7 @@ declare global {
   }
 }
 
+// 카카오 지도를 생성하는 로직
 const MapContainer = () => {
   const [userLocation, setUserLocation] =
     useState<GeolocationCoordinates | null>(null);
@@ -37,7 +38,7 @@ const MapContainer = () => {
   // * 카카오 지도 API를 이용하여 맵을 생성하는 useEffect 훅
   useEffect(() => {
     if (userLocation) {
-      const container = document.getElementById("map");
+      const container = document.getElementById("kakaoMap");
 
       const script = document.createElement("script");
       script.async = true;
@@ -69,7 +70,7 @@ const MapContainer = () => {
 
   return (
     <>
-      <div id="map" style={{ width: "50vw", height: "50vh" }} />
+      <div id="kakaoMap" style={{ width: "50vw", height: "50vh" }} />
       <LocationComponent />
     </>
   );
