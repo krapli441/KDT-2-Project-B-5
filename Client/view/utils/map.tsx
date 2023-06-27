@@ -1,4 +1,10 @@
+// 리액트 라이브러리
 import React, { useEffect } from "react";
+
+// 리액트 컴포넌트
+import LocationComponent from "../component/userLocation";
+
+// 카카오 지도 타입 선언
 declare global {
   interface Window {
     kakao: any;
@@ -28,6 +34,11 @@ const MapContainer = () => {
       });
     };
   }, []);
-  return <div id="map" style={{ width: "100vw", height: "100vh" }} />;
+  return (
+    <>
+      <div id="map" style={{ width: "50vw", height: "50vh" }} />
+      <LocationComponent />
+    </>
+  );
 };
 export default MapContainer;
