@@ -9,7 +9,7 @@
             height: 400px;
         }
     </style>
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b3da2e1025f79e2251178086a01fa93b&libraries=services"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b3da2e1025f79e2251178086a01fa93b&autoload=false"></script>
 </head>
 <body>
     <h1>현재 위치의 교통 상태 확인</h1>
@@ -38,10 +38,10 @@
                     });
 
                     // 현재 위치 기준으로 교통 상태 확인
-                    var traffic = new kakao.maps.Traffic();
-                    traffic.search(currentPosition, function(result, status) {
+                    var traffic = new kakao.maps.services.Traffic();
+                    traffic.getTrafficInfo(currentPosition, function(result, status) {
                         if (status === kakao.maps.services.Status.OK) {
-                            var congestion = result[0].congestion; // 혼잡도 (1: 원할, 2: 보통, 3: 혼잡, 4: 매우혼잡)
+                            var congestion = result.status; // 혼잡 상태 (1: 원할, 2: 보통, 3: 혼잡, 4: 매우 혼잡)
 
                             // 교통 상태에 따라 메시지 출력
                             if (congestion >= 3) {
