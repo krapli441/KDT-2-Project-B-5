@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import SignUp from "../../../../utils/Components/signUp";
-
+import SignUp from "./signUp";
 
 const Screen: React.FC = () => {
   return (
