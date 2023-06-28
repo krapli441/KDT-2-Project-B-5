@@ -11,15 +11,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: [/\.js$/, /\.jsx$/],
+        test: [/\.(js|jsx)$/],
         use: ["babel-loader"],
       },
       {
-        test: [/\.ts$/, /\.tsx$/],
+        test: [/\.(ts|tsx)$/],
         use: ["ts-loader"],
       },
       {
-        test: [/\.css$/],
+        test: [/\.(css)$/],
         use: ["style-loader", "css-loader"],
       },
       { test: [/\.(png|jpe?g|gif)$/i], use: ["file-loader"] },
@@ -27,10 +27,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    inline: true,
     port: 8085,
-    hot: true,
-    publicPath: "/",
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".png"],
