@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
+import "@dotlottie/player-component";
 
 // 리액트 컴포넌트
 import IntroLogo from "./introLogo.png";
@@ -24,6 +25,11 @@ function introPage() {
         alignItems={"center"}
         backgroundColor={"white"}
       >
+        <dotlottie-player
+          src="../../components/asphalt.lottie"
+          autoplay
+          style={{ width: "347px", height: "99px" }}
+        />
         <img src={IntroLogo} width="70%" alt="로고" />
       </Box>
     </>
