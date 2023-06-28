@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function introPage() {
-  /*   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -10,7 +10,6 @@ function introPage() {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
- */
   return (
     <>
       <div>
