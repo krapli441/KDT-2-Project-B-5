@@ -8,8 +8,8 @@ import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
 import SignUp from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
 import Home from "../view/pages/mainPage/mainScreen";
-import Fun from "../view/pages/playlistPages/funPlayList/funPlayListScreen";
-import Blockage from "../view/pages/playlistPages/blockagePlayList/blockagePlayListScreen";
+/* import Fun from "../view/pages/playlistPages/funPlayList/funPlayListScreen";
+ */ import Blockage from "../view/pages/playlistPages/blockagePlayList/blockagePlayListScreen";
 import Normal from "../view/pages/playlistPages/normalPlayList/normalPlayListScreen";
 import Stuck from "../view/pages/playlistPages/stuckPlayList/stuckPlayListScreen";
 
@@ -30,7 +30,8 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/fun" element={<Fun />} />
+        {/*         <Route path="/fun" element={<Fun />} />
+         */}
         <Route path="/blockage" element={<Blockage />} />
         <Route path="/normal" element={<Normal />} />
         <Route path="/stuck" element={<Stuck />} />
