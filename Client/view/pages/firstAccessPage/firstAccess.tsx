@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { HiOutlinePencilAlt } from "react-icons/Hi";
-import IntroLogo from "../IntroPage/introLogo.png";
+import IntroLogo from "../introPage/introLogo.png";
 
 export default function Login() {
   return (

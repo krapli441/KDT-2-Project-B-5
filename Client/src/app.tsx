@@ -1,11 +1,11 @@
 import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import Intro from "../view/IntroPage/IntroPageScreen";
-import FirstPage from "../view/firstPage/firstPageScreen";
-import Singup from "../view/signUp/signUpScreen";
+import Intro from "../view/pages/introPage/IntroPageScreen";
+import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
+import Singup from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
-import Home from "../view/mainPage/mainScreen";
+import Home from "../view/pages/mainPage/mainScreen";
 // import  from "../view/fragments";
 // import Nav from "../view/fragments/footer";
 
@@ -15,7 +15,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Intro />} />
-          <Route path="/first" element={<FirstPage />} />
+          <Route path="/first" element={<FirstAccess />} />
           <Route path="/signup" element={<Singup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
