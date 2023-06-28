@@ -5,11 +5,11 @@ module.exports = {
     index: "./src/index.tsx",
   },
   output: {
-    path: path.join(__dirname, "../server/public"),
+    path: path.join(__dirname, "./public"),
     filename: "bundle.js",
   },
   output: {
-    path: path.join(__dirname, "./public"),
+    path: path.join(__dirname, "../server/public"),
     filename: "bundle.js",
   },
   module: {
