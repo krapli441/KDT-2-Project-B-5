@@ -5,17 +5,23 @@ import { Box } from "@chakra-ui/react";
 // 리액트 컴포넌트
 import Intro from "../view/pages/introPage/introPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
-import Singup from "../view/pages/signUpPage/signUpScreen";
+import SignUp from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
 import Home from "../view/pages/mainPage/mainScreen";
 
 export default function App() {
   return (
-    <Box className="container">
+    <Box
+      className="container"
+      width={"430px"}
+      height={"932px"}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
       <Routes>
         <Route path="/" element={<Intro />} />
         <Route path="/first" element={<FirstAccess />} />
-        <Route path="/signup" element={<Singup />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
       </Routes>
