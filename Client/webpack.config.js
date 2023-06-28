@@ -8,10 +8,6 @@ module.exports = {
     path: path.join(__dirname, "../server/public"),
     filename: "bundle.js",
   },
-  output: {
-    path: path.join(__dirname, "./public"),
-    filename: "bundle.js",
-  },
   module: {
     rules: [
       {
