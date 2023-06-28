@@ -11,7 +11,7 @@ export default function Login() {
   return (
     <>
       <Box>
-        <IntroLogo />
+        <img src={IntroLogo}></img>
         <Box>
           <Box className="createAccoutButton">
             <HiOutlinePencilAlt />

@@ -13,6 +13,7 @@ export default function App() {
   return (
     <Box
       className="container"
+      display={"flex"}
       width={"430px"}
       height={"932px"}
       justifyContent={"center"}
