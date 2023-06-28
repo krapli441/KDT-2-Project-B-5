@@ -13,7 +13,7 @@ declare global {
 }
 
 // 네이버 지도를 생성하는 로직
-const MapContainer = () => {
+const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] =
     useState<GeolocationCoordinates | null>(null);
 
