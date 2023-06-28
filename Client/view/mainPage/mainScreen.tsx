@@ -1,12 +1,12 @@
-// import React from "react";
-// import Main from "../../../../utils/Components/main";
+import React from "react";
+import Main from "./mainPage";
 
-// const Screen: React.FC = () => {
-//   return (
-//     <>
-//       <Main />
-//     </>
-//   );
-// };
+const Screen: React.FC = () => {
+  return (
+    <>
+      <Main />
+    </>
+  );
+};
 
-// export default Screen;
+export default Screen;

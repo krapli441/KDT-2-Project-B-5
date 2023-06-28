@@ -5,6 +5,7 @@ import Intro from "../view/IntroPage/IntroPageScreen";
 import FirstPage from "../view/firstPage/firstPageScreen";
 import Singup from "../view/signUp/signUpScreen";
 import Login from "../view/loginPage/loginScreen";
+import Home from "../view/mainPage/mainScreen";
 // import  from "../view/fragments";
 // import Nav from "../view/fragments/footer";
 
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/first" element={<FirstPage />} />
           <Route path="/signup" element={<Singup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
     </div>
