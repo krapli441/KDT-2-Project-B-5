@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-/* import Iogin from "./login";
- */
+import Iogin from "./login";
+
 const Screen: React.FC = () => {
-  return <></>;
+  return (
+    <>
+      <Iogin />
+    </>
+  );
 };
 
 export default Screen;
