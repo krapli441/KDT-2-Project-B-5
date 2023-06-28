@@ -12,15 +12,13 @@ import Home from "../view/pages/mainPage/mainScreen";
 export default function App() {
   return (
     <Box className="container">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Intro />} />
-          <Route path="/first" element={<FirstAccess />} />
-          <Route path="/signup" element={<Singup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Intro />} />
+        <Route path="/first" element={<FirstAccess />} />
+        <Route path="/signup" element={<Singup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </Box>
   );
 }
