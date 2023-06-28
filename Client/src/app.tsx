@@ -13,16 +13,16 @@ export default function App() {
     <>
       <div className="container">
           <Routes>
-            <Route path="/" element={<IntroPage />} />
-            <Route path="/home" element={<MainScreen />} />
-            <Route path="/first" element={<FirstPage />} />
+            <Route path="/" element={<Intro />} />
+{/*             <Route path="/home" element={<MainScreen />} />
+            <Route path="/Intro" element={<IntroPageScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/signup" element={<SignUpScreen />} />
             <Route path="/welcome_1" element={<FirstLoginPage />} />
             <Route path="/welcome_2" element={<WelcomeSecond />} />
-            <Route path="/welcome_3" element={<WelcomeThird />} />
+            <Route path="/welcome_3" element={<WelcomeThird />} /> */}
           </Routes>
-        {[
+{/*         {[
           "/",
           "/first",
           "/signup",
@@ -32,7 +32,7 @@ export default function App() {
           "/welcome_3",
         ].includes(location.pathname) ? null : (
           <Nav />
-        )}
+        )} */}
       </div>
     </>
   );

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import IntroPage from '../../../../utils/Components/introPage'
-
+import IntroPage from "./introPage";
 
 const Screen: React.FC = () => {
   return (
     <>
-      <IntroPage/>
+      <IntroPage />
     </>
   );
 };
