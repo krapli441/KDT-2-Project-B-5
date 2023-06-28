@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Intro from "../view/IntroPage/IntroPageScreen";
 import FirstPage from "../view/firstPage/firstPageScreen";
 import Singup from "../view/signUp/signUpScreen";
-import Login from "../view/loginPage/loginScreen";
+import Login from "../view/pages/loginPage/loginScreen";
 import Home from "../view/mainPage/mainScreen";
 // import  from "../view/fragments";
 // import Nav from "../view/fragments/footer";
