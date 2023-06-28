@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import IntroLogo from "./introLogo.png";
 
 function introPage() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function introPage() {
   return (
     <>
       <div>
-        <img src={"./introLogo.png"} width="80%" alt="시작로고" />
+        <img src={IntroLogo} width="80%" alt="시작로고" />
       </div>
     </>
   );
