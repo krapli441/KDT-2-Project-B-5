@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import  from "./";
 
@@ -8,5 +9,18 @@ const Screen: React.FC = () => {
  */}    </>
   );
 };
+=======
+// import React, { useState } from "react";
+// import Login from "../../../../utils/Components/login";
+// import Nav from "../../../../utils/Components/nav";
 
-export default Screen;
+// const Screen: React.FC = () => {
+//   return (
+//     <>
+//       <Login />
+//     </>
+//   );
+// };
+>>>>>>> origin/subMain
+
+// export default Screen;

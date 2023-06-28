@@ -9,6 +9,7 @@ import Nav from "../view/fragments/footer";
 export default function App() {
 
   return (
+<<<<<<< HEAD
     <>
       <div className="container">
           <Routes>
@@ -34,5 +35,10 @@ export default function App() {
         )} */}
       </div>
     </>
+=======
+    <div>
+      <p>웹팩 개발서버 테스트</p>
+    </div>
+>>>>>>> origin/subMain
   );
 }

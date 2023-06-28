@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import IntroPage from "./introPage";
 
@@ -8,5 +9,18 @@ const Screen: React.FC = () => {
     </>
   );
 };
+=======
+// import React, { useState } from "react";
+// import IntroPage from '../../../../utils/Components/introPage'
 
-export default Screen;
+
+// const Screen: React.FC = () => {
+//   return (
+//     <>
+//       <IntroPage/>
+//     </>
+//   );
+// };
+>>>>>>> origin/subMain
+
+// export default Screen;
