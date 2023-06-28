@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import Intro from "../view/pages/introPage/IntroPageScreen";
+import Intro from "../view/pages/introPage/introPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
 import Singup from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
