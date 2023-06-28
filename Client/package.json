@@ -34,6 +34,7 @@
     "@babel/preset-react": "^7.22.5",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "kakao.maps.d.ts": "^0.1.38",
     "typescript": "^5.1.3"
   }
 }
