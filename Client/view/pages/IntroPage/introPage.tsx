@@ -13,7 +13,7 @@ function introPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/first");
-    }, 1000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
   return (
@@ -28,9 +28,9 @@ function introPage() {
         <dotlottie-player
           src="../../components/asphalt.lottie"
           autoplay
-          style={{ width: "347px", height: "99px" }}
+          style={{ width: "100%", height: "100%" }}
         />
-        <img src={IntroLogo} width="70%" alt="로고" />
+        {/* <img src={IntroLogo} width="70%" alt="로고" /> */}
       </Box>
     </>
   );
