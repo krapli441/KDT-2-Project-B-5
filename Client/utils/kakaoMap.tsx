@@ -12,7 +12,7 @@ declare global {
 }
 
 // 카카오 지도를 생성하는 로직
-const MapContainer = () => {
+const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] =
     useState<GeolocationCoordinates | null>(null);
 

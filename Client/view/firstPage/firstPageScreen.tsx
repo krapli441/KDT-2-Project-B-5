@@ -1,5 +1,5 @@
 import React from "react";
-import FirstPage from "../../../../utils/Components/firstPage";
+import FirstPage from "./firstpage";
 
 const Screen: React.FC = () => {
   return (
