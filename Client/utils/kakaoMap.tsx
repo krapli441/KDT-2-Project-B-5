@@ -71,7 +71,6 @@ const MapContainer = () => {
   return (
     <>
       <div id="kakaoMap" style={{ width: "100vw", height: "100vh" }} />
-      <LocationComponent />
     </>
   );
 };
