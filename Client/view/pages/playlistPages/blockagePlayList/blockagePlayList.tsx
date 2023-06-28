@@ -1,4 +1,5 @@
-// 정체
 import React from "react";
 
-// 리액트 컴포넌트
+export default function blockage() {
+  return <></>;
+}

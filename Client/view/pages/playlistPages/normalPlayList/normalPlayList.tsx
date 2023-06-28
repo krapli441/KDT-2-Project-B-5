@@ -1,4 +1,5 @@
-// 보통
 import React from "react";
 
-// 리액트 컴포넌트
+export default function normal() {
+  return <></>;
+}
