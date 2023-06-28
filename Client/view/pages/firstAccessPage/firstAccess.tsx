@@ -10,9 +10,24 @@ import IntroLogo from "../introPage/introLogo.png";
 export default function Login() {
   return (
     <>
-      <Box>
-        <img src={IntroLogo}></img>
-        <Box>
+      <Box
+        className="loginPage"
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        backgroundColor={"white"}
+      >
+        <img src={IntroLogo} width="70%" alt="로고" />
+        <Box
+          className="selectLoginType"
+          display="flex"
+          flexDirection={"column"}
+          alignItems={"center"}
+          justifyContent={"space-evenly"}
+          width={"301px"}
+          height={"100px"}
+        >
           <Box className="createAccoutButton">
             <HiOutlinePencilAlt />
             회원가입

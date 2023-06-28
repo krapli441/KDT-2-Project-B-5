@@ -24,7 +24,7 @@ function introPage() {
         alignItems={"center"}
         backgroundColor={"white"}
       >
-        <img src={IntroLogo} width="100%" alt="로고" />
+        <img src={IntroLogo} width="70%" alt="로고" />
       </Box>
     </>
   );
