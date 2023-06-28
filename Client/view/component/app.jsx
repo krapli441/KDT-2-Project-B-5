@@ -1,41 +1,82 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 
-const MapComponent = () => {
-  useEffect(() => {
-    const loadMap = async () => {
-      const mapScript = document.createElement('script');
-      mapScript.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=b3da2e1025f79e2251178086a01fa93b&libraries=services&autoload=false';
-      document.head.appendChild(mapScript);
+class YoutubeSearch extends Component {
+  state = {
+    searchTerm: '',
+    videos: [],
+    selectedVideo: null,
+  };
 
-      mapScript.onload = () => {
-        const mapContainer = document.getElementById('map');
-        const options = {
-          center: new window.kakao.maps.LatLng(36.344291, 127.384876), // 둔산동 둔산대로 좌표 설정
-          level: 3,
-        };
-        const map = new window.kakao.maps.Map(mapContainer, options);
+  handleChange = (event) => {
+    this.setState({ searchTerm: event.target.value });
+  };
 
-        const trafficService = new window.kakao.maps.services.Traffic();
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.fetchData();
+  };
 
-        // 둔산동 둔산대로의 실시간 교통량 정보 가져오기
-        trafficService.getRoadTrafficData(178, (data, status) => {
-          if (status === window.kakao.maps.services.Status.OK) {
-            const congestion = data.congestion;
+  handleClick = (video) => {
+    this.setState({ selectedVideo: video });
+  };
 
-            if (congestion === '3' || congestion === '4') {
-              console.log('혼잡');
-            } else {
-              console.log('원할');
-            }
-          }
-        });
-      };
-    };
+  fetchData = async () => {
+    const { searchTerm } = this.state;
 
-    loadMap();
-  }, []);
+    try {
+      // 유튜브 API 호출
+      const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=AIzaSyA9zqB9QJLqjy1iCTGfgdTNrSo6WpJfRd0`
+      );
 
-  return <div id="map" style={{ width: '500px', height: '400px' }}></div>;
-};
+      if (!response.ok) {
+        throw new Error('유튜브 API 호출이 실패하였습니다.');
+      }
 
-export default MapComponent;
+      const data = await response.json();
+
+      // 검색 결과를 상태에 저장
+      this.setState({ videos: data.items, selectedVideo: null });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  render() {
+    const { searchTerm, videos, selectedVideo } = this.state;
+
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={searchTerm} onChange={this.handleChange} />
+          <button type="submit">검색</button>
+        </form>
+        <div>
+          {selectedVideo && (
+            <div>
+              <iframe
+                width="560"
+                height="315"
+                src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
+          <div>
+            {videos.map((video) => (
+              <div key={video.id.videoId} onClick={() => this.handleClick(video)}>
+                <h2>{video.snippet.title}</h2>
+                <p>{video.snippet.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default YoutubeSearch;
