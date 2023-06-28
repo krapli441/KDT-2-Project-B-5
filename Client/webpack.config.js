@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
     entry: {
-      index: "./view/component/index.jsx",
+      index: "./src/index.jsx",
     },
     output: {
       path: path.join(__dirname, "../server/public"),
