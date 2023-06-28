@@ -1,5 +1,9 @@
+// 리액트 라이브러리
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
+
+// 리액트 컴포넌트
 import IntroLogo from "./introLogo.png";
 
 function introPage() {
@@ -13,9 +17,9 @@ function introPage() {
   }, []);
   return (
     <>
-      <div>
+      <Box className="introLogo">
         <img src={IntroLogo} width="80%" alt="시작로고" />
-      </div>
+      </Box>
     </>
   );
 }

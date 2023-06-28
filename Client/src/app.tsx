@@ -1,17 +1,17 @@
+// 리액트 라이브러리
 import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
+import { Box } from "@chakra-ui/react";
+// 리액트 컴포넌트
 import Intro from "../view/pages/introPage/introPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
 import Singup from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
 import Home from "../view/pages/mainPage/mainScreen";
-// import  from "../view/fragments";
-// import Nav from "../view/fragments/footer";
 
 export default function App() {
   return (
-    <div>
+    <Box className="container">
       <Router>
         <Routes>
           <Route path="/" element={<Intro />} />
@@ -21,6 +21,6 @@ export default function App() {
           <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
-    </div>
+    </Box>
   );
 }
