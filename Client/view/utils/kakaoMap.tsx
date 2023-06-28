@@ -70,7 +70,7 @@ const MapContainer = () => {
 
   return (
     <>
-      <div id="kakaoMap" style={{ width: "50vw", height: "50vh" }} />
+      <div id="kakaoMap" style={{ width: "100vw", height: "100vh" }} />
       <LocationComponent />
     </>
   );

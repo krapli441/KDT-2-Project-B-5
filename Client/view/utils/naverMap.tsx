@@ -66,7 +66,7 @@ const MapContainer = () => {
       <Helmet>
         <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9wujphq98b&submodules=geocoder"></script>
       </Helmet>
-      <div id="naverMap" style={{ width: "50vw", height: "50vh" }} />
+      <div id="naverMap" style={{ width: "100vw", height: "100vh" }} />
     </>
   );
 };
