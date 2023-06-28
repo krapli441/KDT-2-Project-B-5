@@ -17,8 +17,14 @@ function introPage() {
   }, []);
   return (
     <>
-      <Box className="introLogo">
-        <img src={IntroLogo} width="80%" alt="시작로고" />
+      <Box
+        className="introLogo"
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        backgroundColor={"white"}
+      >
+        <img src={IntroLogo} width="100%" alt="로고" />
       </Box>
     </>
   );
