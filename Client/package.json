@@ -2,7 +2,7 @@
   "name": "kdt-2-project-b-5",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "dev": "webpack serve --mode development --open --hot",
     "test": "echo \"Error: no test specified\" && exit 1",
