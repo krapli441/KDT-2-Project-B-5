@@ -11,7 +11,15 @@ const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <BrowserRouter>
     <ChakraProvider>
-      <Box id="rootBackground" width={"100vw"} height={"100vh"}>
+      <Box
+        id="rootBackground"
+        width={"100vw"}
+        height={"100vh"}
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        backgroundColor={"gray.700"}
+      >
         <App></App>
       </Box>
     </ChakraProvider>

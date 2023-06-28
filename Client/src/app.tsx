@@ -18,6 +18,7 @@ export default function App() {
       height={"932px"}
       justifyContent={"center"}
       alignItems={"center"}
+      backgroundColor={"white"}
     >
       <Routes>
         <Route path="/" element={<Intro />} />
