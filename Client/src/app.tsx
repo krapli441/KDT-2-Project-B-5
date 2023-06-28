@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Intro from "../view/IntroPage/IntroPageScreen";
 import login from "../view/loginPage/loginScreen";
-import Firstlogin from "../view/firstLoginPage/";
 import  from "../view/fragments";
 import Nav from "../view/fragments/footer";
 
