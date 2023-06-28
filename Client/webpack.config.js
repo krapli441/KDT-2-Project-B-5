@@ -8,6 +8,10 @@ module.exports = {
     path: path.join(__dirname, "../server/public"),
     filename: "bundle.js",
   },
+  output: {
+    path: path.join(__dirname, "./public"),
+    filename: "bundle.js",
+  },
   module: {
     rules: [
       {
@@ -32,12 +36,4 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".png"],
   },
-  // plugins: [
-  //   new CopyWebpackPlugin([
-  //     {
-  //       from: "./public/img/image",
-  //       to: "./public/img/image",
-  //     },
-  //   ]),
-  // ],
 };
