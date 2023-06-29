@@ -3,12 +3,9 @@ import React from "react";
 import { Box, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 // 리액트 컴포넌트
-import { NavLink } from "react-router-dom";
 import { BsKeyFill } from "react-icons/Bs";
 import { HiOutlinePencilAlt } from "react-icons/Hi";
 import IntroLogo from "../introPage/introLogo.png";
-import Tmap from "../../../utils/skTmap";
-import TmapTwo from "../../../utils/skTmapRemake";
 
 export default function Login() {
   return (
