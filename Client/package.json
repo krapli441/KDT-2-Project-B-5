@@ -31,6 +31,7 @@
     "react-icon": "^1.0.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.0",
+    "react-tmap": "^1.0.1",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1"
