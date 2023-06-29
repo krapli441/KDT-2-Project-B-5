@@ -70,7 +70,7 @@ const MapContainer: React.FC = () => {
 
   return (
     <>
-      <div id="kakaoMap" style={{ width: "100vw", height: "100vh" }} />
+      <div id="kakaoMap" style={{ width: "430px", height: "932px" }} />
     </>
   );
 };

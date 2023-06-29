@@ -2,11 +2,15 @@
 import React from "react";
 import { Box, Image } from "@chakra-ui/react";
 // 리액트 컴포넌트
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BsKeyFill } from "react-icons/Bs";
 import { HiOutlinePencilAlt } from "react-icons/Hi";
 import IntroLogo from "../introPage/introLogo.png";
 
+const flexbox = {
+  display: "flex",
+  alignItems: "center",
+};
 export default function Login() {
   return (
     <>
@@ -28,14 +32,18 @@ export default function Login() {
           width={"301px"}
           height={"100px"}
         >
-          <Box className="createAccoutButton">
-            <HiOutlinePencilAlt />
-            회원가입
-          </Box>
-          <Box className="loginButton">
-            <BsKeyFill />
-            로그인
-          </Box>
+          <Link to="/signup">
+            <Box className="createAccoutButton" style={flexbox}>
+              <HiOutlinePencilAlt />
+              회원가입
+            </Box>
+          </Link>
+          <Link to="/login">
+            <Box className="loginButton" style={flexbox}>
+              <BsKeyFill />
+              로그인
+            </Box>
+          </Link>
         </Box>
       </Box>
     </>

@@ -11,10 +11,6 @@ export default function nav() {
       <IoMdMenu fontSize="40px" />
 
       <AiFillHome fontSize="40px" />
-
-      <Link to="/search">
-        <BiSearchAlt2 color="#000000" fontSize="40px" />
-      </Link>
     </div>
   );
 }
