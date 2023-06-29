@@ -61,9 +61,8 @@ const MapContainer: React.FC = () => {
     <div
       id="TmapApp"
       style={{
-        height: "100%",
-        width: "100%",
-        position: "fixed",
+        height: "403px",
+        width: "936px",
       }}
     ></div>
   );

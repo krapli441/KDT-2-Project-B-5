@@ -38,7 +38,6 @@ export default function Login() {
             <BsKeyFill />
             로그인
           </Box>
-          <TmapTwo></TmapTwo>
         </Box>
       </Box>
     </>
