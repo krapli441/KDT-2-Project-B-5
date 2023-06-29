@@ -66,8 +66,9 @@ export default function Main() {
     setMarketingUseCheck(isChecked);
     setAdvertisementCheck(isChecked);
   };
+
   // ! 이 영역까지 약관 동의에 관한 내용
-  /*   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     alert("회원가입이 완료되었습니다");
     const data = {
@@ -99,12 +100,12 @@ export default function Main() {
       .catch((error) => {
         console.error(error);
       });
-  }; */
+  };
   return (
     <>
       <div className="main">
         <div className="signUpText">회원 정보를 입력해주세요.</div>
-        <form className="BackgroundColorGray" /* onSubmit={handleSubmit} */>
+        <form className="BackgroundColorGray" onSubmit={handleSubmit}>
           <input
             className="inputText"
             name="userId"
@@ -232,9 +233,7 @@ export default function Main() {
               </div>
             </div>
           </div>
-          <button type="submit" className={``}>
-            회원가입
-          </button>
+          <button type="submit">회원가입</button>
         </form>
       </div>
     </>
