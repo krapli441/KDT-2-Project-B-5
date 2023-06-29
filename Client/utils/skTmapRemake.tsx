@@ -10,6 +10,8 @@ declare global {
   }
 }
 
+const requestURI = 'https://apis.openapi.sk.com/tmap/traffic?version={Tmapv3}&minLat={minLat}&minLon={minLon}&maxLat={maxLat}&maxLon={maxLon}&reqCoordType={reqCoordType}&resCoordType={resCoordType}&trafficType={trafficType}&zoomLevel={zoomLevel}&callback={callback}&appKey={appKey}'
+
 const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] =
     useState<GeolocationCoordinates | null>(null);
@@ -39,9 +41,6 @@ const MapContainer: React.FC = () => {
 
   useEffect(() => {
     if (userLocation) {
-      // const script = document.createElement("script");
-      // script.src =
-      //   "https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV";
       function generateMap() {
         let map = new window.Tmapv3.Map("TmapApp", {
           center: new window.Tmapv3.LatLng(
