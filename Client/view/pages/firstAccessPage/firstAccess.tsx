@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { BsKeyFill } from "react-icons/Bs";
 import { HiOutlinePencilAlt } from "react-icons/Hi";
 import IntroLogo from "../introPage/introLogo.png";
+import Tmap from "../../../utils/skTmap";
 
 export default function Login() {
   return (
@@ -36,6 +37,7 @@ export default function Login() {
             <BsKeyFill />
             로그인
           </Box>
+          <Tmap></Tmap>
         </Box>
       </Box>
     </>
