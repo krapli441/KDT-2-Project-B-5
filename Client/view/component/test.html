@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>티맵 OpenAPI</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe"></script>
 </head>
 <body>
-    <div id="map" style="width:500px;height:400px;"></div>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b3da2e1025f79e2251178086a01fa93b"></script>
+    <div id="map_div"></div>
     <script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
-
-		var map = new kakao.maps.Map(container, options);
-	</script>
+         var map = new Tmapv2.Map("map_div", { // 지도가 생성될 div
+            center: new Tmapv2.LatLng(37.570028, 126.986072),    // 지도의 중심좌표
+            width : "750px", // 지도의 넓이
+            height : "750px", // 지도의 높이
+            zoom : 12, // 지도의 줌레벨
+            httpsMode: true,    // https모드 설정
+        });
+    </script>
 </body>
 </html>
