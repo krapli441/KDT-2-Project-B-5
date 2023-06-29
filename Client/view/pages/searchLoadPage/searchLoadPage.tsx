@@ -4,8 +4,9 @@ import { MdSwapVert } from "react-icons/md";
 function navigate() {
   const nowMeInput = document.getElementById("nowMe");
   const wantMeInput = document.getElementById("wantMe");
-  const nowMe = nowMeInput.value;
+  /*   const nowMe = nowMeInput.value;
   const wantMe = wantMeInput.value;
+ */
 }
 export default function search() {
   return (

@@ -66,7 +66,7 @@ const MapContainer: React.FC = () => {
       <Helmet>
         <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=9wujphq98b&submodules=geocoder"></script>
       </Helmet>
-      <div id="naverMap" style={{ width: "100vw", height: "100vh" }} />
+      <div id="naverMap" style={{ width: "430px", height: "932px" }} />
     </>
   );
 };
