@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SearchPage from "./searchPage";
+import SearchPage from "./searchLoadPage";
 
 const Screen: React.FC = () => {
   return (
