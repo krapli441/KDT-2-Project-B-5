@@ -11,32 +11,34 @@ declare global {
   }
 }
 
-// 카카오 지도를 생성하는 로직
-const MapContainer: React.FC = () => {
+export default function App() {
   useEffect(() => {
     const script = document.createElement("script");
-    script.src =
-      "https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=발급받은 App key";
-
-    // 스크립트 로드 완료 시 실행되는 이벤트 핸들러
-    script.onload = () => {
-      initTmap();
-    };
-
+    script.innerHTML = `         
+        function initTmap() {
+            var map = new Tmapv2.Map("TMapApp", {
+                center: new Tmapv2.LatLng(37.566481622437934,126.98502302169841),
+                width: "100%",
+                height: "100%",
+                zoom:15
+            });
+        }
+        
+        initTmap();
+   `;
+    script.type = "text/javascript";
+    script.async = true;
     document.head.appendChild(script);
   }, []);
 
-  // Tmapv2를 사용하여 지도 초기화 함수
-  const initTmap = () => {
-    const map = new window.tMap.Map("map_div", {
-      center: new window.tMap.LatLng(37.566481622437934, 126.98502302169841), // 지도 초기 좌표
-      width: "890px",
-      height: "400px",
-      zoom: 15,
-    });
-  };
-
-  return <div id="map_div" style={{ width: "890px", height: "400px" }}></div>;
-};
-
-export default MapContainer;
+  return (
+    <div
+      id="TMapApp"
+      style={{
+        height: "100%",
+        width: "100%",
+        position: "fixed",
+      }}
+    />
+  );
+}
