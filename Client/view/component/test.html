@@ -1,21 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>티맵 OpenAPI</title>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe"></script>
-</head>
-<body>
-    <div id="map_div"></div>
-    <script>
-         var map = new Tmapv2.Map("map_div", { // 지도가 생성될 div
-            center: new Tmapv2.LatLng(37.570028, 126.986072),    // 지도의 중심좌표
-            width : "750px", // 지도의 넓이
-            height : "750px", // 지도의 높이
-            zoom : 12, // 지도의 줌레벨
-            httpsMode: true,    // https모드 설정
-        });
-    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>simpleMap</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script
+	src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe"></script>
+<script type="text/javascript">
+	var polyLineArr = [];
+
+var map;
+var routeLayer;
+var zoom = 15;
+var centerLon = "127.3789012";
+var centerLat = "36.3016838";
+let latitude 
+let longitude
+
+navigator.geolocation.getCurrentPosition(
+          // 위치 정보를 성공적으로 가져오면 콜백 함수가 실행
+          (position) => {
+            // 사용자의 위도와 경도를 가져옴
+             latitude = position.coords.latitude;
+             longitude = position.coords.longitude;
+
+            // 현재 위치 마커 생성
+            // 위도와 경도로 markerPosition을 생성하고, 이를 기반으로 마커 객체를 생성
+            // const markerPosition = new window.kakao.maps.LatLng(latitude, longitude); 
+            // const marker = new window.kakao.maps.Marker({
+            //   position: markerPosition
+            // });
+
+            // 마커를 지도에 추가
+            // marker.setMap(map);
+
+            // 지도 중심 위치 변경
+            // map.setCenter(markerPosition);
+        }
+        )
+
+function initTmap() {
+  map = new Tmapv2.Map("map_div", {
+    center: new Tmapv2.LatLng(36.3016838, 127.3789012),
+    width: "100%",
+    height: "400px",
+    zoom: 17,
+    zoomControl: true,
+    scrollwheel: true
+  });
+
+  map.addListener("mouseup", function onMoveEnd(evt) {
+    var mapLatLng = evt.latLng;
+    zoom = map.getZoom();
+
+    document.getElementById("zoom").textContent = zoom;
+    document.getElementById("center_zoom").textContent = zoom;
+
+    centerLon = mapLatLng._lng;
+    centerLat = mapLatLng._lat;
+
+    document.getElementById("lon").value = centerLon;
+    document.getElementById("lat").value = centerLat;
+    // document.getElementById("center_lon").textContent = centerLon;
+    // document.getElementById("center_lat").textContent = centerLat;
+    // document.getElementById("center_lon2").textContent = centerLon;
+    // document.getElementById("center_lat2").textContent = centerLat;
+  });
+
+  var btnSelect = document.getElementById("btn_select");
+  btnSelect.addEventListener("click", function () {
+    if (routeLayer) {
+      routeLayer.removeAllFeatures();
+    }
+    var headers = {};
+    headers["appKey"] = "FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe";
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://apis.openapi.sk.com/tmap/traffic?version=1&format=json" +
+        "&reqCoordType=WGS84GEO" +
+        "&resCoordType=EPSG3857" +
+        "&zoomLevel=" +
+        zoom +
+        "&trafficType=AROUND" +"&radius=3"+
+        "&centerLon=" +
+        centerLon +
+        "&centerLat=" +
+        centerLat 
+        
+    );
+    xhr.setRequestHeader("appKey", headers["appKey"]);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        console.log('response',response)
+        var resultData = response.features;
+        console.log('resultdata',resultData);
+        if (polyLineArr.length > 0) {
+          for (var k in polyLineArr) {
+            polyLineArr[k].setMap(null);
+          }
+          polyLineArr = [];
+        }
+
+        for (var i in resultData) {
+          var geometry = resultData[i].geometry;
+          var properties = resultData[i].properties;
+          console.log('properties',properties)
+          var polyline_;
+
+          var drawInfoArr = [];
+
+          if (geometry.type == "LineString") {
+            for (var j in geometry.coordinates) {
+              var latlng = new Tmapv2.Point(
+                geometry.coordinates[j][0],
+                geometry.coordinates[j][1]
+              );
+              var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+                latlng
+              );
+              var convertChange = new Tmapv2.LatLng(
+                convertPoint._lat,
+                convertPoint._lng
+              );
+
+              drawInfoArr.push(convertChange);
+            }
+
+            var lineColor = "";
+            var sectionCongestion = properties.congestion;
+            console.log(sectionCongestion)
+
+            if (sectionCongestion == 0) {
+              lineColor = "#06050D";
+            } else if (sectionCongestion == 1) {
+              lineColor = "#61AB25";
+            } else if (sectionCongestion == 2) {
+              lineColor = "#FFFF00";
+            } else if (sectionCongestion == 3) {
+              lineColor = "#E87506";
+            } else if (sectionCongestion == 4) {
+              lineColor = "#D61125";
+            }
+
+            polyline_ = new Tmapv2.Polyline({
+              path: drawInfoArr,
+              strokeColor: lineColor,
+              strokeWeight: 6,
+              map: map
+            });
+            polyLineArr.push(polyline_);
+          }
+        }
+      } else {
+        console.error("Request failed. Status: " + xhr.status);
+      }
+    };
+    xhr.onerror = function () {
+      console.error("Request failed");
+    };
+    xhr.send();
+  });
+}
+</script>
+<body onload="initTmap();">
+
+	<div>
+		<span class="tit">센터 경도</span>
+		<input type="text" id="lon" name="lon" value="127.3789012">
+		<span class="tit">센터 위도</span>
+		<input type="text" id="lat" name="lat" value="36.3016838">
+		<button id="btn_select">요청</button>
+	</div>
+		
+	<div id="map_wrap" class="map_wrap3">
+		<div id="map_div"></div>
+	</div>
 </body>
 </html>
