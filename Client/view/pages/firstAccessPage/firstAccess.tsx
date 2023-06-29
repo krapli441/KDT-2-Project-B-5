@@ -1,6 +1,7 @@
 // 리액트 라이브러리
 import React from "react";
 import { Box, Image } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 // 리액트 컴포넌트
 import { NavLink } from "react-router-dom";
 import { BsKeyFill } from "react-icons/Bs";
@@ -38,6 +39,7 @@ export default function Login() {
             <BsKeyFill />
             로그인
           </Box>
+          <Link to="/tMap">티맵으로 이동하기</Link>
         </Box>
       </Box>
     </>
