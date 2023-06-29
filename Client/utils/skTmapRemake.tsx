@@ -10,7 +10,11 @@ declare global {
   }
 }
 
-const requestURI = 'https://apis.openapi.sk.com/tmap/traffic?version={Tmapv3}&minLat={minLat}&minLon={minLon}&maxLat={maxLat}&maxLon={maxLon}&reqCoordType={reqCoordType}&resCoordType={resCoordType}&trafficType={trafficType}&zoomLevel={zoomLevel}&callback={callback}&appKey={appKey}'
+let appKey = "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV";
+let centerLon = 127.3789012;
+let centerLat = 36.3016838;
+
+let requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=1&trafficType=AROUND&radius=3&centorLon=${centerLon}&centerLat=${centerLat}&appKey=${appKey}`;
 
 const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] =
@@ -35,6 +39,24 @@ const MapContainer: React.FC = () => {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
   }, []);
+
+  // 교통 정보 데이터를 받아오는 로직
+  fetch(requestURI, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("교통 정보 데이터를 가져오는 중 오류가 발생했습니다.");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // 데이터 처리
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   // * SK open API를 사용하여 맵을 생성하는 useEffect 훅
   // * 윗단 useEffect로 사용자 정보를 가져올 경우 실행된다
