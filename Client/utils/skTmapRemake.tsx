@@ -39,9 +39,9 @@ const MapContainer: React.FC = () => {
 
   useEffect(() => {
     if (userLocation) {
-      const script = document.createElement("script");
-      script.src =
-        "https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV";
+      // const script = document.createElement("script");
+      // script.src =
+      //   "https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV";
       function generateMap() {
         let map = new window.Tmapv2.Map("TmapApp", {
           center: new window.Tmapv2.LatLng(
