@@ -8,6 +8,7 @@ import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
 import SignUp from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
 import Home from "../view/pages/mainPage/mainScreen";
+import SearchLoad from "../view/pages/searchLoadPage/searchLoadPageScreen";
 import Fun from "../view/pages/playlistPages/funPlayList/funPlayListScreen";
 import Blockage from "../view/pages/playlistPages/blockagePlayList/blockagePlayListScreen";
 import Normal from "../view/pages/playlistPages/normalPlayList/normalPlayListScreen";
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/blockage" element={<Blockage />} />
         <Route path="/normal" element={<Normal />} />
         <Route path="/stuck" element={<Stuck />} />
+        <Route path="/searchLoad" element={<SearchLoad />} />
       </Routes>
     </Box>
   );
