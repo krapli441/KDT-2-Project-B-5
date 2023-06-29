@@ -6,7 +6,7 @@ import LocationComponent from "./getUserLocation";
 
 declare global {
   interface Window {
-    Tmapv2: any;
+    Tmapv3: any;
   }
 }
 
@@ -43,8 +43,8 @@ const MapContainer: React.FC = () => {
       // script.src =
       //   "https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV";
       function generateMap() {
-        let map = new window.Tmapv2.Map("TmapApp", {
-          center: new window.Tmapv2.LatLng(
+        let map = new window.Tmapv3.Map("TmapApp", {
+          center: new window.Tmapv3.LatLng(
             userLocation?.latitude,
             userLocation?.longitude
           ),
