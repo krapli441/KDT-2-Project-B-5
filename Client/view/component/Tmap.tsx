@@ -6,12 +6,12 @@ const Tmap: React.FC = () => {
     let map: any;
     let routeLayer: any;
     let zoom = 15;
-    let centerLon = "126.98702028";
-    let centerLat = "37.56520450";
+    let centerLon = 0;
+    let centerLat = 0;
 
     const initTmap = () => {
       map = new window.Tmapv2.Map("map_div", {
-        center: new window.Tmapv2.LatLng(37.56520450, 126.98702028),
+        center: new window.Tmapv2.LatLng(centerLat, centerLon),
         width: "100vw",
         height: "500px",
         zoom: zoom,
@@ -36,7 +36,7 @@ const Tmap: React.FC = () => {
         headers["appKey"] = "n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x";
 
         // AJAX 요청 및 처리 로직
-        fetch("https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=" + zoom + "&trafficType=AUTO&centerLon=" + centerLon + "&centerLat=" + centerLat, {
+        fetch(`https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=${zoom}&trafficType=AUTO&centerLon=${centerLon}&centerLat=${centerLat}`, {
           headers: headers,
         })
           .then(response => response.json())
@@ -57,7 +57,7 @@ const Tmap: React.FC = () => {
 
               var drawInfoArr: any[] = [];
 
-              if (geometry.type == "LineString") {
+              if (geometry.type === "LineString") {
                 for (var j in geometry.coordinates) {
                   var latlng = new window.Tmapv2.Point(
                     geometry.coordinates[j][0],
@@ -78,15 +78,15 @@ const Tmap: React.FC = () => {
 
                 var sectionCongestion = properties.congestion;
 
-                if (sectionCongestion == 0) {
+                if (sectionCongestion === 0) {
                   lineColor = "#000000";
-                } else if (sectionCongestion == 1) {
+                } else if (sectionCongestion === 1) {
                   lineColor = "#61AB25";
-                } else if (sectionCongestion == 2) {
+                } else if (sectionCongestion === 2) {
                   lineColor = "#FFFF00";
-                } else if (sectionCongestion == 3) {
+                } else if (sectionCongestion === 3) {
                   lineColor = "#E87506";
-                } else if (sectionCongestion == 4) {
+                } else if (sectionCongestion === 4) {
                   lineColor = "#D61125";
                 }
 
@@ -106,36 +106,43 @@ const Tmap: React.FC = () => {
       };
       
       document.getElementById("btn_select")?.addEventListener("click", handleRequest);
-    };
 
-    const loadTmap = () => {
-      if (window.Tmapv2 && window.Tmapv2.Async) {
-        window.Tmapv2.Async.loadModules([
-          "Tmap.System",
-          "Tmap.Polyline",
-          "Tmap.LatLng",
-          "Tmap.Point",
-          "Tmap.Projection",
-        ]).then(() => {
-          initTmap();
-        });
+      // 현재 위치 얻어오기
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const { latitude, longitude } = position.coords;
+            centerLat = latitude;
+            centerLon = longitude;
+            map.setCenter(new window.Tmapv2.LatLng(centerLat, centerLon));
+          },
+          error => {
+            console.error(error);
+          }
+        );
       }
     };
-
-    const script = document.createElement("script");
-    script.src =
-      "https://apis.openapi.sk.com/tmap/jsv2?version=1&format=javascript&appKey=n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x&autoload=false";
-    script.async = true;
-    script.onload = loadTmap;
-    document.body.appendChild(script);
+    
+    // if (window.Tmapv2 && window.Tmapv2.Async) {
+    //   window.Tmapv2.Async.loadModules([
+    //     "Tmap.System",
+    //     "Tmap.Polyline",
+    //     "Tmap.LatLng",
+    //     "Tmap.Point",
+    //     "Tmap.Projection",
+    //   ]).then(() => {
+    //     initTmap();
+    //   });
+    // }
+    initTmap()
   }, []);
 
   return (
     <div>
       <span className="tit">센터 경도</span>
-      <input type="text" id="lon" name="lon" value="126.98607199999799" readOnly />
+      <input type="text" id="lon" name="lon" value="0" readOnly />
       <span className="tit">센터 위도</span>
-      <input type="text" id="lat" name="lat" value="37.57002799999981" readOnly />
+      <input type="text" id="lat" name="lat" value="0" readOnly />
       <button id="btn_select">
         요청
       </button>

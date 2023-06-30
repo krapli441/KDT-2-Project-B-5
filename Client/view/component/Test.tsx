@@ -29,84 +29,71 @@ const MapComponent = () => {
       zoomControl: true,
       scrollwheel: true,
     });
-    setMap(tmap);
-
-    const projection = new window.Tmapv2.Projection();
-    projection.init(tmap);
-
-    tmap.addListener("mouseup", function onMoveEnd(evt: any) {
-      const mapLatLng = evt.latLng;
-      const currentZoom = map.getZoom();
-
-      setZoom(currentZoom);
-      setCenterLon(mapLatLng._lng);
-      setCenterLat(mapLatLng._lat);
-    });
+    tmap.setServerOrigin('https://apis.openapi.sk.com/tmap');
   };
+  
 
   const handleButtonClick = () => {
     if (map) {
-      map.removeMarkers(); // 이전 마커를 제거하는 메소드
-      map.removeOverlays(); // 이전 경로를 제거하는 메소드
+    map.removeMarkers(); // 이전 마커를 제거하는 메소드
+    map.removeOverlays(); // 이전 경로를 제거하는 메소드
     }
-
+    
     const appKey = "n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x";
-    const requestUrl = `https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=${zoom}&trafficType=AROUND&radius=3&centerLon=${centerLon}&centerLat=${centerLat}`;
-
+    const requestUrl = `https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=<span class="math-inline">\{zoom\}&trafficType\=AROUND&radius\=3&centerLon\=</span>{centerLon}&centerLat=${centerLat}`;
+    
     const xhr = new XMLHttpRequest();
     xhr.open("GET", requestUrl);
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("appKey", appKey);
     xhr.onload = function () {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        const resultData = response.features;
-
-        if (polyLineArr.length > 0) {
-          for (const polyLine of polyLineArr) {
-            polyLine.setMap(null);
-          }
-          setPolyLineArr([]);
+    if (xhr.status === 200) {
+    const response = JSON.parse(xhr.responseText);
+    const resultData = response.features;
+    if (polyLineArr.length > 0) {
+      for (const polyLine of polyLineArr) {
+        polyLine.setMap(null);
+      }
+      setPolyLineArr([]);
+    }
+  
+    for (const data of resultData) {
+      const geometry = data.geometry;
+      const properties = data.properties;
+  
+      const drawInfoArr = [];
+  
+      if (geometry.type === "LineString") {
+        for (const coordinate of geometry.coordinates) {
+          const latlng = new window.Tmapv2.Point(
+            coordinate[0],
+            coordinate[1]
+          );
+          const convertPoint = new window.Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+            latlng
+          );
+          const convertChange = new window.Tmapv2.LatLng(
+            convertPoint._lat,
+            convertPoint._lng
+          );
+  
+          drawInfoArr.push(convertChange);
         }
-
-        for (const data of resultData) {
-          const geometry = data.geometry;
-          const properties = data.properties;
-
-          const drawInfoArr = [];
-
-          if (geometry.type === "LineString") {
-            for (const coordinate of geometry.coordinates) {
-              const latlng = new window.Tmapv2.Point(
-                coordinate[0],
-                coordinate[1]
-              );
-              const convertPoint = new window.Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
-                latlng
-              );
-              const convertChange = new window.Tmapv2.LatLng(
-                convertPoint._lat,
-                convertPoint._lng
-              );
-
-              drawInfoArr.push(convertChange);
-            }
-
-            let lineColor = "";
-            const sectionCongestion = properties.congestion;
-
-            if (sectionCongestion === 0) {
-              lineColor = "#06050D";
-            } else if (sectionCongestion === 1) {
-              lineColor = "#61AB25";
-            } else if (sectionCongestion === 2) {
-              lineColor = "#FFFF00";
-            } else if (sectionCongestion === 3) {
-              lineColor = "#E87506";
-            } else if (sectionCongestion === 4) {
-              lineColor = "#D61125";
-            }
-
+  
+        let lineColor = "";
+        const sectionCongestion = properties.congestion;
+  
+        if (sectionCongestion === 0) {
+          lineColor = "#06050D";
+        } else if (sectionCongestion === 1) {
+          lineColor = "#61AB25";
+        } else if (sectionCongestion === 2) {
+          lineColor = "#FFFF00";
+        } else if (sectionCongestion === 3) {
+          lineColor = "#E87506";
+        } else if (sectionCongestion === 4) {
+          lineColor = "#D61125";
+        }
             const polyline = new window.Tmapv2.Polyline({
               path: drawInfoArr,
               strokeColor: lineColor,
@@ -155,7 +142,7 @@ const MapComponent = () => {
         <div id="map_div" />
       </div>
 
-      <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x"></script>
+      {/* <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x"></script> */}
     </div>
   );
 };

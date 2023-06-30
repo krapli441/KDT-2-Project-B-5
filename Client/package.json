@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-kakao-maps": "^0.0.13",
     "style-loader": "^3.3.3",
+    "tmap": "^1.0.0",
     "ts-loader": "^9.4.3",
     "webpack": "^5.88.0",
     "webpack-cli": "^5.1.4"
