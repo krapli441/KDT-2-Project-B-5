@@ -11,8 +11,6 @@ declare global {
   }
 }
 
-let requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&minLat=${SampleData.minLat}&minLon=${SampleData.minLon}&maxLat=${SampleData.maxLat}&maxLon=${SampleData.maxLon}&centerLat=${SampleData.centerLat}&centerLon=${SampleData.centerLon}&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
-
 const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] =
     useState<GeolocationCoordinates | null>(null);
