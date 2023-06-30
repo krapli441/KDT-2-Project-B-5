@@ -47,10 +47,10 @@ const SampleData = {
   // ? ACC : 돌발 정보를 요청한다.
   // ! minLat, minLon, maxLat, maxLon의 값은 필히 입력해야 한다.
 
-  trafficType: "AUTO",
+  trafficType: "AROUND",
 
   // ? radius : 주변 교통 정보 반경을 지정한다.
-  radius: 1,
+  radius: 3,
 
   // ? zoomLevel : 교통정보를 표현할 맵의 레벨 별 제한 거리를 지정한다.
   zoomLevel: 19,

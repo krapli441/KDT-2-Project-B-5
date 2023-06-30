@@ -38,24 +38,6 @@ const MapContainer: React.FC = () => {
     }
   }, []);
 
-  // 교통 정보 데이터를 받아오는 로직
-  fetch(requestURI, {
-    method: "GET",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error();
-      }
-      return response.json();
-    })
-    .then((data) => {
-      // 데이터 처리
-      console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
   // * SK open API를 사용하여 맵을 생성하는 useEffect 훅
   // * 윗단 useEffect로 사용자 정보를 가져올 경우 실행된다
 
@@ -74,7 +56,7 @@ const MapContainer: React.FC = () => {
         return map;
       }
       const map = generateMap();
-      const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&minLat=${SampleData.minLat}&minLon=${SampleData.minLon}&maxLat=${SampleData.maxLat}&maxLon=${SampleData.maxLon}&centerLat=${SampleData.centerLat}&centerLon=${SampleData.centerLon}&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
+      const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&format=json&centerLat=${SampleData.centerLat}&centerLon=${SampleData.centerLon}&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
 
       fetch(requestURI, {
         method: "GET",
@@ -86,7 +68,9 @@ const MapContainer: React.FC = () => {
           return response.json();
         })
         .then((data) => {
+          console.log("요청이 성공하였습니다.");
           const resultData = data.features;
+          console.log(resultData);
 
           if (polyLineArr.length > 0) {
             polyLineArr.forEach((polyline) => {
