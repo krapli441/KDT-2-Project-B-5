@@ -53,7 +53,7 @@ const SampleData = {
   radius: 3,
 
   // ? zoomLevel : 교통정보를 표현할 맵의 레벨 별 제한 거리를 지정한다.
-  zoomLevel: 19,
+  zoomLevel: 15,
 
   // ? sort : 지리정보 개체의 정렬 순서를 지정함.
   // ? index(기본값)

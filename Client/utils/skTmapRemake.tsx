@@ -54,7 +54,8 @@ const MapContainer: React.FC = () => {
         return map;
       }
       const map = generateMap();
-      const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&format=json&centerLat=${SampleData.centerLat}&centerLon=${SampleData.centerLon}&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
+
+      const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&format=json&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
 
       fetch(requestURI, {
         method: "GET",
