@@ -20,6 +20,7 @@
   "dependencies": {
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
+    "jquery": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-kakao-maps": "^0.0.13",
@@ -32,6 +33,7 @@
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
+    "@types/jquery": "^3.5.16",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "kakao.maps.d.ts": "^0.1.38",

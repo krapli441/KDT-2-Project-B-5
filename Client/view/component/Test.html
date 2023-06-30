@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>simpleMap</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div>
+		<span class="tit">센터 경도</span>
+		<input type="text" id="lon" name="lon">
+		<span class="tit">센터 위도</span>
+		<input type="text" id="lat" name="lat">
+		<button id="btn_select">요청</button>
+	</div>
+		
+	<div id="map_wrap" class="map_wrap3">
+		<div id="map_div"></div>
+	</div>
+
+	<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x"></script>
+	<script type="text/javascript">
+	var polyLineArr = [];
+
+	var map;
+	var routeLayer;
+	var zoom = 15;
+	var centerLon;
+	var centerLat;
+	var latitude;
+	var longitude;
+
+	navigator.geolocation.getCurrentPosition(
+	    // 위치 정보를 성공적으로 가져오면 콜백 함수가 실행
+	    function(position) {
+	        // 사용자의 위도와 경도를 가져옴
+	        latitude = position.coords.latitude;
+	        centerLat = position.coords.latitude;
+	        console.log('latitude',latitude);
+	        longitude = position.coords.longitude;
+	        centerLon = position.coords.longitude;
+	        console.log('longitude',longitude);
+
+	        initTmap(); // 위치 정보를 가져온 후에 Tmap 초기화 함수를 호출합니다.
+	    }
+	);
+
+	function initTmap() {
+	  map = new Tmapv2.Map("map_div", {
+	    center: new Tmapv2.LatLng(centerLat, centerLon),
+	    width: "100%",
+	    height: "400px",
+	    zoom: 17,
+	    zoomControl: true,
+	    scrollwheel: true
+	  });
+
+	  map.addListener("mouseup", function onMoveEnd(evt) {
+	    var mapLatLng = evt.latLng;
+	    zoom = map.getZoom();
+
+	    document.getElementById("zoom").textContent = zoom;
+	    document.getElementById("center_zoom").textContent = zoom;
+
+	    centerLon = mapLatLng._lng;
+	    centerLat = mapLatLng._lat;
+
+	    document.getElementById("lon").value = centerLon;
+	    document.getElementById("lat").value = centerLat;
+	  });
+
+	  var btnSelect = document.getElementById("btn_select");
+	  btnSelect.addEventListener("click", function () {
+	    if (routeLayer) {
+	      routeLayer.removeAllFeatures();
+	    }
+	    var headers = {};
+	    headers["appKey"] = "n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x";
+
+	    var xhr = new XMLHttpRequest();
+	    xhr.open(
+	      "GET",
+	      "https://apis.openapi.sk.com/tmap/traffic?version=1&format=json" +
+	        "&reqCoordType=WGS84GEO" +
+	        "&resCoordType=EPSG3857" +
+	        "&zoomLevel=" +
+	        zoom +
+	        "&trafficType=AROUND" +
+	        "&radius=3" +
+	        "&centerLon=" +
+	        centerLon +
+	        "&centerLat=" +
+	        centerLat
+	    );
+	    xhr.setRequestHeader("appKey", headers["appKey"]);
+	    xhr.onload = function () {
+	      if (xhr.status === 200) {
+	        var response = JSON.parse(xhr.responseText);
+	        console.log('response',response);
+	        var resultData = response.features;
+	        console.log('resultData',resultData);
+	        if (polyLineArr.length > 0) {
+	          for (var k in polyLineArr) {
+	            polyLineArr[k].setMap(null);
+	          }
+	          polyLineArr = [];
+	        }
+
+	        for (var i in resultData) {
+	          var geometry = resultData[i].geometry;
+	          var properties = resultData[i].properties;
+	          console.log('properties',properties);
+	          var polyline_;
+
+	          var drawInfoArr = [];
+
+	          if (geometry.type == "LineString") {
+	            for (var j in geometry.coordinates) {
+	              var latlng = new Tmapv2.Point(
+	                geometry.coordinates[j][0],
+	                geometry.coordinates[j][1]
+	              );
+	              var convertPoint = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+	                latlng
+	              );
+	              var convertChange = new Tmapv2.LatLng(
+	                convertPoint._lat,
+	                convertPoint._lng
+	              );
+
+	              drawInfoArr.push(convertChange);
+	            }
+
+	            var lineColor = "";
+	            var sectionCongestion = properties.congestion;
+	            console.log(sectionCongestion);
+
+	            if (sectionCongestion == 0) {
+	              lineColor = "#06050D";
+	            } else if (sectionCongestion == 1) {
+	              lineColor = "#61AB25";
+	            } else if (sectionCongestion == 2) {
+	              lineColor = "#FFFF00";
+	            } else if (sectionCongestion == 3) {
+	              lineColor = "#E87506";
+	            } else if (sectionCongestion == 4) {
+	              lineColor = "#D61125";
+	            }
+
+	            polyline_ = new Tmapv2.Polyline({
+	              path: drawInfoArr,
+	              strokeColor: lineColor,
+	              strokeWeight: 6,
+	              map: map
+	            });
+	            polyLineArr.push(polyline_);
+	          }
+	        }
+	      } else {
+	        console.error("Request failed. Status: " + xhr.status);
+	      }
+	    };
+	    xhr.onerror = function () {
+	      console.error("Request failed");
+	    };
+	    xhr.send();
+	  });
+	}
+	</script>
+</body>
+</html>

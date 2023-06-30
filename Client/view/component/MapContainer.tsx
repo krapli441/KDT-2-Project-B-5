@@ -70,64 +70,50 @@ import React, { useEffect } from 'react';
 
 declare global {
   interface Window {
-    kakao: any;
+    Tmapv2: any;
   }
 }
 
-const MapContainer = () => {
+const MapComponent: React.FC = () => {
   useEffect(() => {
-    const container = document.getElementById('map');
+    const appKey = 'n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x';
 
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?appkey=f3f69e507f70b20f6cdaa643fb68b19b&autoload=false';
-    document.head.appendChild(script);
+    const loadScript = () => {
+      return new Promise<void>((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = `https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=${appKey}`;
+        script.async = true;
 
-    script.onload = () => {
-      if (window.kakao) {
-        const kakao = window.kakao;
+        script.onload = () => resolve();
+        script.onerror = () => reject();
 
-        kakao.maps.load(() => {
-          const options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
-            level: 3
+        document.head.appendChild(script);
+      });
+    };
+
+    const initializeMap = async () => {
+      try {
+        await loadScript();
+
+        if (window.Tmapv2) {
+          const mapOptions = {
+            center: new window.Tmapv2.LatLng(37.5652045, 126.98702028),
+            width: '100%',
+            height: '400px',
+            zoom: 16,
           };
 
-          const map = new kakao.maps.Map(container, options);
-          map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC); // 도로 교통정보 레이어 추가
-
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const latitude = position.coords.latitude;
-              const longitude = position.coords.longitude;
-              const markerPosition = new kakao.maps.LatLng(latitude, longitude);
-              const marker = new kakao.maps.Marker({
-                position: markerPosition
-              });
-
-              marker.setMap(map);
-              map.setCenter(markerPosition);
-
-              // Traffic 클래스를 사용하지 않고 교통 정보를 가져온다.
-              const trafficInfo = {
-                congestionLevel: "UNKNOWN"
-              };
-
-              // 교통 정보를 콘솔에 출력한다.
-              console.log(trafficInfo);
-            },
-            (error) => {
-              console.log('Error getting geolocation:', error);
-            }
-          );
-        });
+          const map = new window.Tmapv2.Map('map_div', mapOptions);
+        }
+      } catch (error) {
+        console.error('Failed to load Tmap script:', error);
       }
     };
+
+    initializeMap();
   }, []);
 
-  return (
-    <div id="map" style={{ width: '100vw', height: '100vh' }} />
-  );
+  return <div id="map_div"></div>;
 };
 
-export default MapContainer;
+export default MapComponent;
