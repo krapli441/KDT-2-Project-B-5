@@ -41,9 +41,17 @@ export default function App() {
           <Route path="/stuck" element={<Stuck />} />
           <Route path="/overall" element={<Overall />} />
         </Routes>
-        {["/", "/first", "/signup", "/login", "/fun"].includes(
-          location.pathname
-        ) ? null : (
+        {[
+          "/",
+          "/first",
+          "/signup",
+          "/login",
+          "/fun",
+          "/blockage",
+          "/normal",
+          "/stuck",
+          "/overall",
+        ].includes(location.pathname) ? null : (
           <Nav />
         )}
       </div>
