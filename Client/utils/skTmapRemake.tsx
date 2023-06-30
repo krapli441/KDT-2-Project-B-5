@@ -7,7 +7,7 @@ import SampleData from "./getTrafficSampleData";
 
 declare global {
   interface Window {
-    Tmapv2: any;
+    Tmapv3: any;
   }
 }
 
@@ -39,22 +39,22 @@ const MapContainer: React.FC = () => {
   }, []);
 
   // 교통 정보 데이터를 받아오는 로직
-  // fetch(requestURI, {
-  //   method: "GET",
-  // })
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error();
-  //     }
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     // 데이터 처리
-  //     console.log(data);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
+  fetch(requestURI, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error();
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // 데이터 처리
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
   // * SK open API를 사용하여 맵을 생성하는 useEffect 훅
   // * 윗단 useEffect로 사용자 정보를 가져올 경우 실행된다
@@ -62,8 +62,8 @@ const MapContainer: React.FC = () => {
   useEffect(() => {
     if (userLocation) {
       function generateMap() {
-        let map = new window.Tmapv2.Map("TmapApp", {
-          center: new window.Tmapv2.LatLng(
+        let map = new window.Tmapv3.Map("TmapApp", {
+          center: new window.Tmapv3.LatLng(
             userLocation?.latitude,
             userLocation?.longitude
           ),
@@ -76,7 +76,9 @@ const MapContainer: React.FC = () => {
       const map = generateMap();
       const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&minLat=${SampleData.minLat}&minLon=${SampleData.minLon}&maxLat=${SampleData.maxLat}&maxLon=${SampleData.maxLon}&centerLat=${SampleData.centerLat}&centerLon=${SampleData.centerLon}&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
 
-      fetch(requestURI)
+      fetch(requestURI, {
+        method: "GET",
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("요청이 실패하였습니다.");
@@ -102,15 +104,15 @@ const MapContainer: React.FC = () => {
               const drawInfoArr: any[] = [];
 
               for (const j in geometry.coordinates) {
-                const latlng = new window.Tmapv2.Point(
+                const latlng = new window.Tmapv3.Point(
                   geometry.coordinates[j][0],
                   geometry.coordinates[j][1]
                 );
                 const convertPoint =
-                  new window.Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
+                  new window.Tmapv3.Projection.convertEPSG3857ToWGS84GEO(
                     latlng
                   );
-                const convertChange = new window.Tmapv2.LatLng(
+                const convertChange = new window.Tmapv3.LatLng(
                   convertPoint._lat,
                   convertPoint._lng
                 );
@@ -132,7 +134,7 @@ const MapContainer: React.FC = () => {
                 lineColor = "#D61125";
               }
 
-              const polyline = new window.Tmapv2.Polyline({
+              const polyline = new window.Tmapv3.Polyline({
                 path: drawInfoArr,
                 strokeColor: lineColor,
                 strokeWeight: 6,
@@ -153,8 +155,8 @@ const MapContainer: React.FC = () => {
     <div
       id="TmapApp"
       style={{
-        height: "403px",
-        width: "936px",
+        height: "100%",
+        width: "100%",
       }}
     ></div>
   );
