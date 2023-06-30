@@ -26,7 +26,7 @@ const SampleData = {
 
   // ? 받고자 하는 응답 좌표계 유형을 지정
   // ? 기본값인 WGS84GEO는 경위도를 뜻함
-  resCoordType: "WGS84GEO",
+  resCoordType: "EPSG3857",
 
   // ? 교통 정보 타입을 지정.
   // ? 기본값은 NULL로 되어있다.

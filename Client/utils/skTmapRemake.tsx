@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 
 // 리액트 컴포넌트
-import LocationComponent from "./getUserLocation";
 import SampleData from "./getTrafficSampleData";
 
 declare global {
