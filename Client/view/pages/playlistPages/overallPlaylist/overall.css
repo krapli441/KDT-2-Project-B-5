@@ -1,0 +1,6 @@
+.overallMain {
+  display: flex;
+  gap: 10px;
+  overflow: scroll;
+  height: 135px;
+}
