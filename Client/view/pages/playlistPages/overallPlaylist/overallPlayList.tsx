@@ -1,12 +1,24 @@
 import React from "react";
+import Blockage from "../blockagePlayList/blockagePlayListScreen";
+import FunPlayList from "../funPlayList/funPlayListScreen";
+import NormalPlayList from "../normalPlayList/normalPlayListScreen";
+import StuckPlayList from "../stuckPlayList/stuckPlayListScreen";
 
 export default function overall() {
   return (
     <>
-      <div className="overallMain">1</div>
-      <div className="overallMain">2</div>
-      <div className="overallMain">3</div>
-      <div className="overallMain">4</div>
+      <div className="overallMain">
+        <Blockage></Blockage>
+      </div>
+      <div className="overallMain">
+        <FunPlayList />
+      </div>
+      <div className="overallMain">
+        <NormalPlayList />
+      </div>
+      <div className="overallMain">
+        <StuckPlayList />
+      </div>
     </>
   );
 }
