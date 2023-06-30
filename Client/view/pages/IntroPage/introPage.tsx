@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
+import "@dotlottie/player-component";
 
 // 리액트 컴포넌트
 import IntroLogo from "./introLogo.png";
@@ -12,7 +13,7 @@ function introPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/first");
-    }, 1000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
   return (
@@ -24,7 +25,12 @@ function introPage() {
         alignItems={"center"}
         backgroundColor={"white"}
       >
-        <img src={IntroLogo} width="70%" alt="로고" />
+        <dotlottie-player
+          src="../../components/asphalt.lottie"
+          autoplay
+          style={{ width: "100%", height: "100%" }}
+        />
+        {/* <img src={IntroLogo} width="70%" alt="로고" /> */}
       </Box>
     </>
   );

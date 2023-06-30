@@ -1,9 +1,6 @@
-// 리액트 라이브러리
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
-// 리액트 컴포넌트
-import { Link } from "react-router-dom";
-import { BsKeyFill } from "react-icons/Bs";
+import { NavLink } from "react-router-dom";
+import { AiFillGoogleCircle } from "react-icons/ai";
 import { HiOutlinePencilAlt } from "react-icons/Hi";
 import IntroLogo from "../introPage/introLogo.png";
 
@@ -14,38 +11,34 @@ const flexbox = {
 export default function Login() {
   return (
     <>
-      <Box
-        className="loginPage"
-        display={"flex"}
-        flexDirection={"column"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        backgroundColor={"white"}
-      >
-        <img src={IntroLogo} width="70%" alt="로고" />
-        <Box
-          className="selectLoginType"
-          display="flex"
-          flexDirection={"column"}
-          alignItems={"center"}
-          justifyContent={"space-evenly"}
-          width={"301px"}
-          height={"100px"}
-        >
-          <Link to="/signup">
-            <Box className="createAccoutButton" style={flexbox}>
-              <HiOutlinePencilAlt />
+      <div /* className={loginStyle.main} */>
+        <img
+          /*           className={loginStyle.titleImg}
+           */ src={IntroLogo}
+          width="80%"
+          alt="로고"
+        />
+        <div /* className={loginStyle.loginTypeBox} */>
+          <div /* className={loginStyle.googleLoginButton} */>
+            <AiFillGoogleCircle /* className={loginStyle.googleLoginIcon}  */ />
+            Google을 이용하여 시작하기
+          </div>
+          <NavLink to="/signup" /* className={loginStyle.link} */>
+            <div /* className={loginStyle.signUpButton} */>
+              <HiOutlinePencilAlt /* className={loginStyle.createAccountIcon}  */
+              />
               회원가입
-            </Box>
-          </Link>
-          <Link to="/login">
-            <Box className="loginButton" style={flexbox}>
-              <BsKeyFill />
-              로그인
-            </Box>
-          </Link>
-        </Box>
-      </Box>
+            </div>
+          </NavLink>
+        </div>
+        <NavLink to="/login">
+          <div /* className={loginStyle.moveToLogin} */>
+            <p>계정이 이미 있으신가요?</p>
+          </div>
+        </NavLink>
+      </div>
     </>
   );
 }
+
+//first > 회원가입  signup or 비번 찾기 login >home

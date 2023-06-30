@@ -17,6 +17,7 @@ async function bootstrap() {
       cert: fs.readFileSync('localhost.crt'),
     },
   });
+  app.enableCors();
   app.useStaticAssets(join(__dirname, '../public'));
 
   await app.listen(3001);
