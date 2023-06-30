@@ -13,8 +13,8 @@ import Fun from "../view/pages/playlistPages/funPlayList/funPlayListScreen";
 import Blockage from "../view/pages/playlistPages/blockagePlayList/blockagePlayListScreen";
 import Normal from "../view/pages/playlistPages/normalPlayList/normalPlayListScreen";
 import Stuck from "../view/pages/playlistPages/stuckPlayList/stuckPlayListScreen";
+import Overall from "../view/pages/playlistPages/overallPlaylist/overallPlayListScreen";
 import Nav from "../view/fragments/footer";
-import Map from "../utils/mapscreen";
 
 export default function App() {
   return (
@@ -28,7 +28,7 @@ export default function App() {
       backgroundColor={"white"}
     >
       <Routes>
-        <Route path="/" element={<Map />} />
+        <Route path="/" element={<Intro />} />
         <Route path="/first" element={<FirstAccess />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -37,6 +37,7 @@ export default function App() {
         <Route path="/blockage" element={<Blockage />} />
         <Route path="/normal" element={<Normal />} />
         <Route path="/stuck" element={<Stuck />} />
+        <Route path="/overall" element={<Overall />} />
       </Routes>
       {["/", "/first", "/signup", "/login", "/fun"].includes(
         location.pathname
