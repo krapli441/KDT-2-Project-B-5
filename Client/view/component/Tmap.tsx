@@ -34,7 +34,7 @@ const Tmap: React.FC = () => {
         headers["appKey"] = "n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x";
 
         // AJAX 요청 및 처리 로직
-        fetch(`https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=${zoom}&trafficType=AROUND&centerLon=${centerLon}&centerLat=${centerLat}&radius=1`, {
+        fetch(`https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=${zoom}&trafficType=AROUND&centerLon=${centerLon}&centerLat=${centerLat}&radius=5`, {
           headers: headers,
         })
           .then(response => response.json())
