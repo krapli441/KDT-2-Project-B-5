@@ -28,23 +28,25 @@ export default function App() {
       alignItems={"center"}
       backgroundColor={"white"}
     >
-      <Routes>
-        <Route path="/" element={<Intro />} />
-        <Route path="/first" element={<FirstAccess />} />
-        <Route path="/signup" element={<Singup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/fun" element={<Fun />} />
-        <Route path="/blockage" element={<Blockage />} />
-        <Route path="/normal" element={<Normal />} />
-        <Route path="/stuck" element={<Stuck />} />
-        <Route path="/overall" element={<Overall />} />
-      </Routes>
-      {["/", "/first", "/signup", "/login", "/fun"].includes(
-        location.pathname
-      ) ? null : (
-        <Nav />
-      )}
+      <div>
+        <Routes>
+          <Route path="/" element={<Intro />} />
+          <Route path="/first" element={<FirstAccess />} />
+          <Route path="/signup" element={<Singup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/fun" element={<Fun />} />
+          <Route path="/blockage" element={<Blockage />} />
+          <Route path="/normal" element={<Normal />} />
+          <Route path="/stuck" element={<Stuck />} />
+          <Route path="/overall" element={<Overall />} />
+        </Routes>
+        {["/", "/first", "/signup", "/login", "/fun"].includes(
+          location.pathname
+        ) ? null : (
+          <Nav />
+        )}
+      </div>
     </Box>
   );
 }

@@ -1,16 +1,35 @@
 import React from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
+import MusicPlayer from "../pages/musicPlayerPage/musicPlayerPageScreen";
 
 import { AiFillHome } from "react-icons/ai";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { IoMdMenu } from "react-icons/io";
 
+const navAllStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+  textAlign: "center",
+  fontSize: "40px",
+  height: "180px",
+  flexDirection: "column",
+};
+
+const navStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+};
+
 export default function nav() {
   return (
     <div>
-      <IoMdMenu fontSize="40px" />
-
-      <AiFillHome fontSize="40px" />
+      <div style={navAllStyle}>
+        <MusicPlayer />
+        <div style={navStyle}>
+          <IoMdMenu fontSize="60px" />
+          <AiFillHome fontSize="60px" />
+        </div>
+      </div>
     </div>
   );
 }

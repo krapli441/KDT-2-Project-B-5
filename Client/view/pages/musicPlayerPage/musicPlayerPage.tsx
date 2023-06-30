@@ -14,24 +14,20 @@ export default function musicPlayer() {
   const musicPlayerStyle: React.CSSProperties = {
     display: "flex",
     width: "100%",
-    position: "relative",
-    top: "25rem",
-    left: "10rem",
-    zIndex: "999",
     backgroundColor: "aqua",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
   };
 
   return (
     <div style={musicPlayerStyle}>
       <></>
-      <CgPlayTrackPrev fontSize={40} />
+      <CgPlayTrackPrev fontSize={70} />
       {isPlaying ? (
-        <CgPlayStop onClick={handleClick} fontSize={40} />
+        <CgPlayStop onClick={handleClick} fontSize={70} />
       ) : (
-        <CgPlayButton onClick={handleClick} fontSize={40} />
+        <CgPlayButton onClick={handleClick} fontSize={70} />
       )}
-      <CgPlayTrackNext fontSize={40} />
+      <CgPlayTrackNext fontSize={70} />
     </div>
   );
 }
