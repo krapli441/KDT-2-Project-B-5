@@ -19,14 +19,12 @@ const Tmap: React.FC = () => {
         scrollwheel: true,
       });
 
-      map.addListener("mouseup", function onMoveEnd(evt: any) {
-        var mapLatLng = evt.latLng;
-
-        zoom = map.getZoom();
-
-        centerLon = mapLatLng._lng;
-        centerLat = mapLatLng._lat;
-      });
+      const addMarker = (position: { latitude: number; longitude: number }) => {
+        const marker = new window.Tmapv2.Marker({
+          position: new window.Tmapv2.LatLng(position.latitude, position.longitude),
+          map: map,
+        });
+      };
 
       const handleRequest = () => {
         if (routeLayer) {
@@ -36,7 +34,7 @@ const Tmap: React.FC = () => {
         headers["appKey"] = "n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x";
 
         // AJAX 요청 및 처리 로직
-        fetch(`https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=${zoom}&trafficType=AUTO&centerLon=${centerLon}&centerLat=${centerLat}`, {
+        fetch(`https://apis.openapi.sk.com/tmap/traffic?version=1&format=json&reqCoordType=WGS84GEO&resCoordType=EPSG3857&zoomLevel=${zoom}&trafficType=AROUND&centerLon=${centerLon}&centerLat=${centerLat}&radius=1`, {
           headers: headers,
         })
           .then(response => response.json())
@@ -104,7 +102,7 @@ const Tmap: React.FC = () => {
             console.log("Error:", error);
           });
       };
-      
+
       document.getElementById("btn_select")?.addEventListener("click", handleRequest);
 
       // 현재 위치 얻어오기
@@ -115,6 +113,9 @@ const Tmap: React.FC = () => {
             centerLat = latitude;
             centerLon = longitude;
             map.setCenter(new window.Tmapv2.LatLng(centerLat, centerLon));
+
+            // 마커 추가
+            addMarker({ latitude, longitude });
           },
           error => {
             console.error(error);
@@ -122,19 +123,8 @@ const Tmap: React.FC = () => {
         );
       }
     };
-    
-    // if (window.Tmapv2 && window.Tmapv2.Async) {
-    //   window.Tmapv2.Async.loadModules([
-    //     "Tmap.System",
-    //     "Tmap.Polyline",
-    //     "Tmap.LatLng",
-    //     "Tmap.Point",
-    //     "Tmap.Projection",
-    //   ]).then(() => {
-    //     initTmap();
-    //   });
-    // }
-    initTmap()
+
+    initTmap();
   }, []);
 
   return (
