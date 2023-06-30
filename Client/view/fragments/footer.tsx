@@ -17,7 +17,7 @@ const navAllStyle: React.CSSProperties = {
 
 const navStyle: React.CSSProperties = {
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-evenly",
 };
 
 export default function nav() {
