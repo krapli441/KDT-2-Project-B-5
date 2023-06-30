@@ -13,10 +13,12 @@ const navAllStyle: React.CSSProperties = {
   fontSize: "40px",
   height: "180px",
   flexDirection: "column",
+  backgroundColor: "#21325E",
 };
 
 const navStyle: React.CSSProperties = {
   display: "flex",
+  borderTop: "1px solid black",
   justifyContent: "space-evenly",
 };
 
@@ -25,6 +27,7 @@ export default function nav() {
     <div>
       <div style={navAllStyle}>
         <MusicPlayer />
+
         <div style={navStyle}>
           <IoMdMenu fontSize="60px" />
           <AiFillHome fontSize="60px" />

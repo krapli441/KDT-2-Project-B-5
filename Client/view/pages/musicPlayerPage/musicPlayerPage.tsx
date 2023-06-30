@@ -14,7 +14,6 @@ export default function musicPlayer() {
   const musicPlayerStyle: React.CSSProperties = {
     display: "flex",
     width: "100%",
-    backgroundColor: "aqua",
     justifyContent: "space-evenly",
   };
 
