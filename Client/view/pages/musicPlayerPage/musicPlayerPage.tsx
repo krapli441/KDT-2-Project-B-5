@@ -20,13 +20,13 @@ export default function musicPlayer() {
   return (
     <div style={musicPlayerStyle}>
       <></>
-      <CgPlayTrackPrev fontSize={70} />
+      <CgPlayTrackPrev fontSize={70} color="white" />
       {isPlaying ? (
-        <CgPlayStop onClick={handleClick} fontSize={70} />
+        <CgPlayStop onClick={handleClick} fontSize={70} color="white" />
       ) : (
-        <CgPlayButton onClick={handleClick} fontSize={70} />
+        <CgPlayButton onClick={handleClick} fontSize={70} color="white" />
       )}
-      <CgPlayTrackNext fontSize={70} />
+      <CgPlayTrackNext fontSize={70} color="white" />
     </div>
   );
 }

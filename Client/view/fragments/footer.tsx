@@ -29,8 +29,8 @@ export default function nav() {
         <MusicPlayer />
 
         <div style={navStyle}>
-          <IoMdMenu fontSize="60px" />
-          <AiFillHome fontSize="60px" />
+          <IoMdMenu fontSize="60px" color="white" />
+          <AiFillHome fontSize="60px" color="white" />
         </div>
       </div>
     </div>
