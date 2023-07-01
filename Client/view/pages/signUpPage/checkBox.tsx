@@ -15,7 +15,12 @@ import {
 // 리액트 컴포넌트
 
 function CreateAccountCheckBox() {
-  const [checkedItems, setCheckedItems] = React.useState([false, false]);
+  const [checkedItems, setCheckedItems] = React.useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const allChecked = checkedItems.every(Boolean);
   const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
