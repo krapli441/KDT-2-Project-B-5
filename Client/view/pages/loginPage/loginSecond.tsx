@@ -1,17 +1,10 @@
 // 리액트 라이브러리
 import React, { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
-import {
-  Box,
-  FormControl,
-  Input,
-  Button,
-  Text,
-  NumberInput,
-  NumberInputField,
-} from "@chakra-ui/react";
+import { Box, FormControl, Input, Button, Text } from "@chakra-ui/react";
 import "@fontsource/staatliches";
 
 // 리액트 컴포넌트
@@ -21,9 +14,6 @@ const CreateAccount: React.FC = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
-    name: "",
-    phoneNumber: "",
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -113,20 +103,22 @@ const CreateAccount: React.FC = () => {
           </Button>
         </Box>
       </FormControl>
-      <Button
-        mt={4}
-        backgroundColor="#D9D9D9"
-        color="white"
-        width={"340px"}
-        height={"60px"}
-        _hover={{ bg: "#C9C9C9" }}
-        _active={{
-          bg: "#B3B3B3",
-          transform: "scale(0.98)",
-        }}
-      >
-        돌아가기
-      </Button>
+      <Link to={"/first"}>
+        <Button
+          mt={4}
+          backgroundColor="#D9D9D9"
+          color="white"
+          width={"340px"}
+          height={"60px"}
+          _hover={{ bg: "#C9C9C9" }}
+          _active={{
+            bg: "#B3B3B3",
+            transform: "scale(0.98)",
+          }}
+        >
+          돌아가기
+        </Button>
+      </Link>
     </>
   );
 };

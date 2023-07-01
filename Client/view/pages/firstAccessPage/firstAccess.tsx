@@ -1,6 +1,6 @@
 // 리액트 라이브러리
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 // 리액트 컴포넌트
 import { BsKeyFill } from "react-icons/Bs";
@@ -43,22 +43,34 @@ export default function Login() {
           height={"180px"}
         >
           <Link to={"/signup"}>
-            <Box
-              className="createAccoutButton"
-              style={buttonStyling}
-              backgroundColor={"#D9D9D9"}
+            <Button
+              backgroundColor="#D9D9D9"
+              color="white"
+              width={"340px"}
+              height={"60px"}
+              _hover={{ bg: "#C9C9C9" }}
+              _active={{
+                bg: "#B3B3B3",
+                transform: "scale(0.98)",
+              }}
             >
               회원가입
-            </Box>
+            </Button>
           </Link>
           <Link to="/login">
-            <Box
+            <Button
               className="loginButton"
               style={buttonStyling}
               backgroundColor={"#FFB703"}
+              color={"white"}
+              _hover={{ bg: "#FF8B03" }}
+              _active={{
+                bg: "#FF7C03",
+                transform: "scale(0.98)",
+              }}
             >
               로그인
-            </Box>
+            </Button>
           </Link>
           <Link to="/tMap">티맵으로 이동하기</Link>
         </Box>

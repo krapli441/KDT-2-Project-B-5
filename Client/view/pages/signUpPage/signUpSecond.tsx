@@ -1,6 +1,6 @@
 // 리액트 라이브러리
 import React, { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // 외부 라이브러리
 import {
@@ -131,6 +131,22 @@ const CreateAccount: React.FC = () => {
           회원가입
         </Button>
       </FormControl>
+      <Link to="/first">
+        <Button
+          mt={4}
+          backgroundColor="#D9D9D9"
+          color="white"
+          width={"340px"}
+          height={"60px"}
+          _hover={{ bg: "#C9C9C9" }}
+          _active={{
+            bg: "#B3B3B3",
+            transform: "scale(0.98)",
+          }}
+        >
+          돌아가기
+        </Button>
+      </Link>
     </>
   );
 };
