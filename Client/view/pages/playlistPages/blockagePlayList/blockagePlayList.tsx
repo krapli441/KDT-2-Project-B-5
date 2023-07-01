@@ -8,7 +8,8 @@ const overallMain: React.CSSProperties = {
   height: "800px",
 };
 const scrollContent: React.CSSProperties = {
-  overflow: "auto" /* 내부 컨텐츠에 스크롤 적용 */,
+  scrollbarWidth: "none" /* Firefox에서 스크롤바 감추기 */,
+  msOverflowStyle: "none" /* IE/Edge에서 스크롤바 감추기 */,
 };
 
 /* 
