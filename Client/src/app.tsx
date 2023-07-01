@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react";
 import Intro from "../view/pages/introPage/introPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
 import SignUp from "../view/pages/signUpPage/signUpSecond";
-import Login from "../view/pages/loginPage/loginScreen";
+import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
 

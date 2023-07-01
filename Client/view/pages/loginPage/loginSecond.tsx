@@ -15,7 +15,6 @@ import {
 import "@fontsource/staatliches";
 
 // 리액트 컴포넌트
-import CreateAccountCheckBox from "./checkBox";
 
 const CreateAccount: React.FC = () => {
   const [input, setInput] = useState("");
@@ -52,8 +51,7 @@ const CreateAccount: React.FC = () => {
         width={"80%"}
       >
         <Box className="signUpInfoText">
-          <Text fontSize={"24px"}>회원가입</Text>
-          <Text fontSize={"13px"}>회원 정보를 입력해주세요.</Text>
+          <Text fontSize={"24px"}>로그인</Text>
         </Box>
         <Box className="serviceLogoText">
           <Text fontFamily={"Staatliches"} fontSize={"50px"}>
@@ -89,47 +87,38 @@ const CreateAccount: React.FC = () => {
           value={formData.password}
           onChange={handleInputChange}
         />
-
-        <Input
-          type="password"
-          placeholder="비밀번호 확인"
-          height={"60px"}
-          required
-        />
-        <Input
-          type="text"
-          placeholder="이름"
-          height={"60px"}
-          required
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-        <NumberInput>
-          <NumberInputField
+        <Box className="buttons">
+          <Button
+            mt={4}
+            backgroundColor="#FFB703"
+            color="white"
+            type="submit"
+            width={"340px"}
             height={"60px"}
-            placeholder="휴대전화번호"
-            name="number"
-            onChange={handleInputChange}
-            value={formData.phoneNumber}
-          ></NumberInputField>
-        </NumberInput>
-        <CreateAccountCheckBox />
-        <Button
-          mt={4}
-          backgroundColor="#FFB703"
-          color="white"
-          type="submit"
-          width={"340px"}
-          height={"60px"}
-          _hover={{ bg: "#FF8B03" }}
-          _active={{
-            bg: "#FF7C03",
-            transform: "scale(0.98)",
-          }}
-        >
-          회원가입
-        </Button>
+            _hover={{ bg: "#FF8B03" }}
+            _active={{
+              bg: "#FF7C03",
+              transform: "scale(0.98)",
+            }}
+          >
+            로그인
+          </Button>
+          <Button
+            mt={4}
+            backgroundColor="#D9D9D9"
+            color="white"
+            type="submit"
+            width={"340px"}
+            height={"60px"}
+            _hover={{ bg: "#C9C9C9" }}
+            _active={{
+              bg: "#B3B3B3",
+              transform: "scale(0.98)",
+            }}
+          >
+            돌아가기
+          </Button>
+        </Box>
       </FormControl>
     </>
   );
