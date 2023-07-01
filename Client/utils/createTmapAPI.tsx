@@ -152,7 +152,7 @@ const MapContainer: React.FC = () => {
         position={"sticky"}
       ></Box>
       <Box
-        className="musicPlayer"
+        className="navigationBar"
         width={"100%"}
         height={"20%"}
         backgroundColor={"#21325E"}
