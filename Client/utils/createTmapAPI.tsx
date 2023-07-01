@@ -6,6 +6,8 @@ import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
 import SampleData from "./getTrafficSampleData";
+import MusicController from "../view/fragments/musicController";
+import NavigationController from "../view/fragments/navgiationController";
 
 declare global {
   interface Window {
@@ -153,11 +155,16 @@ const MapContainer: React.FC = () => {
       ></Box>
       <Box
         className="navigationBar"
+        display={"flex"}
+        flexDirection={"column"}
         width={"100%"}
         height={"20%"}
         backgroundColor={"#21325E"}
         borderRadius={"10% 10% 0% 0%;"}
-      ></Box>
+      >
+        <MusicController />
+        <NavigationController />
+      </Box>
     </>
   );
 };
