@@ -60,11 +60,11 @@ const CreateAccount: React.FC = () => {
         </Box>
       </Box>
       <FormControl
-        className="createAccountForm"
+        className="loginForm"
         display={"flex"}
         flexDirection={"column"}
         width={"80%"}
-        gap={"27px"}
+        gap={"10px"}
         isRequired
         onSubmit={handleSubmit}
       >
@@ -87,7 +87,15 @@ const CreateAccount: React.FC = () => {
           value={formData.password}
           onChange={handleInputChange}
         />
-        <Box className="buttons">
+        <Text fontSize={"16px"} textAlign={"right"}>
+          계정 및 비밀번호 찾기
+        </Text>
+        <Box
+          className="buttons"
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
           <Button
             mt={4}
             backgroundColor="#FFB703"
@@ -103,23 +111,22 @@ const CreateAccount: React.FC = () => {
           >
             로그인
           </Button>
-          <Button
-            mt={4}
-            backgroundColor="#D9D9D9"
-            color="white"
-            type="submit"
-            width={"340px"}
-            height={"60px"}
-            _hover={{ bg: "#C9C9C9" }}
-            _active={{
-              bg: "#B3B3B3",
-              transform: "scale(0.98)",
-            }}
-          >
-            돌아가기
-          </Button>
         </Box>
       </FormControl>
+      <Button
+        mt={4}
+        backgroundColor="#D9D9D9"
+        color="white"
+        width={"340px"}
+        height={"60px"}
+        _hover={{ bg: "#C9C9C9" }}
+        _active={{
+          bg: "#B3B3B3",
+          transform: "scale(0.98)",
+        }}
+      >
+        돌아가기
+      </Button>
     </>
   );
 };
