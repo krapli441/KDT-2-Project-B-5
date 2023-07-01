@@ -52,7 +52,7 @@ const MapContainer: React.FC = () => {
             userLocation?.longitude
           ),
           width: "100%",
-          height: "100%",
+          height: "80%",
           zoom: 15,
         });
         var marker = new window.Tmapv3.Marker({
@@ -150,7 +150,7 @@ const MapContainer: React.FC = () => {
       <Box
         id="tMapContainer"
         width={"100%"}
-        height={"80%"}
+        height={"100%"}
         position={"sticky"}
       ></Box>
       <Box
