@@ -30,15 +30,18 @@ const CreateAccount: React.FC = () => {
       <Box
         className="header"
         display={"flex"}
+        alignItems={"center"}
         justifyContent={"space-between"}
         width={"80%"}
       >
         <Box className="signUpInfoText">
-          <Text>회원가입</Text>
-          <Text>회원 정보를 입력해주세요.</Text>
+          <Text fontSize={"24px"}>회원가입</Text>
+          <Text fontSize={"13px"}>회원 정보를 입력해주세요.</Text>
         </Box>
         <Box className="serviceLogoText">
-          <Text fontFamily={"Staatliches"}>ASPHALT</Text>
+          <Text fontFamily={"Staatliches"} fontSize={"50px"}>
+            ASPHALT
+          </Text>
         </Box>
       </Box>
       <FormControl
