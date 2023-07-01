@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Button,
   Text,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
 import "@fontsource/staatliches";
 
@@ -20,12 +19,28 @@ import IndeterminateExample from "./checkBox";
 
 const CreateAccount: React.FC = () => {
   const [input, setInput] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    phoneNumber: "",
+  });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const isError = input === "";
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // 여기에서 formData를 처리하는 작업을 수행합니다.
+    // 예: 서버로 데이터 전송 등
+    console.log(formData);
+  };
 
   return (
     <>
@@ -53,12 +68,16 @@ const CreateAccount: React.FC = () => {
         width={"80%"}
         gap={"27px"}
         isRequired
+        onSubmit={handleSubmit}
       >
         <Input
           type="email"
           placeholder="아이디 (이메일)"
           height={"60px"}
           required
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
         />
 
         <Input
@@ -66,6 +85,9 @@ const CreateAccount: React.FC = () => {
           placeholder="비밀번호"
           height={"60px"}
           required
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
         />
 
         <Input
@@ -74,13 +96,24 @@ const CreateAccount: React.FC = () => {
           height={"60px"}
           required
         />
-        <Input type="text" placeholder="이름" height={"60px"} required />
         <Input
-          type="number"
-          placeholder="휴대전화번호"
+          type="text"
+          placeholder="이름"
           height={"60px"}
           required
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
         />
+        <NumberInput>
+          <NumberInputField
+            height={"60px"}
+            placeholder="휴대전화번호"
+            name="number"
+            onChange={handleInputChange}
+            value={formData.phoneNumber}
+          ></NumberInputField>
+        </NumberInput>
         <IndeterminateExample />
         <Button
           mt={4}

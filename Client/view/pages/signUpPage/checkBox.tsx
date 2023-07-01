@@ -3,15 +3,7 @@ import React, { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // 외부 라이브러리
-import {
-  Box,
-  Input,
-  Button,
-  Text,
-  Checkbox,
-  CheckboxGroup,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Checkbox, Stack } from "@chakra-ui/react";
 // 리액트 컴포넌트
 
 function CreateAccountCheckBox() {
