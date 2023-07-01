@@ -7,33 +7,53 @@ import { BsKeyFill } from "react-icons/Bs";
 import { HiOutlinePencilAlt } from "react-icons/Hi";
 import IntroLogo from "../introPage/introLogo.png";
 
+const flexCenter = {
+  display: "flex",
+  alignItems: "center",
+};
+
+const buttonStyling = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "340px",
+  height: "60px",
+  borderRadius: "5px",
+};
+
 export default function Login() {
   return (
     <>
       <Box
-        className="loginPage"
-        display={"flex"}
+        className="main"
+        style={flexCenter}
+        width={"100%"}
+        height={"100%"}
         flexDirection={"column"}
-        justifyContent={"center"}
-        alignItems={"center"}
+        justifyContent={"space-evenly"}
         backgroundColor={"white"}
       >
         <img src={IntroLogo} width="70%" alt="로고" />
         <Box
           className="selectLoginType"
-          display="flex"
+          style={flexCenter}
           flexDirection={"column"}
-          alignItems={"center"}
           justifyContent={"space-evenly"}
-          width={"301px"}
-          height={"100px"}
+          width={"100%"}
+          height={"180px"}
         >
-          <Box className="createAccoutButton">
-            <HiOutlinePencilAlt />
+          <Box
+            className="createAccoutButton"
+            style={buttonStyling}
+            backgroundColor={"#D9D9D9"}
+          >
             회원가입
           </Box>
-          <Box className="loginButton">
-            <BsKeyFill />
+          <Box
+            className="loginButton"
+            style={buttonStyling}
+            backgroundColor={"#FFB703"}
+          >
             로그인
           </Box>
           <Link to="/tMap">티맵으로 이동하기</Link>
