@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react";
 
 import { BiSolidPlaylist } from "react-icons/Bi";
 import { AiFillHome } from "react-icons/Ai";
-import { FaSearch } from "react-icons/Fa";
+import { BiCurrentLocation } from "react-icons/Bi";
 
 // 리액트 컴포넌트
 
@@ -24,7 +24,7 @@ const NavigationController: React.FC = () => {
       >
         <BiSolidPlaylist />
         <AiFillHome />
-        <FaSearch />
+        <BiCurrentLocation />
       </Box>
     </>
   );

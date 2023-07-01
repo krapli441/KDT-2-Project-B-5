@@ -8,6 +8,7 @@ import { Box } from "@chakra-ui/react";
 import SampleData from "./getTrafficSampleData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
+import RefreshUserLocationButton from "../view/fragments/refreshUserLocationButton";
 
 declare global {
   interface Window {
@@ -153,12 +154,14 @@ const MapContainer: React.FC = () => {
         height={"100%"}
         position={"sticky"}
       ></Box>
+
       <Box
         className="navigationBar"
         display={"flex"}
         flexDirection={"column"}
         width={"100%"}
         height={"20%"}
+        fontSize={"24px"}
         backgroundColor={"#21325E"}
         borderRadius={"10% 10% 0% 0%;"}
       >
