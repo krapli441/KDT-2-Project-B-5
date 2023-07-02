@@ -3,7 +3,7 @@ import Blockage from "../blockagePlayList/blockagePlayListScreen";
 import FunPlayList from "../funPlayList/funPlayListScreen";
 import NormalPlayList from "../normalPlayList/normalPlayListScreen";
 import StuckPlayList from "../stuckPlayList/stuckPlayListScreen";
-import "./overallPlayList.css";
+import "./allPlayList.css";
 
 export default function overall() {
   return (

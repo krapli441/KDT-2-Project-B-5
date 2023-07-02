@@ -12,7 +12,7 @@ import FunPlayList from "../view/pages/playlistPages/funPlayList/funPlayListScre
 import BlockagePlayList from "../view/pages/playlistPages/blockagePlayList/blockagePlayListScreen";
 import NormalPlayList from "../view/pages/playlistPages/normalPlayList/normalPlayListScreen";
 import StuckPlayList from "../view/pages/playlistPages/stuckPlayList/stuckPlayListScreen";
-import OverallPlayList from "../view/pages/playlistPages/overallPlaylist/overallPlayListScreen";
+import AllPlayList from "../view/pages/playlistPages/allPlaylist/allPlayListScreen";
 import Nav from "../view/fragments/footer";
 // import  from "../view/fragments";
 // import Nav from "../view/fragments/footer";
@@ -35,22 +35,22 @@ export default function App() {
           <Route path="/signup" element={<Singup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/fun" element={<FunPlayList />} />
-          <Route path="/blockage" element={<BlockagePlayList />} />
-          <Route path="/normal" element={<NormalPlayList />} />
-          <Route path="/stuck" element={<StuckPlayList />} />
-          <Route path="/overall" element={<OverallPlayList />} />
+          <Route path="/funPlayList" element={<FunPlayList />} />
+          <Route path="/blockagePlayList" element={<BlockagePlayList />} />
+          <Route path="/normalPlayList" element={<NormalPlayList />} />
+          <Route path="/stuckPlayList" element={<StuckPlayList />} />
+          <Route path="/allPlayList" element={<AllPlayList />} />
         </Routes>
         {[
           "/",
           "/first",
           "/signup",
           "/login",
-          "/fun",
-          "/blockage",
-          "/normal",
-          "/stuck",
-          "/overall",
+          "/funPlayList",
+          "/blockagePlayList",
+          "/normalPlayList",
+          "/stuckPlayList",
+          "/allPlayList",
         ].includes(location.pathname) ? null : (
           <Nav />
         )}

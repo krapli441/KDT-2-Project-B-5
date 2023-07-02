@@ -25,11 +25,6 @@ function introPage() {
         alignItems={"center"}
         backgroundColor={"white"}
       >
-        <dotlottie-player
-          src="../../components/asphalt.lottie"
-          autoplay
-          style={{ width: "100%", height: "100%" }}
-        />
         {/* <img src={IntroLogo} width="70%" alt="로고" /> */}
       </Box>
     </>

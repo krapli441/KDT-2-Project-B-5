@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import OverallPlayList from "./overallPlayList";
+import AllPlayList from "./allPlayList";
 
 const Screen: React.FC = () => {
   return (
     <>
-      <OverallPlayList />
+      <AllPlayList />
     </>
   );
 };
