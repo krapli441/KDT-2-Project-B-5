@@ -166,6 +166,7 @@ const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] = useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
+  const [marker, setMarker] = useState<any>(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -195,14 +196,12 @@ const MapContainer: React.FC = () => {
         });
 
         const marker = new window.Tmapv3.Marker({
-          position: new window.Tmapv3.LatLng(
-                        userLocation?.latitude,
-                        userLocation?.longitude
-                      ),
+          position: new window.Tmapv3.LatLng(userLocation?.latitude, userLocation?.longitude),
           map: map,
         });
 
         setMap(map);
+        setMarker(marker);
         return map;
       }
 
@@ -288,6 +287,9 @@ const MapContainer: React.FC = () => {
             polyline.setMap(null);
           });
         }
+        if (marker) {
+          marker.setMap(null);
+        }
       };
     }
   }, [userLocation]);
@@ -296,8 +298,12 @@ const MapContainer: React.FC = () => {
     if (map && userLocation) {
       const centerLatLng = new window.Tmapv3.LatLng(userLocation.latitude, userLocation.longitude);
       map.setCenter(centerLatLng);
+
+      if (marker) {
+        marker.setPosition(centerLatLng);
+      }
     }
-  }, [map, userLocation]);
+  }, [map, marker, userLocation]);
 
   return <div id="TmapApp" style={{ width: "100%", height: "100%" }}></div>;
 };
