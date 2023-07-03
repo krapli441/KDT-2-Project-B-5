@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SampleData from "./getTrafficSampleData";
 import { Box } from "@chakra-ui/react";
 
@@ -19,6 +19,7 @@ const MapContainer: React.FC = () => {
   const [map, setMap] = useState<any>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
+  const markerRef = useRef<any>(null);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -94,6 +95,7 @@ const MapContainer: React.FC = () => {
         },
         {
           enableHighAccuracy: true,
+          maximumAge: 10000,
         }
       );
 
@@ -115,9 +117,9 @@ const MapContainer: React.FC = () => {
       );
       map.setCenter(centerLatLng);
 
-      if (marker) {
+      if (markerRef.current) {
         // 기존 마커 객체 제거
-        marker.setMap(null);
+        markerRef.current.setMap(null);
       }
 
       // 새로운 마커 객체 생성 및 설정
@@ -126,9 +128,9 @@ const MapContainer: React.FC = () => {
         map: map,
       });
 
-      setMarker(newMarker);
+      markerRef.current = newMarker;
     }
-  }, [map, marker, userRealTimeLocation]);
+  }, [map, userRealTimeLocation]);
 
   return (
     <>
