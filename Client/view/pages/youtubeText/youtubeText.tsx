@@ -1,6 +1,6 @@
 
-import React, { ChangeEvent, FormEvent, Component } from "react";
-
+import React, { ChangeEvent, FormEvent, Component,useContext } from "react";
+// import { AuthContext } from "../../../utils/Context";
 interface Video {
   id: { videoId: string };
   snippet: { title: string; description: string };
@@ -36,6 +36,7 @@ class YoutubeSearch extends Component<{}, State> {
     const { searchTerm } = this.state;
 
     try {
+
       // 유튜브 API 호출
       const response = await fetch(
         `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=AIzaSyA9zqB9QJLqjy1iCTGfgdTNrSo6WpJfRd0`
@@ -57,6 +58,7 @@ class YoutubeSearch extends Component<{}, State> {
   render() {
     const { searchTerm, videos, selectedVideo } = this.state;
     const firstVideo = videos[0];
+    // const {congestion}=useContext(AuthContext)
 
     return (
       <div>
