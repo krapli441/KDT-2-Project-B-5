@@ -83,7 +83,7 @@ const MapContainer: React.FC = () => {
 
   // * 지도와 마커가 생성되었을 경우 watchPosition 메서드를 실행
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (userCurrentLocation) {
       console.log("4. watchPosition으로 실시간 위치 정보를 수집");
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
@@ -110,7 +110,7 @@ const MapContainer: React.FC = () => {
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
     console.log("5. 실시간 위치 정보를 토대로 마커 갱신");
-    if (map && userRealTimeLocation) {
+    if (userRealTimeLocation) {
       const centerLatLng = new window.Tmapv3.LatLng(
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude
@@ -130,7 +130,7 @@ const MapContainer: React.FC = () => {
 
       markerRef.current = newMarker;
     }
-  }, [map, userRealTimeLocation]);
+  }, [userRealTimeLocation]);
 
   return (
     <>
@@ -140,7 +140,6 @@ const MapContainer: React.FC = () => {
         height={"100%"}
         position={"sticky"}
       ></Box>
-
       <Box
         className="navigationBar"
         display={"flex"}
