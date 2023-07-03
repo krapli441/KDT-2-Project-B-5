@@ -14,6 +14,17 @@ const MapContainer: React.FC = () => {
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
 
+  const clearMap = () => {
+    if (polyLineArr.length > 0) {
+      polyLineArr.forEach((polyline) => {
+        polyline.setMap(null);
+      });
+    }
+    if (marker) {
+      marker.setMap(null);
+    }
+  };
+
   useEffect(() => {
     if (navigator.geolocation) {
       const watchId = navigator.geolocation.watchPosition(
@@ -45,7 +56,6 @@ const MapContainer: React.FC = () => {
           height: "100%",
           zoom: 15,
         });
-
         const marker = new window.Tmapv3.Marker({
           position: new window.Tmapv3.LatLng(
             userLocation?.latitude,
@@ -54,12 +64,12 @@ const MapContainer: React.FC = () => {
           map: map,
         });
 
-        setMap(map);
-        setMarker(marker);
-        return map;
+        return { map, marker };
       }
 
-      const map = generateMap();
+      const { map } = generateMap();
+      setMap(map);
+      setMarker(marker);
 
       const fetchTrafficData = () => {
         if (map) {
@@ -74,17 +84,25 @@ const MapContainer: React.FC = () => {
             })
             .then((data) => {
               console.log("요청이 성공하였습니다.");
+              if (marker) {
+                marker.setMap(null);
+              }
+              clearMap();
+
+              const newMarker = new window.Tmapv3.Marker({
+                position: new window.Tmapv3.LatLng(
+                  userLocation.latitude,
+                  userLocation.longitude
+                ),
+                map: map,
+              });
+              setMarker(newMarker);
+
               const resultData = data.features;
               const congestionValues = resultData.map(
                 (item: any) => item.properties.congestion
               );
               console.log(congestionValues);
-
-              if (polyLineArr.length > 0) {
-                polyLineArr.forEach((polyline) => {
-                  polyline.setMap(null);
-                });
-              }
 
               const newPolyLineArr: any[] = [];
 
@@ -147,14 +165,7 @@ const MapContainer: React.FC = () => {
 
       return () => {
         clearInterval(intervalId);
-        if (polyLineArr.length > 0) {
-          polyLineArr.forEach((polyline) => {
-            polyline.setMap(null);
-          });
-        }
-        if (marker) {
-          marker.setMap(null);
-        }
+        clearMap();
       };
     }
   }, [userLocation]);
