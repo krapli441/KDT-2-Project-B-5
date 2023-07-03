@@ -3,5 +3,6 @@
 
   gap: 10px;
   overflow: scroll;
-  height: 230px;
+  overflow-x: hidden;
+  height: 200px;
 }
