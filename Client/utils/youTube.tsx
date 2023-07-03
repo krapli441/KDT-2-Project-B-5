@@ -72,8 +72,8 @@ class YoutubeSearch extends Component<{}, State> {
           {selectedVideo ? (
             <div>
               <iframe
-                width="340"
-                height="200"
+                width="142"
+                height="80"
                 src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}`}
                 title="YouTube video player"
                 frameBorder="0"
@@ -89,8 +89,8 @@ class YoutubeSearch extends Component<{}, State> {
                   onClick={() => this.handleClick(video)}
                 >
                   <iframe
-                    width="340"
-                    height="200"
+                    width="213"
+                    height="120"
                     src={`https://www.youtube.com/embed/${video.id.videoId}`}
                     title={video.snippet.title}
                     frameBorder="0"
