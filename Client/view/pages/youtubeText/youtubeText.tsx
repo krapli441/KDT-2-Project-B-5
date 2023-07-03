@@ -34,55 +34,67 @@
 // };
 
 // export default YouTubePlayer;
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
-const API_KEY = 'lucky-era-391205';
-
-const App = () => {
+interface Video {
+    id: {
+      videoId: string;
+    };
+    snippet: {
+      title: string;
+      description: string;
+    };
+  }
+const YoutubeSearch = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [videoId, setVideoId] = useState('');
+  const [videos, setVideos] = useState<Array<Video>>([]);
 
-  const handleKeyPress = async (e) => {
-    if (e.key === 'Enter') {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&q=${encodeURIComponent(
-            searchTerm
-          )}&part=snippet&type=video&maxResults=1&autoplay=1`
+        // 유튜브 API 호출
+        const response = await fetch(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=lucky-era-391205`
         );
-        const videoId = response.data.items[0]?.id.videoId;
-        if (videoId) {
-          setVideoId(videoId);
+
+        if (!response.ok) {
+          throw new Error('유튜브 API 호출이 실패하였습니다.');
         }
+
+        const data = await response.json();
+
+        // 검색 결과를 상태에 저장
+        setVideos(data.items);
       } catch (error) {
-        console.error('Failed to fetch YouTube data:', error);
+        console.error(error);
       }
-    }
+    };
+
+    fetchData();
+  }, [searchTerm]);
+
+  const handleSearch = (event:any) => {
+    event.preventDefault();
+    // 검색어 변경 시 상태 업데이트
+    setSearchTerm('beenzino');
   };
 
   return (
     <div>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyPress={handleKeyPress}
-      />
-      {videoId ? (
-        <iframe
-          width="560"
-          height="315"
-          src={`https://www.youtube.com/embed/${videoId}`}
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-        />
-      ) : (
-        <p>검색 결과를 입력하세요.</p>
-      )}
+      <form>
+        <input type="text" value={searchTerm} onChange={handleSearch} />
+        <button type="submit">검색</button>
+      </form>
+      <div>
+        {videos.map((video) => (
+          <div key={video.id.videoId}>
+            <h2>{video.snippet.title}</h2>
+            <p>{video.snippet.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default App;
+export default YoutubeSearch;
