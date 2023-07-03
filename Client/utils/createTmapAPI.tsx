@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SampleData from "./getTrafficSampleData";
+import { Box } from "@chakra-ui/react";
 
 declare global {
   interface Window {
@@ -78,7 +79,27 @@ const MapContainer: React.FC = () => {
     }
   }, [map, marker, userCurrentLocation]);
 
-  return <div id="TmapApp" style={{ width: "100%", height: "100%" }}></div>;
+  return (
+    <>
+      <Box
+        id="tMapContainer"
+        width={"100%"}
+        height={"100%"}
+        position={"sticky"}
+      ></Box>
+
+      <Box
+        className="navigationBar"
+        display={"flex"}
+        flexDirection={"column"}
+        width={"100%"}
+        height={"20%"}
+        fontSize={"24px"}
+        backgroundColor={"#21325E"}
+        borderRadius={"10% 10% 0% 0%;"}
+      ></Box>
+    </>
+  );
 };
 
 export default MapContainer;
