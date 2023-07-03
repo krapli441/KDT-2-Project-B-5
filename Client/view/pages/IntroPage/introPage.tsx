@@ -7,7 +7,7 @@ import "@dotlottie/player-component";
 // 리액트 컴포넌트
 import IntroLogo from "./introLogo.png";
 
-function introPage() {
+function IntroPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,4 +36,4 @@ function introPage() {
   );
 }
 
-export default introPage;
+export default IntroPage;
