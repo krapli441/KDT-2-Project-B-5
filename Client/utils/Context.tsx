@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 
 interface AuthContextProps {
-    congestion:number,
+    congestion:number;
     setCongestion:(congestion:number) => void;
 
 }
@@ -12,18 +12,18 @@ export const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
-    const [congestion, setCongestion] = useState<number>(0);
+    const [congestion, setCongestion] = useState(0);
 
     return (
         <AuthContext.Provider value={{
             congestion,
-            setCongestion
+            setCongestion   
         }}>
              {children}
 
         </AuthContext.Provider>
-    )
-}
+    );
+};
 
 
 
