@@ -47,7 +47,7 @@ const SampleData = {
   // ? ACC : 돌발 정보를 요청한다.
   // ! minLat, minLon, maxLat, maxLon의 값은 필히 입력해야 한다.
 
-  trafficType: "AROUND",
+  trafficType: "POINT",
 
   // ? radius : 주변 교통 정보 반경을 지정한다.
   radius: 3,
@@ -65,7 +65,7 @@ const SampleData = {
   callback: "function",
 
   // ? appKey : 발급받은 APP Key
-  appKey: "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV",
+  appKey: "n5tcTlbrrd5rR16HzBuog98VPUg1oeiN6X8gIA5x",
 };
 
 export default SampleData;
