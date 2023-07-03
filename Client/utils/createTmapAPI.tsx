@@ -53,14 +53,6 @@ const MapContainer: React.FC = () => {
           height: "100%",
           zoom: 15,
         });
-        // const marker = new window.Tmapv3.Marker({
-        //   position: new window.Tmapv3.LatLng(
-        //     userCurrentLocation?.latitude,
-        //     userCurrentLocation?.longitude
-        //   ),
-        //   map: map,
-        // });
-
         return { map, marker };
       }
 
