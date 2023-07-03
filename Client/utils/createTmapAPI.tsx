@@ -87,7 +87,7 @@ const MapContainer: React.FC = () => {
       <Box
         id="tMapContainer"
         width={"100%"}
-        height={"80%"}
+        height={"100%"}
         position={"sticky"}
       ></Box>
 
