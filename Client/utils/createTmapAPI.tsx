@@ -80,7 +80,7 @@ const MapContainer: React.FC = () => {
           return response.json();
         })
         .then((data) => {
-          console.log("사용자 위치 교통량 데이터를 성공적으로 수신했습니다.");
+          console.log("현재 위치 교통정보를 성공적으로 수신했습니다.");
           const resultData = data.features;
           console.log(resultData);
         });
@@ -92,12 +92,12 @@ const MapContainer: React.FC = () => {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("주변 교통정보 요청이 실패하였습니다.");
+            throw new Error("사용자 주변 교통정보 요청이 실패하였습니다.");
           }
           return response.json();
         })
         .then((data) => {
-          console.log("사용자 주변 교통량 데이터를 성공적으로 수신했습니다.");
+          console.log("사용자 주변 교통정보를 성공적으로 수신했습니다.");
           const resultData = data.features;
           console.log(resultData);
 
