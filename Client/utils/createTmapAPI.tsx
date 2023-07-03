@@ -24,6 +24,7 @@ const MapContainer: React.FC = () => {
   const [map, setMap] = useState<any>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -63,7 +64,7 @@ const MapContainer: React.FC = () => {
 
       const { map } = generateMap();
       setMap(map);
-      // setMarker(marker);
+      setIsLoading(false);
     }
   }, [userCurrentLocation]);
 
@@ -130,11 +131,12 @@ const MapContainer: React.FC = () => {
     }
   }, [map, marker, userRealTimeLocation]);
 
-  if (map === null) {
+  if (isLoading) {
+    // 로딩 중인 경우 로딩 애니메이션을 표시
     return (
       <Box className="loadingScreen">
         <dotlottie-player
-          src="../view/components/loading.lottie"
+          src="https://lottie.host/3e0f94d0-2b5e-49a9-84bd-337295601c79/V27sRE6Xah.lottie"
           autoplay
           loop
           style={{ width: "100%", height: "100%" }}
