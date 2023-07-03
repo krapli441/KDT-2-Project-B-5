@@ -3,8 +3,7 @@
   flex-direction: column;
   justify-content: center;
   overflow-x: hidden;
-  overflow-y: scroll;
-  align-items: center;
+  overflow-y: auto;
   width: 340px;
   height: 800px;
   gap: 15px;
