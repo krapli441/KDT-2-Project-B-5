@@ -1,9 +1,14 @@
+// 리액트 라이브러리
 import React, { useState, useEffect } from "react";
-import SampleData from "./getTrafficSampleData";
+
+// 외부 라이브러리
 import { Box } from "@chakra-ui/react";
 
+// 리액트 컴포넌트
+import SampleData from "./getTrafficSampleData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
+import "@dotlottie/player-component";
 
 declare global {
   interface Window {
@@ -124,6 +129,19 @@ const MapContainer: React.FC = () => {
       setMarker(newMarker);
     }
   }, [map, marker, userRealTimeLocation]);
+
+  if (map === null) {
+    return (
+      <Box className="loadingScreen">
+        <dotlottie-player
+          src="../view/components/loading.lottie"
+          autoplay
+          loop
+          style={{ width: "100%", height: "100%" }}
+        />
+      </Box>
+    );
+  }
 
   return (
     <>
