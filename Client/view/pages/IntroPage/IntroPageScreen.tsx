@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import IntroPage from "./introPage";
+import IntroPage from "./IntroPage";
 
 const Screen: React.FC = () => {
   return (
