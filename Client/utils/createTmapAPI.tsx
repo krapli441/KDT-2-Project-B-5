@@ -68,6 +68,7 @@ const MapContainer: React.FC = () => {
       }
       const map = generateMap();
 
+      // ! 사용자 위치 교통정보 데이터를 가져오는 fetch
       const trafficPointRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${PointTrafficSampleData.version}&format=json&reqCoordType=${PointTrafficSampleData.reqCoordType}&resCoordType=${PointTrafficSampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${PointTrafficSampleData.trafficType}&zoomLevel=${PointTrafficSampleData.zoomLevel}&callback=${PointTrafficSampleData.callback}&appKey=${PointTrafficSampleData.appKey}`;
 
       fetch(trafficPointRequestURI, {
@@ -85,7 +86,8 @@ const MapContainer: React.FC = () => {
           console.log(resultData);
         });
 
-      const trafficAroundRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${AroundTrafficSampleData.version}&format=json&reqCoordType=${AroundTrafficSampleData.reqCoordType}&resCoordType=${AroundTrafficSampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${AroundTrafficSampleData.trafficType}&zoomLevel=${AroundTrafficSampleData.zoomLevel}&callback=${AroundTrafficSampleData.callback}&appKey=${AroundTrafficSampleData.appKey}`;
+      // ! 사용자 주변 교통정보 데이터를 가져오는 fetch
+      const trafficAroundRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${AroundTrafficSampleData.version}&format=json&reqCoordType=${AroundTrafficSampleData.reqCoordType}&resCoordType=${AroundTrafficSampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${AroundTrafficSampleData.trafficType}&radius=${AroundTrafficSampleData.radius}&zoomLevel=${AroundTrafficSampleData.zoomLevel}&callback=${AroundTrafficSampleData.callback}&appKey=${AroundTrafficSampleData.appKey}`;
 
       fetch(trafficAroundRequestURI, {
         method: "GET",

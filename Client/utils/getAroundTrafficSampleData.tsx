@@ -50,10 +50,10 @@ const AroundSampleData = {
   trafficType: "AROUND",
 
   // ? radius : 주변 교통 정보 반경을 지정한다.
-  radius: 3,
+  radius: 9,
 
   // ? zoomLevel : 교통정보를 표현할 맵의 레벨 별 제한 거리를 지정한다.
-  zoomLevel: 15,
+  zoomLevel: 19,
 
   // ? sort : 지리정보 개체의 정렬 순서를 지정함.
   // ? index(기본값)
@@ -67,7 +67,5 @@ const AroundSampleData = {
   // ? appKey : 발급받은 APP Key
   appKey: "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV",
 };
-
-
 
 export default AroundSampleData;

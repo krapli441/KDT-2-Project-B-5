@@ -50,7 +50,7 @@ const PointSampleData = {
   trafficType: "POINT",
 
   // ? radius : 주변 교통 정보 반경을 지정한다.
-  radius: 3,
+  radius: 5,
 
   // ? zoomLevel : 교통정보를 표현할 맵의 레벨 별 제한 거리를 지정한다.
   zoomLevel: 15,
