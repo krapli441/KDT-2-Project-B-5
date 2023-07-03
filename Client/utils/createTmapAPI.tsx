@@ -1,5 +1,5 @@
 // 리액트 라이브러리
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // 외부 라이브러리
 import { Box } from "@chakra-ui/react";
@@ -22,6 +22,7 @@ const MapContainer: React.FC = () => {
     useState<GeolocationCoordinates | null>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [map, setMap] = useState<any | null>(null);
+  const mapRef = useRef<any>(null); // useRef를 사용하여 map 상태에 접근
 
   // * 사용자 위치 정보를 가져오도록 하는 getCurrentPosition 메서드
   useEffect(() => {
@@ -56,23 +57,31 @@ const MapContainer: React.FC = () => {
           height: "80%",
           zoom: 15,
         };
-        let newMap = null;
-        if (!map) {
-          newMap = new window.Tmapv3.Map("tMapContainer", mapOptions);
-          setMap(newMap);
-        } else {
-          map.setCenter(center);
-          newMap = map;
-        }
-        const markerOptions = {
-          position: center,
-          map: newMap,
-        };
-        const marker = new window.Tmapv3.Marker(markerOptions);
+        const newMap = new window.Tmapv3.Map("tMapContainer", mapOptions);
+        mapRef.current = newMap; // mapRef에 생성된 맵 저장
+      }
+
+      // 기존의 맵 제거
+      const mapContainer = document.getElementById("tMapContainer");
+      if (mapContainer) {
+        mapContainer.innerHTML = "";
       }
       generateMap();
     }
-  }, [userLocation, map]);
+  }, [userLocation]);
+
+  useEffect(() => {
+    if (userLocation && mapRef.current) {
+      const markerOptions = {
+        position: new window.Tmapv3.LatLng(
+          userLocation.latitude,
+          userLocation.longitude
+        ),
+        map: mapRef.current, // 저장된 맵 사용
+      };
+      const marker = new window.Tmapv3.Marker(markerOptions);
+    }
+  }, [userLocation]);
 
   // * 사용자 위치 정보를 가져오도록 하는 watchPosition 메서드
   useEffect(() => {
@@ -104,7 +113,7 @@ const MapContainer: React.FC = () => {
       );
 
       return () => {
-        // 컴포넌트가 언마운트되거나 업데이트되면 watchPosition을 중지합니다.
+        // 컴포넌트가 언마운트되거나 업데이트되면 watchPosition을 중지.
         navigator.geolocation.clearWatch(watchId);
       };
     } else {
