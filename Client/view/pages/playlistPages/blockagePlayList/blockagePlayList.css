@@ -1,12 +1,10 @@
 .newsArea {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   overflow-x: hidden;
   overflow-y: auto;
   width: 340px;
   height: 800px;
-  gap: 15px;
 } 
 
 .newsArea::-webkit-scrollbar {
@@ -14,14 +12,14 @@
 }
 
 
-.aa {
+.playListHeader {
   min-width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
 }
 
-/* 
-1. minHeight: "80px" // 최소 박스 크기 
-
-2. .innerBox {
-  height: 100px;
-  flex-shrink: 0;
-  } // 내부 박스의 크기를 유지 */
+.otherPlayList {
+  display: flex;
+  flex-direction: row-reverse;
+}

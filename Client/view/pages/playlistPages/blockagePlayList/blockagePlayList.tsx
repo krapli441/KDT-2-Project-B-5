@@ -1,17 +1,19 @@
 import React from "react";
 import "./blockagePlayList.css";
 import Youtube from "../../../../utils/youTube";
+import { Box } from "@chakra-ui/layout";
 
 export default function blockage() {
   return (
     <div>
-      <div style={{ width: "340px", height: "10vh" }}> 대충 제목</div>
+      <Box>
+        <div className="playListHeader">정체</div>
 
-      <div className="newsArea">
         <div className="newsArea">
           <Youtube />
         </div>
-      </div>
+        <div className="otherPlayList">다른 플레이리스트 보기</div>
+      </Box>
     </div>
   );
 }
