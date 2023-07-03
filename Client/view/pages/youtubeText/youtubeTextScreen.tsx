@@ -5,7 +5,7 @@ import Youtube from './youtubeText'
 const Screen: React.FC = () => {
   return (
     <>
-      <Youtube videoId="bennzino"/>
+      <Youtube/>
     </>
   );
 };
