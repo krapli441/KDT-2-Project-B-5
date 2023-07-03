@@ -27,6 +27,7 @@ const MapContainer: React.FC = () => {
         (position) => {
           setUserCurrentLocation(position.coords);
           console.log(position.coords.latitude, position.coords.longitude);
+          console.log("1. 최초 위치 불러옴");
         },
         (error) => {
           console.log(error);
@@ -48,6 +49,7 @@ const MapContainer: React.FC = () => {
   useEffect(() => {
     if (userCurrentLocation) {
       function generateMap() {
+        console.log("2. 최초 위치를 토대로 맵 생성");
         const map = new window.Tmapv3.Map("tMapContainer", {
           width: "100%",
           height: "100%",
@@ -65,6 +67,7 @@ const MapContainer: React.FC = () => {
   // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 마커 생성
   useEffect(() => {
     if (map && userCurrentLocation) {
+      console.log("3. 사용자 위치를 토대로 마커 생성");
       const centerLatLng = new window.Tmapv3.LatLng(
         userCurrentLocation.latitude,
         userCurrentLocation.longitude
@@ -80,6 +83,7 @@ const MapContainer: React.FC = () => {
   // * 지도와 마커가 생성되었을 경우 watchPosition 메서드를 실행
   useEffect(() => {
     if (navigator.geolocation) {
+      console.log("4. watchPosition으로 실시간 위치 정보를 수집");
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
           setUserRealTimeLocation(position.coords);
@@ -103,6 +107,7 @@ const MapContainer: React.FC = () => {
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
+    console.log("5. 실시간 위치 정보를 토대로 마커 갱신");
     if (map && userRealTimeLocation) {
       const centerLatLng = new window.Tmapv3.LatLng(
         userRealTimeLocation?.latitude,
