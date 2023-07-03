@@ -55,6 +55,7 @@ class YoutubeSearch extends Component<{}, State> {
 
   render() {
     const { searchTerm, videos, selectedVideo } = this.state;
+    const firstVideo = videos[0];
 
     return (
       <div>
@@ -69,36 +70,46 @@ class YoutubeSearch extends Component<{}, State> {
           <button type="submit">검색</button>
         </form>
         <div>
-          {selectedVideo ? (
-            <div>
+          // 검색 결과 영상 출력, 바로 실행
+          {firstVideo && (
+            <div
+              key={firstVideo.id.videoId}
+              onClick={() => this.handleClick(firstVideo)}
+            >
               <iframe
-                width="142"
-                height="80"
-                src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}`}
-                title="YouTube video player"
+                width="213"
+                height="120"
+                src={`https://www.youtube.com/embed/${firstVideo.id.videoId}?autoplay=1`}
+                title={firstVideo.snippet.title}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
             </div>
-          ) : (
+          )}
+          // 영상 5개 출력
+          {firstVideo && (
             <div>
-              {videos.map((video) => (
-                <div
-                  key={video.id.videoId}
-                  onClick={() => this.handleClick(video)}
-                >
-                  <iframe
-                    width="213"
-                    height="120"
-                    src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                    title={video.snippet.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+              {videos.length ? (
+                <div>
+                  {videos.slice(0, 5).map((video) => (
+                    <div
+                      key={video.id.videoId}
+                      onClick={() => this.handleClick(video)}
+                    >
+                      <iframe
+                        width="213"
+                        height="120"
+                        src={`https://www.youtube.com/embed/${video.id.videoId}?`}
+                        title={video.snippet.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : null}
             </div>
           )}
         </div>

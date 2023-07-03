@@ -20,6 +20,7 @@ const buttonStyling = {
   height: "60px",
   borderRadius: "5px",
 };
+
 export default function Login() {
   return (
     <>
@@ -41,24 +42,20 @@ export default function Login() {
           width={"100%"}
           height={"180px"}
         >
-          <Link to={"/signup"}>
-            <Box
-              className="createAccoutButton"
-              style={buttonStyling}
-              backgroundColor={"#D9D9D9"}
-            >
-              회원가입
-            </Box>
-          </Link>
-          <Link to="/login">
-            <Box
-              className="loginButton"
-              style={buttonStyling}
-              backgroundColor={"#FFB703"}
-            >
-              로그인
-            </Box>
-          </Link>
+          <Box
+            className="createAccoutButton"
+            style={buttonStyling}
+            backgroundColor={"#D9D9D9"}
+          >
+            회원가입
+          </Box>
+          <Box
+            className="loginButton"
+            style={buttonStyling}
+            backgroundColor={"#FFB703"}
+          >
+            로그인
+          </Box>
           <Link to="/tMap">티맵으로 이동하기</Link>
         </Box>
       </Box>
