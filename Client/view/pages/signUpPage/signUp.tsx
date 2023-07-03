@@ -1,7 +1,16 @@
+// 리액트 라이브러리
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+} from "@chakra-ui/react";
 
-export default function Main() {
+// 리액트 컴포넌트
+
+export default function CreateAcount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setpasswordConfirm] = useState("");
