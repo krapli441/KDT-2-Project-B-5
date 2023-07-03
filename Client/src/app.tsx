@@ -9,6 +9,7 @@ import SignUp from "../view/pages/signUpPage/signUpScreen";
 import Login from "../view/pages/loginPage/loginScreen";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
+import Youtube from "../view/pages/youtubeText/youtubeTextScreen"
 
 export default function App() {
   return (
@@ -23,7 +24,8 @@ export default function App() {
     >
       <Routes>
         <Route path="/" element={<Intro />} />
-        <Route path="/first" element={<FirstAccess />} />
+        {/* <Route path="/first" element={<FirstAccess />} /> */}
+        <Route path="/first" element={<Youtube/>}></Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
