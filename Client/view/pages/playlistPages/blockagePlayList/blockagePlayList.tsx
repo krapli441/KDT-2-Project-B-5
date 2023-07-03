@@ -1,5 +1,6 @@
 import React from "react";
 import "./blockagePlayList.css";
+import Youtube from "../../../../utils/youTube";
 
 export default function blockage() {
   return (
@@ -7,36 +8,7 @@ export default function blockage() {
       <div style={{ width: "340px", height: "10vh" }}> 대충 제목</div>
 
       <div className="newsArea">
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
-        <div>asd</div>
+        <Youtube />
       </div>
     </div>
   );
