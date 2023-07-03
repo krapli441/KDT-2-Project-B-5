@@ -37,7 +37,7 @@ class YoutubeSearch extends Component<{}, State> {
     try {
       // 유튜브 API 호출
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=YOUR_API_KEY`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=AIzaSyA9zqB9QJLqjy1iCTGfgdTNrSo6WpJfRd0`
       );
 
       if (!response.ok) {
@@ -59,23 +59,21 @@ class YoutubeSearch extends Component<{}, State> {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            :
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={this.handleChange}
-            />
-          </label>
-
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={this.handleChange}
+            title="Search Term"
+            placeholder="Enter search term"
+          />
           <button type="submit">검색</button>
         </form>
         <div>
-          {selectedVideo && (
+          {selectedVideo ? (
             <div>
               <iframe
-                width="560"
-                height="315"
+                width="340"
+                height="200"
                 src={`https://www.youtube.com/embed/${selectedVideo.id.videoId}`}
                 title="YouTube video player"
                 frameBorder="0"
@@ -83,18 +81,26 @@ class YoutubeSearch extends Component<{}, State> {
                 allowFullScreen
               ></iframe>
             </div>
+          ) : (
+            <div>
+              {videos.map((video) => (
+                <div
+                  key={video.id.videoId}
+                  onClick={() => this.handleClick(video)}
+                >
+                  <iframe
+                    width="340"
+                    height="200"
+                    src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                    title={video.snippet.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              ))}
+            </div>
           )}
-          <div>
-            {videos.map((video) => (
-              <div
-                key={video.id.videoId}
-                onClick={() => this.handleClick(video)}
-              >
-                <h2>{video.snippet.title}</h2>
-                <p>{video.snippet.description}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     );

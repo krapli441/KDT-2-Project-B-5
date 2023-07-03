@@ -7,10 +7,15 @@
   width: 340px;
   height: 800px;
   gap: 15px;
-}
+} 
 
 .newsArea::-webkit-scrollbar {
   display: none;
+}
+
+
+.aa {
+  min-width: 100%;
 }
 
 /* 
