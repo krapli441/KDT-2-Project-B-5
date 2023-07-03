@@ -5,7 +5,8 @@ import React, { useState, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
-import SampleData from "./getTrafficSampleData";
+import AroundTrafficSampleData from "./getAroundTrafficSampleData";
+import PointTrafficSampleData from "./getPointTrafficSampleData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
 import RefreshUserLocationButton from "../view/fragments/refreshUserLocationButton";
@@ -42,7 +43,7 @@ const MapContainer: React.FC = () => {
   }, []);
 
   // * SK open API를 사용하여 맵을 생성하는 useEffect 훅
-  // * 윗단 useEffect로 사용자 정보를 가져올 경우 실행된다
+  // * 윗단 useEffect 훅으로 사용자 정보를 가져올 경우 실행된다
 
   useEffect(() => {
     if (userLocation) {
@@ -67,19 +68,36 @@ const MapContainer: React.FC = () => {
       }
       const map = generateMap();
 
-      const AroundRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&format=json&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
+      const trafficPointRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${PointTrafficSampleData.version}&format=json&reqCoordType=${PointTrafficSampleData.reqCoordType}&resCoordType=${PointTrafficSampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${PointTrafficSampleData.trafficType}&zoomLevel=${PointTrafficSampleData.zoomLevel}&callback=${PointTrafficSampleData.callback}&appKey=${PointTrafficSampleData.appKey}`;
 
-      fetch(AroundRequestURI, {
+      fetch(trafficPointRequestURI, {
         method: "GET",
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("요청이 실패하였습니다.");
+            throw new Error("현재 위치 교통정보 요청이 실패하였습니다.");
           }
           return response.json();
         })
         .then((data) => {
-          console.log("요청이 성공하였습니다.");
+          console.log("사용자 위치 교통량 데이터를 성공적으로 수신했습니다.");
+          const resultData = data.features;
+          console.log(resultData);
+        });
+
+      const trafficAroundRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${AroundTrafficSampleData.version}&format=json&reqCoordType=${AroundTrafficSampleData.reqCoordType}&resCoordType=${AroundTrafficSampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${AroundTrafficSampleData.trafficType}&zoomLevel=${AroundTrafficSampleData.zoomLevel}&callback=${AroundTrafficSampleData.callback}&appKey=${AroundTrafficSampleData.appKey}`;
+
+      fetch(trafficAroundRequestURI, {
+        method: "GET",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("주변 교통정보 요청이 실패하였습니다.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("사용자 주변 교통량 데이터를 성공적으로 수신했습니다.");
           const resultData = data.features;
           console.log(resultData);
 
