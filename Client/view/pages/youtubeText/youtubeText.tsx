@@ -29,7 +29,7 @@ const YoutubeSearch: React.FC = () => {
     try {
       // 유튜브 API 호출
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${congestion}&key=AIzaSyA9zqB9QJLqjy1iCTGfgdTNrSo6WpJfRd0`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${congestion}&key=AIzaSyA9zqB9QJLqjy1iCTGfgdTNrSo6WpJfRd`
       );
 
       if (!response.ok) {
