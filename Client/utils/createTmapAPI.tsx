@@ -23,8 +23,7 @@ const MapContainer: React.FC = () => {
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [map, setMap] = useState<any[]>([]);
 
-  // * 사용자 위치 정보를 가져오는 useEffect, getCurrentPosition 메서드
-
+  // * 사용자 위치 정보를 가져오도록 하는 getCurrentPosition 메서드
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -43,40 +42,7 @@ const MapContainer: React.FC = () => {
     }
   }, []);
 
-  // * 사용자 위치 정보가 변경될 때마다 호출되는 watchPosition 메서드
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      const options = {
-        enableHighAccuracy: true,
-        timeout: 10000,
-      };
-      navigator.geolocation.watchPosition(
-        (position) => {
-          console.log(
-            "현재 위치:",
-            position.coords.latitude,
-            position.coords.longitude
-          );
-        },
-        (error) => {
-          if (error.code === error.TIMEOUT) {
-            console.log("위치 정보를 가져오는 중 시간이 초과되었습니다.");
-          } else {
-            console.log(
-              "실시간 위치 정보를 불러오는 중 오류가 발생했습니다.",
-              error
-            );
-          }
-        },
-        options
-      );
-    }
-  }, [userLocation]);
-
   // * SK open API를 사용하여 맵을 생성하는 useEffect 훅
-  // * 윗단 useEffect 훅으로 사용자 정보를 가져올 경우 실행된다
-
   useEffect(() => {
     if (userLocation) {
       function generateMap() {
@@ -103,6 +69,44 @@ const MapContainer: React.FC = () => {
     }
   }, [userLocation]);
 
+  // * 사용자 위치 정보가 변경될 때마다 호출되는 watchPosition 메서드
+  useEffect(() => {
+    if (navigator.geolocation) {
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,
+      };
+      navigator.geolocation.watchPosition(
+        (position) => {
+          var marker = new window.Tmapv3.Marker({
+            position: new window.Tmapv3.LatLng(
+              userLocation?.latitude,
+              userLocation?.longitude
+            ),
+            map: window.Tmapv3.map,
+          });
+          console.log(
+            "현재 위치:",
+            position.coords.latitude,
+            position.coords.longitude
+          );
+        },
+        (error) => {
+          if (error.code === error.TIMEOUT) {
+            console.log("위치 정보를 가져오는 중 시간이 초과되었습니다.");
+          } else {
+            console.log(
+              "실시간 위치 정보를 불러오는 중 오류가 발생했습니다.",
+              error
+            );
+          }
+        },
+        options
+      );
+    }
+  }, [userLocation]);
+
+  // ! 사용자 위치 정보를 가져오는 useEffect
   useEffect(() => {
     if (userLocation) {
       if (map) {
