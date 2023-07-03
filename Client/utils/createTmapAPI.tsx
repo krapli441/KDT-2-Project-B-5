@@ -8,28 +8,19 @@ declare global {
 }
 
 const MapContainer: React.FC = () => {
-  const [userLocation, setUserLocation] =
+  const [userRealTimeLocation, setUserRealTimeLocation] =
+    useState<GeolocationCoordinates | null>(null);
+  const [userCurrentLocation, setUserCurrentLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
 
-  const clearMap = () => {
-    if (polyLineArr.length > 0) {
-      polyLineArr.forEach((polyline) => {
-        polyline.setMap(null);
-      });
-    }
-    if (marker) {
-      marker.setMap(null);
-    }
-  };
-
   useEffect(() => {
     if (navigator.geolocation) {
-      const watchId = navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
-          setUserLocation(position.coords);
+          setUserCurrentLocation(position.coords);
           console.log(position.coords.latitude, position.coords.longitude);
         },
         (error) => {
@@ -41,7 +32,7 @@ const MapContainer: React.FC = () => {
       );
 
       return () => {
-        navigator.geolocation.clearWatch(watchId);
+        userCurrentLocation;
       };
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
@@ -49,7 +40,7 @@ const MapContainer: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (userLocation) {
+    if (userCurrentLocation) {
       function generateMap() {
         const map = new window.Tmapv3.Map("TmapApp", {
           width: "100%",
@@ -58,8 +49,8 @@ const MapContainer: React.FC = () => {
         });
         const marker = new window.Tmapv3.Marker({
           position: new window.Tmapv3.LatLng(
-            userLocation?.latitude,
-            userLocation?.longitude
+            userCurrentLocation?.latitude,
+            userCurrentLocation?.longitude
           ),
           map: map,
         });
@@ -70,111 +61,14 @@ const MapContainer: React.FC = () => {
       const { map } = generateMap();
       setMap(map);
       setMarker(marker);
-
-      const fetchTrafficData = () => {
-        if (map) {
-          const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${SampleData.version}&format=json&reqCoordType=${SampleData.reqCoordType}&resCoordType=${SampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${SampleData.trafficType}&zoomLevel=${SampleData.zoomLevel}&callback=${SampleData.callback}&appKey=${SampleData.appKey}`;
-
-          fetch(requestURI)
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("요청이 실패하였습니다.");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              console.log("요청이 성공하였습니다.");
-              if (marker) {
-                marker.setMap(null);
-              }
-              clearMap();
-
-              const newMarker = new window.Tmapv3.Marker({
-                position: new window.Tmapv3.LatLng(
-                  userLocation.latitude,
-                  userLocation.longitude
-                ),
-                map: map,
-              });
-              setMarker(newMarker);
-
-              const resultData = data.features;
-              const congestionValues = resultData.map(
-                (item: any) => item.properties.congestion
-              );
-              console.log(congestionValues);
-
-              const newPolyLineArr: any[] = [];
-
-              for (const i in resultData) {
-                const geometry = resultData[i].geometry;
-                const properties = resultData[i].properties;
-
-                if (geometry.type === "LineString") {
-                  const drawInfoArr: any[] = [];
-
-                  for (const j in geometry.coordinates) {
-                    const latlng = new window.Tmapv3.Point(
-                      geometry.coordinates[j][0],
-                      geometry.coordinates[j][1]
-                    );
-                    const convertPoint =
-                      new window.Tmapv3.Projection.convertEPSG3857ToWGS84GEO(
-                        latlng
-                      );
-                    const convertChange = new window.Tmapv3.LatLng(
-                      convertPoint._lat,
-                      convertPoint._lng
-                    );
-                    drawInfoArr.push(convertChange);
-                  }
-
-                  let lineColor = "";
-                  const sectionCongestion = properties.congestion;
-                  if (sectionCongestion === 0) {
-                    lineColor = "#06050D";
-                  } else if (sectionCongestion === 1) {
-                    lineColor = "#61AB25";
-                  } else if (sectionCongestion === 2) {
-                    lineColor = "#FFFF00";
-                  } else if (sectionCongestion === 3) {
-                    lineColor = "#FF7200";
-                  } else if (sectionCongestion === 4) {
-                    lineColor = "#FF0000";
-                  }
-
-                  const polyline = new window.Tmapv3.Polyline({
-                    path: drawInfoArr,
-                    strokeColor: lineColor,
-                    strokeWeight: 6,
-                    map: map,
-                  });
-                  newPolyLineArr.push(polyline);
-                }
-              }
-
-              setPolyLineArr(newPolyLineArr);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      };
-
-      const intervalId = setInterval(fetchTrafficData, 5000);
-
-      return () => {
-        clearInterval(intervalId);
-        clearMap();
-      };
     }
-  }, [userLocation]);
+  }, [userCurrentLocation]);
 
   useEffect(() => {
-    if (map && userLocation) {
+    if (map && userCurrentLocation) {
       const centerLatLng = new window.Tmapv3.LatLng(
-        userLocation.latitude,
-        userLocation.longitude
+        userCurrentLocation.latitude,
+        userCurrentLocation.longitude
       );
       map.setCenter(centerLatLng);
 
@@ -182,19 +76,7 @@ const MapContainer: React.FC = () => {
         marker.setPosition(centerLatLng);
       }
     }
-  }, [map, marker, userLocation]);
-
-  useEffect(() => {
-    const consoleLogUserLocation = setInterval(() => {
-      if (userLocation) {
-        console.log(userLocation.latitude, userLocation.longitude);
-      }
-    }, 1000);
-
-    return () => {
-      clearInterval(consoleLogUserLocation);
-    };
-  }, [userLocation]);
+  }, [map, marker, userCurrentLocation]);
 
   return <div id="TmapApp" style={{ width: "100%", height: "100%" }}></div>;
 };
