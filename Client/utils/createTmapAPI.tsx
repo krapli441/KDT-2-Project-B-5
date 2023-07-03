@@ -21,8 +21,9 @@ const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
+  const [map, setMap] = useState<any[]>([]);
 
-  // * 사용자 위치 정보를 가져오는 useEffect
+  // * 사용자 위치 정보를 가져오는 useEffect, getCurrentPosition 메서드
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -39,6 +40,37 @@ const MapContainer: React.FC = () => {
       );
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
+    }
+  }, []);
+
+  // * 사용자 위치 정보가 변경될 때마다 호출되는 watchPosition 메서드
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,
+      };
+      navigator.geolocation.watchPosition(
+        (position) => {
+          console.log(
+            "현재 위치:",
+            position.coords.latitude,
+            position.coords.longitude
+          );
+        },
+        (error) => {
+          if (error.code === error.TIMEOUT) {
+            console.log("위치 정보를 가져오는 중 시간이 초과되었습니다.");
+          } else {
+            console.log(
+              "실시간 위치 정보를 불러오는 중 오류가 발생했습니다.",
+              error
+            );
+          }
+        },
+        options
+      );
     }
   }, []);
 
@@ -67,8 +99,12 @@ const MapContainer: React.FC = () => {
         return map;
       }
       const map = generateMap();
+      setMap(map);
+    }
+  }, [userLocation]);
 
-      // ! 사용자 위치 교통정보 데이터를 가져오는 fetch
+  useEffect(() => {
+    if (userLocation) {
       const trafficPointRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${PointTrafficSampleData.version}&format=json&reqCoordType=${PointTrafficSampleData.reqCoordType}&resCoordType=${PointTrafficSampleData.resCoordType}&centerLat=${userLocation.latitude}&centerLon=${userLocation.longitude}&trafficType=${PointTrafficSampleData.trafficType}&zoomLevel=${PointTrafficSampleData.zoomLevel}&callback=${PointTrafficSampleData.callback}&appKey=${PointTrafficSampleData.appKey}`;
 
       fetch(trafficPointRequestURI, {
@@ -164,7 +200,7 @@ const MapContainer: React.FC = () => {
           console.log("에러:", error);
         });
     }
-  }, [userLocation]);
+  }, [userLocation, map]);
 
   return (
     <>
