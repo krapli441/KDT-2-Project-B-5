@@ -48,6 +48,7 @@ const YoutubeSearch: React.FC = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(congestion)
   }, []);
 
   const firstVideo = videos[0];

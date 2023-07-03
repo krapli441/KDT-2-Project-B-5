@@ -14,7 +14,7 @@ function IntroPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCongestion(3)
+      setCongestion(3);
       navigate("/first");
     }, 5000);
     return () => clearTimeout(timer);
