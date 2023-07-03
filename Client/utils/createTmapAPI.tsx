@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import SampleData from "./getTrafficSampleData";
 import { Box } from "@chakra-ui/react";
 
+import MusicController from "../view/fragments/musicController";
+import NavigationController from "../view/fragments/navigationController";
+
 declare global {
   interface Window {
     Tmapv3: any;
@@ -43,7 +46,7 @@ const MapContainer: React.FC = () => {
   useEffect(() => {
     if (userCurrentLocation) {
       function generateMap() {
-        const map = new window.Tmapv3.Map("TmapApp", {
+        const map = new window.Tmapv3.Map("tMapContainer", {
           width: "100%",
           height: "100%",
           zoom: 15,
@@ -84,7 +87,7 @@ const MapContainer: React.FC = () => {
       <Box
         id="tMapContainer"
         width={"100%"}
-        height={"100%"}
+        height={"80%"}
         position={"sticky"}
       ></Box>
 
@@ -97,7 +100,10 @@ const MapContainer: React.FC = () => {
         fontSize={"24px"}
         backgroundColor={"#21325E"}
         borderRadius={"10% 10% 0% 0%;"}
-      ></Box>
+      >
+        <MusicController />
+        <NavigationController />
+      </Box>
     </>
   );
 };
