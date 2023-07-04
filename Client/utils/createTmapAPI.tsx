@@ -3,12 +3,14 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 
 // 외부 라이브러리
 import { Box } from "@chakra-ui/react";
+
 // 리액트 컴포넌트
 import TrafficAroundData from "./getTrafficAroundData";
 import TrafficPointData from "./getTrafficPointData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
 import { AuthContext } from "../utils/Context";
+import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 
 declare global {
   interface Window {
@@ -26,7 +28,7 @@ const MapContainer: React.FC = () => {
   const [marker, setMarker] = useState<any>(null);
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
-  const { congestion,setCongestion } = useContext(AuthContext);
+  const { congestion, setCongestion } = useContext(AuthContext);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -280,7 +282,7 @@ const MapContainer: React.FC = () => {
         clearInterval(intervalPoint);
         clearInterval(intervalAround);
       };
-    }, 5000);
+    }, 4000);
 
     // 컴포넌트가 언마운트될 때 timeout 제거
     return () => {
@@ -311,9 +313,11 @@ const MapContainer: React.FC = () => {
             fontSize={"24px"}
             backgroundColor={"#21325E"}
             borderRadius={"10% 10% 0% 0%;"}
-          >{congestion}
-            <MusicController />
-            <NavigationController />
+          >
+            {/* 현재 혼잡도 : {congestion} */}
+            <VideoPlayer />
+            {/* <MusicController />
+            <NavigationController /> */}
           </Box>
         )}
       </>
