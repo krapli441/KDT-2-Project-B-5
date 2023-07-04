@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 
 interface AuthContextProps {
-  congestion: string;
+  congestion: string|number;
   setCongestion: (congestion: string) => void;
   color: string;
   setColor: (color: string) => void;
