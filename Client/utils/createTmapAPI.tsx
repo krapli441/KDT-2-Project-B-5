@@ -179,111 +179,62 @@ const MapContainer: React.FC = () => {
         // console.log("AROUND 혼잡도:" + congestionValues); // ['2'], length: 1, Prototype: Array(0)
         //! 현재 아래의 부분이 옳바르게 진행되지 않는 것으로 보임.
         if (polyLineArr.length > 0) {
+          console.log("폴리라인"+polyLineArr);
           polyLineArr.forEach((polyline) => {
             polyline.setMap(null);
           });
-
-          //* 약간의 지연을 주기위해 setTimeout사용
-          setTimeout(()=> {
-            const newPolyLineArr: any[] = [];
-
-          for (const i in resultData) {
-            const geometry = resultData[i].geometry;
-            const properties = resultData[i].properties;
-
-            if (geometry.type === "LineString") {
-              const drawInfoArr: any[] = [];
-
-              for (const j in geometry.coordinates) {
-                const latlng = new window.Tmapv3.Point(
-                  geometry.coordinates[j][0],
-                  geometry.coordinates[j][1]
-                );
-                const convertPoint =
-                  new window.Tmapv3.Projection.convertEPSG3857ToWGS84GEO(latlng);
-                const convertChange = new window.Tmapv3.LatLng(
-                convertPoint._lat,
-                convertPoint._lng
-                );
-                drawInfoArr.push(convertChange);
-              }
-
-              let lineColor = "";
-              const sectionCongestion = properties.congestion;
-              if (sectionCongestion === 0) {
-                lineColor = "#06050D";
-              } else if (sectionCongestion === 1) {
-                lineColor = "#61AB25";
-              } else if (sectionCongestion === 2) {
-                lineColor = "#FFFF00";
-              } else if (sectionCongestion === 3) {
-                lineColor = "#FF7200";
-              } else if (sectionCongestion === 4) {
-                lineColor = "#FF0000";
-              }
-
-              const polyline = new window.Tmapv3.Polyline({
-                path: drawInfoArr,
-                strokeColor: lineColor,
-                strokeWeight: 6,
-                map: map,
-              });
-              newPolyLineArr.push(polyline);
-            }
-          }
-
-          setPolyLineArr(newPolyLineArr);
-          }, 1000)
-        } else {
-          const newPolyLineArr: any[] = [];
-
-          for (const i in resultData) {
-            const geometry = resultData[i].geometry;
-            const properties = resultData[i].properties;
-
-            if (geometry.type === "LineString") {
-              const drawInfoArr: any[] = [];
-
-              for (const j in geometry.coordinates) {
-                const latlng = new window.Tmapv3.Point(
-                  geometry.coordinates[j][0],
-                  geometry.coordinates[j][1]
-                );
-                const convertPoint =
-                  new window.Tmapv3.Projection.convertEPSG3857ToWGS84GEO(latlng);
-                const convertChange = new window.Tmapv3.LatLng(
-                convertPoint._lat,
-                convertPoint._lng
-                );
-                drawInfoArr.push(convertChange);
-              }
-
-              let lineColor = "";
-              const sectionCongestion = properties.congestion;
-              if (sectionCongestion === 0) {
-                lineColor = "#06050D";
-              } else if (sectionCongestion === 1) {
-                lineColor = "#61AB25";
-              } else if (sectionCongestion === 2) {
-                lineColor = "#FFFF00";
-              } else if (sectionCongestion === 3) {
-                lineColor = "#FF7200";
-              } else if (sectionCongestion === 4) {
-                lineColor = "#FF0000";
-              }
-
-              const polyline = new window.Tmapv3.Polyline({
-                path: drawInfoArr,
-                strokeColor: lineColor,
-                strokeWeight: 6,
-                map: map,
-              });
-              newPolyLineArr.push(polyline);
-            }
-          }
-
-          setPolyLineArr(newPolyLineArr);
         }
+        setTimeout(() => {
+          const newPolyLineArr: any[] = [];
+      
+          for (const i in resultData) {
+            const geometry = resultData[i].geometry;
+            const properties = resultData[i].properties;
+      
+            if (geometry.type === "LineString") {
+              const drawInfoArr: any[] = [];
+      
+              for (const j in geometry.coordinates) {
+                const latlng = new window.Tmapv3.Point(
+                  geometry.coordinates[j][0],
+                  geometry.coordinates[j][1]
+                );
+                const convertPoint = new window.Tmapv3.Projection.convertEPSG3857ToWGS84GEO(
+                  latlng
+                );
+                const convertChange = new window.Tmapv3.LatLng(
+                  convertPoint._lat,
+                  convertPoint._lng
+                );
+                drawInfoArr.push(convertChange);
+              }
+      
+              let lineColor = "";
+              const sectionCongestion = properties.congestion;
+              if (sectionCongestion === 0) {
+                lineColor = "#06050D";
+              } else if (sectionCongestion === 1) {
+                lineColor = "#61AB25";
+              } else if (sectionCongestion === 2) {
+                lineColor = "#FFFF00";
+              } else if (sectionCongestion === 3) {
+                lineColor = "#FF7200";
+              } else if (sectionCongestion === 4) {
+                lineColor = "#FF0000";
+              }
+      
+              const polyline = new window.Tmapv3.Polyline({
+                path: drawInfoArr,
+                strokeColor: lineColor,
+                strokeWeight: 6,
+                map: map,
+              });
+              newPolyLineArr.push(polyline);
+            }
+          }
+      
+          setPolyLineArr(newPolyLineArr);
+        }, 1000);  
       })
       .catch((error) => {
         console.log(error);
