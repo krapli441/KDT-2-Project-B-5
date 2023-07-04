@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import IntroLogo from "../introPage/introLogo.png";
 import AudioPlayer from "../../../utils/musicPlayer";
 
-
 const flexCenter = {
   display: "flex",
   alignItems: "center",
@@ -75,7 +74,6 @@ export default function Login() {
           </Link>
           <Link to="/tMap">티맵으로 이동하기</Link>
         </Box>
-        <AudioPlayer />
       </Box>
     </>
   );
