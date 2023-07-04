@@ -9,6 +9,7 @@ import SignUp from "../view/pages/signUpPage/signUpSecond";
 import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
+import { AuthProvider } from "../utils/congestionContext";
 
 export default function App() {
   return (
@@ -22,14 +23,16 @@ export default function App() {
       alignItems={"center"}
       backgroundColor={"white"}
     >
-      <Routes>
-        <Route path="/" element={<Intro />} />
-        <Route path="/first" element={<FirstAccess />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/tMap" element={<Tmap />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Intro />} />
+          <Route path="/first" element={<FirstAccess />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/tMap" element={<Tmap />} />
+        </Routes>
+      </AuthProvider>
     </Box>
   );
 }
