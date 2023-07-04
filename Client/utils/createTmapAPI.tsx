@@ -159,23 +159,24 @@ const MapContainer: React.FC = () => {
 
   // 10초마다 실행되는 함수
   const getPointTrafficData = () => {
-    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+    //* AROUND 요청
+    const aroundRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
 
-    fetch(requestURI)
+    fetch(aroundRequestURI)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("요청이 실패하였습니다.");
+          throw new Error("AROUND 요청이 실패하였습니다.");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("요청이 성공하였습니다.");
+        console.log("AROUND 요청이 성공하였습니다.");
         const resultData = data.features;
         const congestionValues = resultData.map(
           (item: any) => item.properties.congestion
         );
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
-        console.log(congestionValues); // ['2'], length: 1, Prototype: Array(0)
+        // console.log("AROUND 혼잡도:" + congestionValues); // ['2'], length: 1, Prototype: Array(0)
 
         if (polyLineArr.length > 0) {
           polyLineArr.forEach((polyline) => {
@@ -231,6 +232,29 @@ const MapContainer: React.FC = () => {
         }
 
         setPolyLineArr(newPolyLineArr);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    //* POINT 요청
+    const pointRequestURL = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=POINT&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+
+    fetch(pointRequestURL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("POINT 요청이 실패하였습니다.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("POINT 요청이 성공하였습니다.");
+        const resultData = data.features;
+        const congestionValues = resultData.map(
+          (item: any) => item.properties.congestion
+        );
+        //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
+        console.log("POINT 혼잡도 :" + congestionValues); // ['2'], length: 1, Prototype: Array(0)
+        
       })
       .catch((error) => {
         console.log(error);
