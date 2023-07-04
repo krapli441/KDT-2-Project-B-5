@@ -3,7 +3,7 @@ import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 // 리액트 컴포넌트
-import Intro from "../view/pages/introPage/IntroPageScreen";
+import Intro from "../view/pages/IntroPage/IntroPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
 import SignUp from "../view/pages/signUpPage/signUpSecond";
 import Login from "../view/pages/loginPage/loginSecond";
