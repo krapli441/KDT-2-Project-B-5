@@ -1,5 +1,11 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect,useContext } from "react";
-import { AuthContext } from "../../../utils/Context";
+import React, {
+  useState,
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useContext,
+} from "react";
+import { AuthContext } from "../../../utils/TrafficCongestionContext";
 
 interface Video {
   id: { videoId: string };
@@ -48,12 +54,12 @@ const YoutubeSearch: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(congestion)
+    console.log(congestion);
   }, []);
-  
-  setTimeout(()=>{
-    console.log(firstVideo.id.videoId)
-  },10000)
+
+  setTimeout(() => {
+    console.log(firstVideo.id.videoId);
+  }, 10000);
 
   const firstVideo = videos[0];
 
@@ -63,7 +69,7 @@ const YoutubeSearch: React.FC = () => {
         <input
           type="text"
           value={congestion}
-          onChange={handleChange} 
+          onChange={handleChange}
           title="Search Term"
           placeholder="Enter search term"
         />

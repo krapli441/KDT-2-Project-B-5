@@ -9,8 +9,8 @@ import SignUp from "../view/pages/signUpPage/signUpSecond";
 import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
-import Youtube from "../view/pages/youtubeText/youtubeTextScreen"
-import { AuthProvider } from "../utils/Context";
+import Youtube from "../view/pages/youtubeText/youtubeTextScreen";
+import { AuthProvider } from "../utils/TrafficCongestionContext";
 
 export default function App() {
   return (
@@ -33,7 +33,6 @@ export default function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/tMap" element={<Tmap />} />
           <Route path="/test" element={<Youtube />} />
-
         </Routes>
       </AuthProvider>
     </Box>
