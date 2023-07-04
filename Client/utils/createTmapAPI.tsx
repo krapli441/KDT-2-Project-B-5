@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SampleData from "./getTrafficSampleData";
 import { AuthContext } from "./Context";
 
@@ -12,7 +12,7 @@ const MapContainer: React.FC = () => {
   const [userLocation, setUserLocation] = useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
-  const {setCongestion} = useContext(AuthContext)
+  // const {setCongestion} = useContext(AuthContext);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -97,7 +97,8 @@ const MapContainer: React.FC = () => {
 
                   let lineColor = "";
                   const sectionCongestion = properties.congestion;
-                  setCongestion(sectionCongestion)
+                  // setCongestion(sectionCongestion)
+                  console.log(sectionCongestion)
                   if (sectionCongestion === 0) {
                     lineColor = "#06050D";
                   } else if (sectionCongestion === 1) {
