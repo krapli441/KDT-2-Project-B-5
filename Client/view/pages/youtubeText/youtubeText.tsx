@@ -70,7 +70,7 @@ const YoutubeSearch: React.FC = () => {
         {firstVideo && (
           <div
             key={firstVideo.id.videoId}
-            // onClick={() => handleClick(firstVideo)}
+            onClick={() => handleClick(firstVideo)}
           >
             <iframe
               width="213"
