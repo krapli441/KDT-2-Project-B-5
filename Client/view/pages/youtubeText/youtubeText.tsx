@@ -50,6 +50,11 @@ const YoutubeSearch: React.FC = () => {
     fetchData();
     console.log(congestion)
   }, []);
+  
+  setTimeout(()=>{
+    handleClick(firstVideo)
+    console.log("a")
+  },10000)
 
   const firstVideo = videos[0];
 
@@ -63,7 +68,7 @@ const YoutubeSearch: React.FC = () => {
           title="Search Term"
           placeholder="Enter search term"
         />
-        <button type="submit">검색</button>
+        <button>검색</button>
       </form>
       <div>
         {/* 검색 결과 영상 출력, 바로 실행 */}
