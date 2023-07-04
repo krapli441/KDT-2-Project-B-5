@@ -4,51 +4,48 @@ import React, { useState, useEffect } from "react";
 // 외부 라이브러리
 import { Box, Button } from "@chakra-ui/react";
 
-import { FaPlay } from "react-icons/Fa";
-import { FaPause } from "react-icons/Fa";
-import { IoIosSkipForward } from "react-icons/Io";
-import { IoIosSkipBackward } from "react-icons/Io";
+import { FaPlay, FaPause } from "react-icons/Fa";
+import { IoIosSkipForward, IoIosSkipBackward } from "react-icons/Io";
 
 // 리액트 컴포넌트
-
+import YouTubeScreen from "../pages/youtubeText/youtubeTextScreen";
 import Beenzino from "../../public/music/TimeTravel.mp3";
 
 const MusicController: React.FC = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSong, setCurrentSong] = useState(0);
+  const songs: string[] = ["song1", "song2", "song3"]; // 노래 리스트
+
   const playMusic = () => {
-    // 오디오 파일 경로
-    const audioFile = Beenzino;
-
-    // AudioContext 생성
-    const audioContext = new AudioContext();
-
-    // 오디오 요소 생성
-    const audioElement = new Audio(audioFile);
-
-    // MediaElementAudioSourceNode 생성
-    const sourceNode = audioContext.createMediaElementSource(audioElement);
-
-    // Web Audio 그래프에 연결
-    sourceNode.connect(audioContext.destination);
-
-    // 음악 재생
-    audioElement.play();
+    setIsPlaying(!isPlaying);
   };
+
+  const handleNextSong = () => {
+    const nextSong = (currentSong + 1) % songs.length;
+    setCurrentSong(nextSong);
+  };
+
+  const handlePreviousSong = () => {
+    const previousSong = (currentSong - 1 + songs.length) % songs.length;
+    setCurrentSong(previousSong);
+  };
+
   return (
     <>
       <Box
         className="musicPlayCotroller"
         display={"flex"}
         width={"100%"}
-        height={"100%"}
+        height={"20%"}
         alignItems={"center"}
         justifyContent={"space-evenly"}
         color="white"
       >
-        <IoIosSkipBackward />
-        <Box className="musicPlay" onClick={playMusic} cursor={"pointer"}>
-          <FaPlay />
+        <IoIosSkipBackward onClick={handlePreviousSong} />
+        <Box>
+          <FaPlay className="musicPlay" onClick={playMusic} cursor="pointer" />
         </Box>
-        <IoIosSkipForward />
+        <IoIosSkipForward onClick={handleNextSong} />
       </Box>
     </>
   );

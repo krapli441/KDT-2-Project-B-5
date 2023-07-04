@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react";
 import TrafficAroundData from "./getTrafficAroundData";
 import TrafficPointData from "./getTrafficPointData";
 import MusicController from "../view/fragments/musicController";
-import NavigationController from "../view/fragments/navgiationController";
+import YoutubeScreen from "../view/pages/youtubeText/youtubeTextScreen";
 import { AuthContext } from "../utils/Context";
 
 declare global {
@@ -26,7 +26,7 @@ const MapContainer: React.FC = () => {
   const [marker, setMarker] = useState<any>(null);
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
-  const { congestion,setCongestion } = useContext(AuthContext);
+  const { congestion, setCongestion } = useContext(AuthContext);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -297,7 +297,7 @@ const MapContainer: React.FC = () => {
               src="https://lottie.host/21edb5c7-0e2f-41fe-bd21-12a0c246b066/0ajUoSiKvd.json"
               autoplay
               loop
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "100%", height: "70%" }}
             />
           )}
         </Box>
@@ -307,13 +307,15 @@ const MapContainer: React.FC = () => {
             display={"flex"}
             flexDirection={"column"}
             width={"100%"}
-            height={"20%"}
+            height={"40%"}
             fontSize={"24px"}
             backgroundColor={"#21325E"}
             borderRadius={"10% 10% 0% 0%;"}
-          >{congestion}
+          >
+            {congestion}
+            <YoutubeScreen />
+
             <MusicController />
-            <NavigationController />
           </Box>
         )}
       </>

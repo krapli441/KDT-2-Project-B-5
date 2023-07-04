@@ -28,12 +28,7 @@ export default function Login() {
         style={flexCenter}
         width={"100%"}
         height={"100%"}
-        className="main"
-        style={flexCenter}
-        width={"100%"}
-        height={"100%"}
         flexDirection={"column"}
-        justifyContent={"space-evenly"}
         justifyContent={"space-evenly"}
         backgroundColor={"white"}
       >
@@ -41,11 +36,8 @@ export default function Login() {
         <Box
           className="selectLoginType"
           style={flexCenter}
-          style={flexCenter}
           flexDirection={"column"}
           justifyContent={"space-evenly"}
-          width={"100%"}
-          height={"180px"}
           width={"100%"}
           height={"180px"}
         >
