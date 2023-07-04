@@ -12,7 +12,7 @@ export const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
-    const [congestion, setCongestion] = useState('');
+    const [congestion, setCongestion] = useState('빈지노');
 
     return (
         <AuthContext.Provider value={{
