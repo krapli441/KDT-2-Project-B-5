@@ -25,13 +25,41 @@ const VideoPlayer = () => {
   const onReady = (event: any) => {
     event.target.playVideo();
   };
+  const selectCongestionArray= (congestion:any) =>{
+    let value
+    switch(congestion){
+      case 0:
+        value = trafficStatusZero;
+        break
+      case 1:
+        value= trafficStatusOne;
+        break
+      case 2:
+        value= trafficStatusTwo;
+        break
+      case 3:
+        value= trafficStatusThree;
+        break
+      case 4:
+        value= trafficStatusFour;
+        break
+      default:
+        value= trafficStatusZero;
+        
+    }
+    console.log('valueText',value)
+    return value;
+  }
 
   const onPlayerStateChange = (event: any) => {
     if (event.data === 0 && currentVideoId === videoId1) {
       console.log('test=',congestion)
-      setCurrentVideoId(trafficStatusFour[2]);
+      setCurrentVideoId(selectCongestionArray(congestion)[0]);
+      // setCurrentVideoId(trafficStatusFour[1]);
+
     }
   };
+  
 
   return (
     <>
