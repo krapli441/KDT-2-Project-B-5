@@ -1,5 +1,5 @@
 // 리액트 라이브러리
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 
 // 외부 라이브러리
 import { Box } from "@chakra-ui/react";
@@ -26,6 +26,7 @@ const MapContainer: React.FC = () => {
   const [marker, setMarker] = useState<any>(null);
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
+  const { setCongestion } = useContext(AuthContext);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -257,8 +258,10 @@ const MapContainer: React.FC = () => {
         const congestionValues = resultData.map(
           (item: any) => item.properties.congestion
         );
+        setCongestion(congestionValues);
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
         console.log(congestionValues); // ['2'], length: 1, Prototype: Array(0)
+        console.log(setCongestion);
       })
       .catch((error) => {
         console.log(error);
