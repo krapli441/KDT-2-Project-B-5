@@ -5,13 +5,13 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
-import TrafficAroundData from "./getTrafficAroundData";
 import TrafficPointData from "./getTrafficPointData";
-import MusicController from "../view/fragments/musicController";
-import NavigationController from "../view/fragments/navgiationController";
 import { AuthContext } from "./trafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 import Header from "../view/fragments/header";
+// import TrafficAroundData from "./getTrafficAroundData";
+// import MusicController from "../view/fragments/musicController";
+// import NavigationController from "../view/fragments/navgiationController";
 
 declare global {
   interface Window {
@@ -30,6 +30,7 @@ const MapContainer: React.FC = () => {
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
   const { congestion, setCongestion } = useContext(AuthContext);
+  const { color, setColor } = useContext(AuthContext);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -37,8 +38,8 @@ const MapContainer: React.FC = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setUserCurrentLocation(position.coords);
-          console.log(position.coords.latitude, position.coords.longitude);
-          console.log("1. 최초 위치 불러옴");
+          // console.log(position.coords.latitude, position.coords.longitude);
+          // console.log("1. 최초 위치 불러옴");
         },
         (error) => {
           console.log(error);
@@ -67,7 +68,7 @@ const MapContainer: React.FC = () => {
       };
 
       const generateMap = () => {
-        console.log("2. 최초 위치를 토대로 맵 생성");
+        // console.log("2. 최초 위치를 토대로 맵 생성");
         const map = new window.Tmapv3.Map("tMapContainer", {
           width: "100%",
           height: "70%",
@@ -88,7 +89,7 @@ const MapContainer: React.FC = () => {
   // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 마커 생성
   useEffect(() => {
     if (map && userCurrentLocation) {
-      console.log("3. 사용자 위치를 토대로 마커 생성");
+      // console.log("3. 사용자 위치를 토대로 마커 생성");
       const centerLatLng = new window.Tmapv3.LatLng(
         userCurrentLocation.latitude,
         userCurrentLocation.longitude
@@ -117,11 +118,11 @@ const MapContainer: React.FC = () => {
         const watchId = navigator.geolocation.watchPosition(
           (position) => {
             setUserRealTimeLocation(position.coords);
-            console.log(
-              "4. watchPosition으로 실시간 위치 정보를 수집",
-              position.coords.latitude,
-              position.coords.longitude
-            );
+            // console.log(
+            // "4. watchPosition으로 실시간 위치 정보를 수집",
+            //   position.coords.latitude,
+            //   position.coords.longitude
+            // );
           },
           (error) => {
             console.log(error);
@@ -143,7 +144,7 @@ const MapContainer: React.FC = () => {
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
-    console.log("5. 실시간 위치 정보를 토대로 마커 갱신");
+    // console.log("5. 실시간 위치 정보를 토대로 마커 갱신");
     if (userRealTimeLocation) {
       const centerLatLng = new window.Tmapv3.LatLng(
         userRealTimeLocation?.latitude,
@@ -261,10 +262,10 @@ const MapContainer: React.FC = () => {
         const congestionValues = resultData.map(
           (item: any) => item.properties.congestion
         );
+        // 혼잡도 정보를 useContext로 관리
         setCongestion(congestionValues[0]);
+        setColor(congestionValues[0]);
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
-        console.log(congestionValues); // ['2'], length: 1, Prototype: Array(0)
-        console.log(congestion);
       })
       .catch((error) => {
         console.log(error);
