@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "./blockagePlayList.css";
 import Youtube from "../../../../utils/youTube";
 import { Box } from "@chakra-ui/layout";
 
-export default function blockage() {
+export default function Blockage() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleKeyword = (keyword: string) => {
+    setSearchTerm(keyword);
+  };
+  useEffect(() => {
+    handleKeyword("이니셜D"); // 검색어 초기값 설정
+  }, []);
   return (
     <div>
       <Box>
@@ -14,7 +22,7 @@ export default function blockage() {
         )}
 
         <div className="newsArea">
-          <Youtube />
+          <Youtube searchTerm={searchTerm} />
         </div>
         {["/allPlayList"].includes(location.pathname) ? null : (
           <Link to="/allPlayList">

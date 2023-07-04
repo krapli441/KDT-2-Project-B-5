@@ -5,39 +5,56 @@ interface Video {
   snippet: { title: string; description: string };
 }
 
+interface Props {
+  searchTerm: string;
+}
+
 interface State {
   searchTerm: string;
   videos: Video[];
   selectedVideo: Video | null;
 }
 
-class YoutubeSearch extends Component<{}, State> {
+class YoutubeSearch extends Component<Props, State> {
   state: State = {
     searchTerm: "",
     videos: [],
     selectedVideo: null,
   };
 
+  componentDidMount() {
+    const { searchTerm } = this.props;
+    if (searchTerm) {
+      this.fetchData(searchTerm);
+    }
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const { searchTerm } = this.props;
+    if (searchTerm !== prevProps.searchTerm) {
+      this.fetchData(searchTerm);
+    }
+  }
+
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchTerm: event.target.value });
+    // Handle any additional logic for searchTerm change if needed
   };
 
   handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.fetchData();
+    const { searchTerm } = this.props;
+    this.fetchData(searchTerm);
   };
 
   handleClick = (video: Video) => {
     this.setState({ selectedVideo: video });
   };
 
-  fetchData = async () => {
-    const { searchTerm } = this.state;
-
+  fetchData = async (searchTerm: string) => {
     try {
       // 유튜브 API 호출
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=AIzaSyA9zqB9QJLqjy1iCTGfgdTNrSo6WpJfRd0`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchTerm}&key=AIzaSyAvzFL4fjt0C5gk7b7VWBt5jsSF8ur4MXs`
       );
 
       if (!response.ok) {
@@ -54,23 +71,22 @@ class YoutubeSearch extends Component<{}, State> {
   };
 
   render() {
-    const { searchTerm, videos, selectedVideo } = this.state;
+    const { videos, selectedVideo } = this.state;
     const firstVideo = videos[0];
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        {/*        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            value={searchTerm}
             onChange={this.handleChange}
             title="Search Term"
             placeholder="Enter search term"
           />
           <button type="submit">검색</button>
-        </form>
+        </form> */}
         <div>
-          // 검색 결과 영상 출력, 바로 실행
+          {/* 검색 결과 영상 출력, 바로 실행 */}
           {firstVideo && (
             <div
               key={firstVideo.id.videoId}
@@ -87,7 +103,6 @@ class YoutubeSearch extends Component<{}, State> {
               ></iframe>
             </div>
           )}
-          // 영상 5개 출력
           {firstVideo && (
             <div>
               {videos.length ? (
@@ -100,7 +115,7 @@ class YoutubeSearch extends Component<{}, State> {
                       <iframe
                         width="213"
                         height="120"
-                        src={`https://www.youtube.com/embed/${video.id.videoId}?`}
+                        src={`https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`}
                         title={video.snippet.title}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
