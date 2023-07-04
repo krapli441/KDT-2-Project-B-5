@@ -32,6 +32,7 @@ const Header: React.FC = () => {
         background={color}
         borderRadius={"10px"}
         width={"30%"}
+        transition={"all 0.2s ease"}
       >
         {congestion}
       </Text>
