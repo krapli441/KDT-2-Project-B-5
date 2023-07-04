@@ -52,8 +52,7 @@ const YoutubeSearch: React.FC = () => {
   }, []);
   
   setTimeout(()=>{
-    handleClick(firstVideo)
-    console.log("a")
+    console.log(firstVideo.id.videoId)
   },10000)
 
   const firstVideo = videos[0];
