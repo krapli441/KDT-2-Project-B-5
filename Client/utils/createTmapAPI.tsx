@@ -1,8 +1,11 @@
+// 리액트 라이브러리
 import React, { useState, useEffect, useRef } from "react";
+
+// 외부 라이브러리
+import { Box } from "@chakra-ui/react";
+// 리액트 컴포넌트
 import TrafficAroundData from "./getTrafficAroundData";
 import TrafficPointData from "./getTrafficPointData";
-import { Box } from "@chakra-ui/react";
-
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
 
