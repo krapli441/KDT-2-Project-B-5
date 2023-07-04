@@ -132,4 +132,6 @@ PERFORMANCE OF THIS SOFTWARE.
  * LICENSE file in the root directory of this source tree.
  */
 
+//! random으로 currentVideoId의 값이 결정되다보니 같은값이 나오면 useEffect가 실행이 안되는 현상이 있음.
+
 //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
