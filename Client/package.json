@@ -23,7 +23,7 @@
     "@dotlottie/player-component": "^1.4.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "axios": "^1.4.0",
+    "@fontsource/staatliches": "^5.0.3",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
     "framer-motion": "^10.12.17",
