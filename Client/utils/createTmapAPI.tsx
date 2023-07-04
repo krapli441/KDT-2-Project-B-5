@@ -234,6 +234,55 @@ const MapContainer: React.FC = () => {
 
           setPolyLineArr(newPolyLineArr);
           }, 1000)
+        } else {
+          const newPolyLineArr: any[] = [];
+
+          for (const i in resultData) {
+            const geometry = resultData[i].geometry;
+            const properties = resultData[i].properties;
+
+            if (geometry.type === "LineString") {
+              const drawInfoArr: any[] = [];
+
+              for (const j in geometry.coordinates) {
+                const latlng = new window.Tmapv3.Point(
+                  geometry.coordinates[j][0],
+                  geometry.coordinates[j][1]
+                );
+                const convertPoint =
+                  new window.Tmapv3.Projection.convertEPSG3857ToWGS84GEO(latlng);
+                const convertChange = new window.Tmapv3.LatLng(
+                convertPoint._lat,
+                convertPoint._lng
+                );
+                drawInfoArr.push(convertChange);
+              }
+
+              let lineColor = "";
+              const sectionCongestion = properties.congestion;
+              if (sectionCongestion === 0) {
+                lineColor = "#06050D";
+              } else if (sectionCongestion === 1) {
+                lineColor = "#61AB25";
+              } else if (sectionCongestion === 2) {
+                lineColor = "#FFFF00";
+              } else if (sectionCongestion === 3) {
+                lineColor = "#FF7200";
+              } else if (sectionCongestion === 4) {
+                lineColor = "#FF0000";
+              }
+
+              const polyline = new window.Tmapv3.Polyline({
+                path: drawInfoArr,
+                strokeColor: lineColor,
+                strokeWeight: 6,
+                map: map,
+              });
+              newPolyLineArr.push(polyline);
+            }
+          }
+
+          setPolyLineArr(newPolyLineArr);
         }
       })
       .catch((error) => {
