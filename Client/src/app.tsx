@@ -27,12 +27,13 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Intro />} />
-          {/* <Route path="/first" element={<FirstAccess />} /> */}
-          <Route path="/first" element={<Youtube/>} />
+          <Route path="/first" element={<FirstAccess />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/tMap" element={<Tmap />} />
+          <Route path="/test" element={<Youtube />} />
+
         </Routes>
       </AuthProvider>
     </Box>

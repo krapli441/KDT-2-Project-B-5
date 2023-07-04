@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import YouTube from "react-youtube";
+import { AuthContext } from "../../../utils/Context";
 
 const VideoPlayer = () => {
   const trafficStatusZero = ['aUndbCBVV0c','mkMiGm7Q','mkMiGm7Q']
@@ -9,6 +10,7 @@ const VideoPlayer = () => {
   const trafficStatusFour = ['4Ukh9aQBzWc','hAjiKVEWZSk','kON9fn01rUQ']
   const videoId2 = "Y3fMr-gLkis";
   const videoId1 = "LtbrEnpVEDI";
+  // const videoId1 = "w4qYzE9hTto";
   const opts = {
     height: "100%",
     width: "100%",
@@ -18,6 +20,7 @@ const VideoPlayer = () => {
   };
 
   const [currentVideoId, setCurrentVideoId] = useState(videoId1);
+  const {congestion,isPlaying} = useContext(AuthContext)
 
   const onReady = (event: any) => {
     event.target.playVideo();
@@ -25,11 +28,13 @@ const VideoPlayer = () => {
 
   const onPlayerStateChange = (event: any) => {
     if (event.data === 0 && currentVideoId === videoId1) {
-      setCurrentVideoId(videoId2);
+      console.log('test=',congestion)
+      setCurrentVideoId(trafficStatusFour[2]);
     }
   };
 
   return (
+    <>
     <YouTube
       className="player"
       style={{ width: "100%", height: "50%" }}
@@ -39,6 +44,7 @@ const VideoPlayer = () => {
       key={currentVideoId}
       onStateChange={onPlayerStateChange}
     />
+    </>
   );
 };
 

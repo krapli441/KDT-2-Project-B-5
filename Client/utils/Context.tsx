@@ -1,22 +1,22 @@
 import React, { useState, createContext } from "react";
 
 interface AuthContextProps {
-    congestion:string;
-    setCongestion:(congestion:string) => void;
+    congestion:number
+    setCongestion:(congestion:number) => void;
     isPlaying:boolean,
     setIsPlaying:(isPlaying:boolean) =>void;
 
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-    congestion:'',
+    congestion:0,
     setCongestion:() => {},
     isPlaying:false,
     setIsPlaying:()=> {}
 });
 
 export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
-    const [congestion, setCongestion] = useState('빈지노');
+    const [congestion, setCongestion] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false)
 
     return (
