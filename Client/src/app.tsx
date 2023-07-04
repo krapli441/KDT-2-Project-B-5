@@ -14,8 +14,6 @@ import NormalPlayList from "../view/pages/playlistPages/normalPlayList/normalPla
 import StuckPlayList from "../view/pages/playlistPages/stuckPlayList/stuckPlayListScreen";
 import AllPlayList from "../view/pages/playlistPages/allPlaylist/allPlayListScreen";
 import Nav from "../view/fragments/footer";
-// import  from "../view/fragments";
-// import Nav from "../view/fragments/footer";
 
 export default function App() {
   return (
