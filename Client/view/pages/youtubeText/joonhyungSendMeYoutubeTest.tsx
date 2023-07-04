@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import YouTube from "react-youtube";
 
 const VideoPlayer = () => {
+  const trafficStatusZero = ['aUndbCBVV0c','mkMiGm7Q','mkMiGm7Q']
+  const trafficStatusOne = ['nERQ6u1NZgA','ApXoWvfEYVU','r1hjXK1kzOc']
+  const trafficStatusTwo = ['s2qAzRWg5VQ','uu_3AU3-a9E','AAOyOZ3GeZ0']
+  const trafficStatusThree = ['CP9PXe74mW8','00LLwjonJv4','w4qYzE9hTto']
+  const trafficStatusFour = ['4Ukh9aQBzWc','hAjiKVEWZSk','kON9fn01rUQ']
   const videoId2 = "Y3fMr-gLkis";
   const videoId1 = "LtbrEnpVEDI";
   const opts = {
