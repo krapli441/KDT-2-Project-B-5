@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       case "4":
         return "정체";
       default:
-        return "";
+        return "정보 없음";
     }
   };
 
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       case "4":
         return "#ff4800";
       default:
-        return "";
+        return "#edede9";
     }
   };
   return (

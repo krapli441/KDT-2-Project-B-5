@@ -20,7 +20,7 @@ const VideoPlayer = () => {
   };
 
   const [currentVideoId, setCurrentVideoId] = useState(videoId1);
-  const { congestion, isPlaying } = useContext(AuthContext);
+  const { congestion, isPlaying, setIsPlaying } = useContext(AuthContext);
 
   const onReady = (event: any) => {
     event.target.playVideo();
@@ -29,7 +29,8 @@ const VideoPlayer = () => {
   const onPlayerStateChange = (event: any) => {
     if (event.data === 0 && currentVideoId === videoId1) {
       console.log("test=", congestion);
-      setCurrentVideoId(trafficStatusFour[2]);
+      setIsPlaying(false);
+      setCurrentVideoId(trafficStatusFour[0]);
     }
   };
 
