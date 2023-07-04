@@ -177,10 +177,10 @@ const MapContainer: React.FC = () => {
         console.log(congestionValues); // ['2'], length: 1, Prototype: Array(0)
         if (polyLineArr.length > 0) {
           polyLineArr.forEach((polyline) => {
-            polyline.setMap(null);
+            polyline.setMap(null); // 이전에 그려진 혼잡도 제거
           });
         }
-
+        setPolyLineArr([]);
         const newPolyLineArr: any[] = [];
 
         for (const i in resultData) {
