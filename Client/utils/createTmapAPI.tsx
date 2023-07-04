@@ -157,6 +157,7 @@ const MapContainer: React.FC = () => {
     }
   }, [userRealTimeLocation]);
 
+  // ? 사용자 주변 교통 정보 데이터를 요청하는 함수
   const getAroundTrafficData = () => {
     const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficAroundData.version}&format=json&reqCoordType=${TrafficAroundData.reqCoordType}&resCoordType=${TrafficAroundData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficAroundData.trafficType}&zoomLevel=${TrafficAroundData.zoomLevel}&callback=${TrafficAroundData.callback}&appKey=${TrafficAroundData.appKey}`;
     fetch(requestURI)
@@ -234,7 +235,7 @@ const MapContainer: React.FC = () => {
       });
   };
 
-  // 10초마다 실행되는 함수
+  // ? 사용자 위치 교통 정보를 요청하는 함수
   const getPointTrafficData = () => {
     const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
 
@@ -259,7 +260,7 @@ const MapContainer: React.FC = () => {
       });
   };
 
-  // 5초 뒤에 함수 실행
+  // ! 5초 뒤에 교통정보 요청 함수를 실행
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
