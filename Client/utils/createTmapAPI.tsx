@@ -8,7 +8,7 @@ import TrafficAroundData from "./getTrafficAroundData";
 import TrafficPointData from "./getTrafficPointData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
-
+import { AuthContext } from "../utils/congestionContext";
 
 declare global {
   interface Window {
