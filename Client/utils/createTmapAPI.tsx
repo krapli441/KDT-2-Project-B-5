@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import SampleData from "./getTrafficSampleData";
+import TrafficAroundData from "./getTrafficAroundData";
+import TrafficPointData from "./getTrafficPointData";
 import { Box } from "@chakra-ui/react";
 
 import MusicController from "../view/fragments/musicController";
