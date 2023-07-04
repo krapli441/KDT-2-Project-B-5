@@ -68,7 +68,7 @@ const YoutubeSearch: React.FC = () => {
           title="Search Term"
           placeholder="Enter search term"
         />
-        <button>검색</button>
+        <button type="submit">검색</button>
       </form>
       <div>
         {/* 검색 결과 영상 출력, 바로 실행 */}
