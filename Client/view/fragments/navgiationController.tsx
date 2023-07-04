@@ -7,6 +7,7 @@ import { Box } from "@chakra-ui/react";
 import { BiSolidPlaylist } from "react-icons/Bi";
 import { AiFillHome } from "react-icons/Ai";
 import { BiCurrentLocation } from "react-icons/Bi";
+import { Link } from "react-router-dom";
 
 // 리액트 컴포넌트
 
@@ -22,7 +23,9 @@ const NavigationController: React.FC = () => {
         justifyContent={"space-evenly"}
         color="white"
       >
+        <Link to={"/test"}>
         <BiSolidPlaylist />
+        </Link>
         <AiFillHome />
         <BiCurrentLocation />
       </Box>

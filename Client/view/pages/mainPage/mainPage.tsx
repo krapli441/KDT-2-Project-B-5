@@ -1,10 +1,10 @@
 import React from "react";
-import Kakaomap from "../../../utils/createkakaoMapAPI";
+import Tmap from "../../../utils/createTmapAPI";
 
 export default function main() {
   return (
     <>
-      <Kakaomap />
+      <Tmap />
     </>
   );
 }
