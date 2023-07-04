@@ -261,10 +261,10 @@ const MapContainer: React.FC = () => {
         const congestionValues = resultData.map(
           (item: any) => item.properties.congestion
         );
-        setCongestion(congestionValues);
+        setCongestion(congestionValues[0]);
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
         console.log(congestionValues); // ['2'], length: 1, Prototype: Array(0)
-        console.log(setCongestion);
+        console.log(congestion);
       })
       .catch((error) => {
         console.log(error);

@@ -1,37 +1,52 @@
 import React, { useState, createContext } from "react";
 
 interface AuthContextProps {
-    congestion:number
-    setCongestion:(congestion:number) => void;
-    isPlaying:boolean,
-    setIsPlaying:(isPlaying:boolean) =>void;
-
+  congestion: string; // 타입 변경
+  setCongestion: (congestion: string) => void;
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-    congestion:0,
-    setCongestion:() => {},
-    isPlaying:false,
-    setIsPlaying:()=> {}
+  congestion: "",
+  setCongestion: () => {},
+  isPlaying: false,
+  setIsPlaying: () => {},
 });
 
-export const AuthProvider:React.FC<{children:React.ReactNode}> = ({children})=>{
-    const [congestion, setCongestion] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(false)
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [congestion, setCongestion] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
 
-    return (
-        <AuthContext.Provider value={{
-            congestion,
-            setCongestion,
-            isPlaying,
-            setIsPlaying
+  const getCongestionLabel = (value: string) => {
+    switch (value) {
+      case "0":
+        return "정보 없음";
+      case "1":
+        return "원활";
+      case "2":
+        return "서행";
+      case "3":
+        return "지체";
+      case "4":
+        return "정체";
+      default:
+        return "";
+    }
+  };
 
-        }}>
-             {children}
-
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider
+      value={{
+        congestion: getCongestionLabel(congestion),
+        setCongestion,
+        isPlaying,
+        setIsPlaying,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
-
-
-
