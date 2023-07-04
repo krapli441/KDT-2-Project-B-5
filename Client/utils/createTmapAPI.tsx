@@ -1,7 +1,12 @@
+// 리액트 라이브라리
 import React, { useState, useEffect, useRef } from "react";
-import SampleData from "./getTrafficSampleData";
-import { Box } from "@chakra-ui/react";
 
+// 외부 라이브러리
+import { Box } from "@chakra-ui/react";
+import "@dotlottie/player-component";
+
+// 리액트 컴포넌트
+import SampleData from "./getTrafficSampleData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
 
@@ -17,6 +22,7 @@ const MapContainer: React.FC = () => {
   const [userRealTimeLocation, setUserRealTimeLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
+  const [isMapReady, setMapReady] = useState(false);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
   const markerRef = useRef<any>(null);
@@ -71,6 +77,7 @@ const MapContainer: React.FC = () => {
       if (isTmapv3Loaded) {
         const { map } = generateMap();
         setMap(map);
+        setMapReady(true);
       }
     }
   }, [userCurrentLocation]);
@@ -156,25 +163,36 @@ const MapContainer: React.FC = () => {
 
   return (
     <>
-      <Box
-        id="tMapContainer"
-        width={"100%"}
-        height={"100%"}
-        position={"sticky"}
-      ></Box>
-      <Box
-        className="navigationBar"
-        display={"flex"}
-        flexDirection={"column"}
-        width={"100%"}
-        height={"20%"}
-        fontSize={"24px"}
-        backgroundColor={"#21325E"}
-        borderRadius={"10% 10% 0% 0%;"}
-      >
-        <MusicController />
-        <NavigationController />
-      </Box>
+      {isMapReady ? (
+        <>
+          <Box
+            id="tMapContainer"
+            width={"100%"}
+            height={"100%"}
+            position={"sticky"}
+          ></Box>
+          <Box
+            className="navigationBar"
+            display={"flex"}
+            flexDirection={"column"}
+            width={"100%"}
+            height={"20%"}
+            fontSize={"24px"}
+            backgroundColor={"#21325E"}
+            borderRadius={"10% 10% 0% 0%;"}
+          >
+            <MusicController />
+            <NavigationController />
+          </Box>
+        </>
+      ) : (
+        <dotlottie-player
+          src="https://lottie.host/21edb5c7-0e2f-41fe-bd21-12a0c246b066/0ajUoSiKvd.json"
+          autoplay
+          loop
+          style={{ width: "100%", height: "100%" }}
+        />
+      )}
     </>
   );
 };
