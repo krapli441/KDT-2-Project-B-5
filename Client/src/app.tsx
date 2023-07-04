@@ -3,56 +3,38 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
-import Intro from "../view/pages/introPage/introPageScreen";
+import Intro from "../view/pages/introPage/IntroPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
-import Singup from "../view/pages/signUpPage/signUpScreen";
-import Login from "../view/pages/loginPage/loginScreen";
+import SignUp from "../view/pages/signUpPage/signUpSecond";
+import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
-import FunPlayList from "../view/pages/playlistPages/funPlayList/funPlayListScreen";
-import BlockagePlayList from "../view/pages/playlistPages/blockagePlayList/blockagePlayListScreen";
-import NormalPlayList from "../view/pages/playlistPages/normalPlayList/normalPlayListScreen";
-import StuckPlayList from "../view/pages/playlistPages/stuckPlayList/stuckPlayListScreen";
-import AllPlayList from "../view/pages/playlistPages/allPlaylist/allPlayListScreen";
-import Nav from "../view/fragments/footer";
+import Tmap from "../view/pages/mapPage/mapScreen";
+import Youtube from "../view/pages/youtubeText/youtubeTextScreen";
+import { AuthProvider } from "../utils/Context";
 
 export default function App() {
   return (
     <Box
       className="container"
       display={"flex"}
+      flexDirection={"column"}
       width={"430px"}
       height={"932px"}
       justifyContent={"center"}
       alignItems={"center"}
       backgroundColor={"white"}
     >
-      <div>
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<Intro />} />
           <Route path="/first" element={<FirstAccess />} />
-          <Route path="/signup" element={<Singup />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/funPlayList" element={<FunPlayList />} />
-          <Route path="/blockagePlayList" element={<BlockagePlayList />} />
-          <Route path="/normalPlayList" element={<NormalPlayList />} />
-          <Route path="/stuckPlayList" element={<StuckPlayList />} />
-          <Route path="/allPlayList" element={<AllPlayList />} />
+          <Route path="/tMap" element={<Tmap />} />
+          <Route path="/test" element={<Youtube />} />
         </Routes>
-        {[
-          "/",
-          "/first",
-          "/signup",
-          "/login",
-          "/funPlayList",
-          "/blockagePlayList",
-          "/normalPlayList",
-          "/stuckPlayList",
-          "/allPlayList",
-        ].includes(location.pathname) ? null : (
-          <Nav />
-        )}
-      </div>
+      </AuthProvider>
     </Box>
   );
 }

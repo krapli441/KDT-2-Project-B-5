@@ -30,6 +30,13 @@ module.exports = {
         test: [/\.(png|jpe?g|gif)$/i],
         use: ["file-loader"],
       },
+      {
+        test: /\.(mp3|ogg)$/,
+        loader: "file-loader",
+        options: {
+          name: "assets/media/[name].[ext]?[hash]",
+        },
+      },
     ],
   },
   devServer: {
