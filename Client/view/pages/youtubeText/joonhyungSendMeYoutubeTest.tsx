@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import { AuthContext } from "../../../utils/Context";
 
 const VideoPlayer = () => {
-  const trafficStatusZero = ['aUndbCBVV0c','mkMiGm7Q','mkMiGm7Q'];
+  const trafficStatusZero = ['aUndbCBVV0c','Y3fMr-gLkis','iGWKNrtbF9I'];
   const trafficStatusOne = ['nERQ6u1NZgA','ApXoWvfEYVU','r1hjXK1kzOc'];
   const trafficStatusTwo = ['s2qAzRWg5VQ','uu_3AU3-a9E','AAOyOZ3GeZ0'];
   const trafficStatusThree = ['CP9PXe74mW8','00LLwjonJv4','w4qYzE9hTto'];
@@ -36,18 +36,19 @@ const VideoPlayer = () => {
 
       // 랜덤 Video ID 선택
       let randomVideoId = "";
-      randomVideoId = trafficStatusFour[randomIndex];
-      // if (congestion === 0) {
-      //   randomVideoId = trafficStatusZero[randomIndex];
-      // } else if (congestion === 1) {
-      //   randomVideoId = trafficStatusOne[randomIndex];
-      // } else if (congestion === 2) {
-      //   randomVideoId = trafficStatusTwo[randomIndex];
-      // } else if (congestion === 3) {
-      //   randomVideoId = trafficStatusThree[randomIndex];
-      // } else if (congestion === 4) {
-      //   randomVideoId = trafficStatusFour[randomIndex];
-      // }
+      // randomVideoId = trafficStatusFour[randomIndex];
+
+      if (congestion === 0) {
+        randomVideoId = trafficStatusZero[randomIndex];
+      } else if (congestion === 1) {
+        randomVideoId = trafficStatusOne[randomIndex];
+      } else if (congestion === 2) {
+        randomVideoId = trafficStatusTwo[randomIndex];
+      } else if (congestion === 3) {
+        randomVideoId = trafficStatusThree[randomIndex];
+      } else if (congestion === 4) {
+        randomVideoId = trafficStatusFour[randomIndex];
+      }
 
       setCurrentVideoId(randomVideoId);
     }
