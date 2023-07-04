@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 import "@dotlottie/player-component";
-import { AuthContext } from "../../../utils/TrafficCongestionContext";
+import { AuthContext } from "../../../utils/trafficCongestionContext";
 // 리액트 컴포넌트
 import IntroLogo from "./introLogo.png";
 

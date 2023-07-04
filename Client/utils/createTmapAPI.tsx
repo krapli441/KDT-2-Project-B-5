@@ -9,7 +9,7 @@ import TrafficAroundData from "./getTrafficAroundData";
 import TrafficPointData from "./getTrafficPointData";
 import MusicController from "../view/fragments/musicController";
 import NavigationController from "../view/fragments/navgiationController";
-import { AuthContext } from "./TrafficCongestionContext";
+import { AuthContext } from "./trafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 import Header from "../view/fragments/header";
 

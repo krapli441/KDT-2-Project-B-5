@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useContext,
 } from "react";
-import { AuthContext } from "../../../utils/TrafficCongestionContext";
+import { AuthContext } from "../../../utils/trafficCongestionContext";
 
 interface Video {
   id: { videoId: string };

@@ -10,7 +10,7 @@ import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
 import Youtube from "../view/pages/youtubeText/youtubeTextScreen";
-import { AuthProvider } from "../utils/TrafficCongestionContext";
+import { AuthProvider } from "../utils/trafficCongestionContext";
 
 export default function App() {
   return (
