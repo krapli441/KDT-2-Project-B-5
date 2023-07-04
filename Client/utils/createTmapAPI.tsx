@@ -49,19 +49,29 @@ const MapContainer: React.FC = () => {
   // * currentPosition으로 가져온 정보를 토대로 tMap 지도 생성
   useEffect(() => {
     if (userCurrentLocation) {
-      function generateMap() {
+      const checkTmapv3Loaded = () => {
+        if (window.Tmapv3) {
+          return true;
+        } else {
+          setTimeout(checkTmapv3Loaded, 100);
+        }
+      };
+
+      const generateMap = () => {
         console.log("2. 최초 위치를 토대로 맵 생성");
         const map = new window.Tmapv3.Map("tMapContainer", {
           width: "100%",
           height: "100%",
           zoom: 15,
         });
-        return { map, marker };
-      }
+        return { map };
+      };
 
-      const { map } = generateMap();
-      setMap(map);
-      // setMarker(marker);
+      const isTmapv3Loaded = checkTmapv3Loaded();
+      if (isTmapv3Loaded) {
+        const { map } = generateMap();
+        setMap(map);
+      }
     }
   }, [userCurrentLocation]);
 
@@ -83,29 +93,41 @@ const MapContainer: React.FC = () => {
 
   // * 지도와 마커가 생성되었을 경우 watchPosition 메서드를 실행
   useEffect(() => {
-    if (userCurrentLocation) {
+    if (userCurrentLocation && map) {
       console.log("4. watchPosition으로 실시간 위치 정보를 수집");
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          setUserRealTimeLocation(position.coords);
-          console.log(position.coords.latitude, position.coords.longitude);
-        },
-        (error) => {
-          console.log(error);
-        },
-        {
-          enableHighAccuracy: true,
-          maximumAge: 10000,
-        }
-      );
 
-      return () => {
-        navigator.geolocation.clearWatch(watchId);
+      const checkLatLngLoaded = () => {
+        if (window.Tmapv3 && window.Tmapv3.LatLng) {
+          return true;
+        } else {
+          setTimeout(checkLatLngLoaded, 100);
+        }
       };
+
+      const isLatLngLoaded = checkLatLngLoaded();
+      if (isLatLngLoaded) {
+        const watchId = navigator.geolocation.watchPosition(
+          (position) => {
+            setUserRealTimeLocation(position.coords);
+            console.log(position.coords.latitude, position.coords.longitude);
+          },
+          (error) => {
+            console.log(error);
+          },
+          {
+            enableHighAccuracy: true,
+            maximumAge: 10000,
+          }
+        );
+
+        return () => {
+          navigator.geolocation.clearWatch(watchId);
+        };
+      }
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
-  }, [userCurrentLocation]);
+  }, [userCurrentLocation, map]);
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
