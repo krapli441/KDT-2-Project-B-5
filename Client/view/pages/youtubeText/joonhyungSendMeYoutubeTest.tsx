@@ -38,15 +38,15 @@ const VideoPlayer = () => {
         const randomIndex = Math.floor(Math.random() * 3);
         console.log("randomIndex:", randomIndex);
 
-        if (congestion === 0) {
+        if (congestion === "정보 없음") {
           randomVideoId = trafficStatusZero[randomIndex];
-        } else if (congestion === 1) {
+        } else if (congestion === "원활") {
           randomVideoId = trafficStatusOne[randomIndex];
-        } else if (congestion === 2) {
+        } else if (congestion === "서행") {
           randomVideoId = trafficStatusTwo[randomIndex];
-        } else if (congestion === 3) {
+        } else if (congestion === "지체") {
           randomVideoId = trafficStatusThree[randomIndex];
-        } else if (congestion === 4) {
+        } else if (congestion === "정체") {
           randomVideoId = trafficStatusFour[randomIndex];
         }
       }
