@@ -41,6 +41,7 @@ export default function Login() {
           justifyContent={"space-evenly"}
           width={"100%"}
           height={"180px"}
+          gap={"20px"}
         >
           <Link to={"/signup"}>
             <Button
@@ -72,7 +73,11 @@ export default function Login() {
               로그인
             </Button>
           </Link>
-          <Link to="/tMap">티맵으로 이동하기</Link>
+          <Link to="/tMap">
+            <Button width={"340px"} height={"60px"}>
+              지도로 이동하기
+            </Button>
+          </Link>
         </Box>
       </Box>
     </>
