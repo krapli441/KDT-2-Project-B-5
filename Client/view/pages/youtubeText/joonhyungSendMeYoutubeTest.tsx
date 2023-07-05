@@ -54,6 +54,7 @@ const VideoPlayer = () => {
       setCurrentVideoId(randomVideoId);
     }
   };
+  
   useEffect(() => {
     const player = document.getElementById("youtube-player");
     if (player) {
