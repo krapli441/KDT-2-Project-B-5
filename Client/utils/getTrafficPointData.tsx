@@ -65,7 +65,7 @@ const SampleData = {
   callback: "function",
 
   // ? appKey : 발급받은 APP Key
-  appKey: "FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe",
+  appKey: "bEukn9QeYC1tnx9OAck4i9m5fTS6DscR44zbAfSY",
 };
 
 export default SampleData;

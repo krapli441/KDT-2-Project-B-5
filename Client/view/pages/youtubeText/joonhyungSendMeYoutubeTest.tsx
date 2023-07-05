@@ -3,10 +3,39 @@ import YouTube from "react-youtube";
 import { AuthContext } from "../../../utils/trafficCongestionContext";
 
 const VideoPlayer = () => {
-  const trafficStatusZero = ["aUndbCBVV0c", "Y3fMr-gLkis", "iGWKNrtbF9I"];
-  const trafficStatusOne = ["nERQ6u1NZgA", "ApXoWvfEYVU", "r1hjXK1kzOc"];
-  const trafficStatusTwo = ["s2qAzRWg5VQ", "uu_3AU3-a9E", "AAOyOZ3GeZ0"];
-  const trafficStatusThree = ["CP9PXe74mW8", "00LLwjonJv4", "w4qYzE9hTto"];
+  const trafficStatusZero = [
+    "aUndbCBVV0c",
+    "btPJPFnesV4",
+    "mNEUkkoUoIA",
+    "vx2u5uUu3DE",
+    "9jK-NcRmVcw",
+    "IcrbM1l_BoI",
+  ];
+  const trafficStatusOne = [
+    "nERQ6u1NZgA",
+    "ApXoWvfEYVU",
+    "r1hjXK1kzOc",
+    "7Arb-XUpSRk",
+    "2Y6Nne8RvaA",
+    "iArXv64tCJA",
+  ];
+  const trafficStatusTwo = [
+    "s2qAzRWg5VQ",
+    "uu_3AU3-a9E",
+    "AAOyOZ3GeZ0",
+    "ubZrAmRxy_M",
+    "CfbrBV5jXO0",
+    "dkdoawhm0i4",
+  ];
+  const trafficStatusThree = [
+    "CP9PXe74mW8",
+    "00LLwjonJv4",
+    "w4qYzE9hTto",
+    "vmDDOFXSgAs",
+    "2XBrycTHq4Y",
+    "d0Uj0K9mcoQ",
+  ];
+
   const trafficStatusFour = ["4Ukh9aQBzWc", "hAjiKVEWZSk", "kON9fn01rUQ"];
   const videoId2 = "Y3fMr-gLkis";
   const videoId1 = "LtbrEnpVEDI";
