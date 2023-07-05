@@ -125,7 +125,7 @@ const MapContainer: React.FC = () => {
             console.log(error);
           },
           {
-            enableHighAccuracy: false,
+            enableHighAccuracy: true,
             maximumAge: 10000,
           }
         );
