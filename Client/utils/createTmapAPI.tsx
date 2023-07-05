@@ -6,7 +6,7 @@ import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
 import TrafficPointData from "./getTrafficPointData";
-import { AuthContext } from "./trafficCongestionContext";
+import { AuthContext } from "./TrafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 import Header from "../view/fragments/header";
 

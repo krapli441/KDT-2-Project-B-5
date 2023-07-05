@@ -1,6 +1,6 @@
 // 리액트 라이브러리
 import React, { useContext } from "react";
-import { AuthContext } from "../../utils/trafficCongestionContext";
+import { AuthContext } from "../../utils/TrafficCongestionContext";
 
 // 외부 라이브러리
 import { Box, Text } from "@chakra-ui/react";
