@@ -9,7 +9,7 @@ const VideoPlayer = () => {
   const trafficStatusThree = ["CP9PXe74mW8", "00LLwjonJv4", "w4qYzE9hTto"];
   const trafficStatusFour = ["4Ukh9aQBzWc", "hAjiKVEWZSk", "kON9fn01rUQ"];
   const videoId2 = "Y3fMr-gLkis";
-  const videoId1 = "LtbrEnpVEDI";
+  const videoId1 = "DLr8m_W3HbU";
 
   const opts = {
     height: "100%",
