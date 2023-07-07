@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 
 // 리액트 컴포넌트
-import LocationComponent from "./getUserLocation";
+// import LocationComponent from "./getUserLocation";
 
 // 네이버 지도 타입 선언
 declare global {

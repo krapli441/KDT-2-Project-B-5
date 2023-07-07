@@ -9,6 +9,7 @@ import TrafficPointData from "./getTrafficPointData";
 import { AuthContext } from "./trafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 import Header from "../view/fragments/header";
+import getDistance from "../utils/getUserDistance";
 
 declare global {
   interface Window {
@@ -22,10 +23,10 @@ const MapContainer: React.FC = () => {
   const [userRealTimeLocation, setUserRealTimeLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
-  const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
+  const prevPosition = useRef<GeolocationCoordinates | null>(null);
   const { congestion, setCongestion } = useContext(AuthContext);
   const { color, setColor } = useContext(AuthContext);
 
@@ -86,7 +87,6 @@ const MapContainer: React.FC = () => {
   // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 마커 생성
   useEffect(() => {
     if (map && userCurrentLocation) {
-      // console.log("3. 사용자 위치를 토대로 마커 생성");
       const centerLatLng = new window.Tmapv3.LatLng(
         userCurrentLocation.latitude,
         userCurrentLocation.longitude
@@ -112,23 +112,18 @@ const MapContainer: React.FC = () => {
 
       const isLatLngLoaded = checkLatLngLoaded();
       if (isLatLngLoaded) {
-        const watchId = navigator.geolocation.watchPosition(
-          (position) => {
+        const watchId = navigator.geolocation.watchPosition((position) => {
+          if (
+            !prevPosition.current ||
+            getDistance(prevPosition.current, position.coords) >= 50
+          ) {
             setUserRealTimeLocation(position.coords);
+            prevPosition.current = position.coords;
             console.log(
-              "4. watchPosition으로 실시간 위치 정보를 수집",
-              position.coords.latitude,
-              position.coords.longitude
+              "4. watchPosition으로 사용자의 실시간 위치 정보를 수집"
             );
-          },
-          (error) => {
-            console.log(error);
-          },
-          {
-            enableHighAccuracy: false,
-            maximumAge: 10000,
           }
-        );
+        });
 
         return () => {
           navigator.geolocation.clearWatch(watchId);

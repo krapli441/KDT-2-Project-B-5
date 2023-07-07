@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // 리액트 컴포넌트
-import LocationComponent from "./getUserLocation";
+// import LocationComponent from "./getUserLocation";
 
 // 카카오 지도 타입 선언
 declare global {
