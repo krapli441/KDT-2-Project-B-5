@@ -63,7 +63,7 @@ const MapContainer: React.FC = () => {
         if (window.Tmapv3) {
           return true;
         } else {
-          setTimeout(checkTmapv3Loaded, 50);
+          setTimeout(checkTmapv3Loaded, 1);
         }
       };
 
@@ -117,6 +117,7 @@ const MapContainer: React.FC = () => {
       if (isLatLngLoaded) {
         const watchId = navigator.geolocation.watchPosition((position) => {
           if (
+            // 현재 위치에서 50m 이상 벗어났을 때 교통정보 요청
             !prevPosition.current ||
             getDistance(prevPosition.current, position.coords) >= 50
           ) {
@@ -124,6 +125,7 @@ const MapContainer: React.FC = () => {
             setUserRealTimeLocation(position.coords);
             prevPosition.current = position.coords;
             console.log("4. watchPosition으로 실시간 위치 정보를 수집");
+            getPointTrafficData();
           }
         });
 
@@ -158,6 +160,15 @@ const MapContainer: React.FC = () => {
       });
 
       markerRef.current = newMarker;
+
+      if (
+        prevPosition.current &&
+        getDistance(prevPosition.current, userRealTimeLocation) >= 50
+      ) {
+        console.log("현재 위치가 50m 이상 벗어났습니다.");
+      } else {
+        console.log("현재 위치가 50m 이내에 있습니다.");
+      }
     }
   }, [userRealTimeLocation]);
 
