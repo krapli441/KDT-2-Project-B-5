@@ -37,8 +37,7 @@ const VideoPlayer = () => {
   ];
 
   const trafficStatusFour = ["4Ukh9aQBzWc", "hAjiKVEWZSk", "kON9fn01rUQ"];
-  const videoId2 = "Y3fMr-gLkis";
-  const videoId1 = "LtbrEnpVEDI";
+  const openingVideo = "DLr8m_W3HbU";
 
   const opts = {
     height: "100%",
@@ -48,7 +47,7 @@ const VideoPlayer = () => {
     },
   };
 
-  const [currentVideoId, setCurrentVideoId] = useState(videoId1);
+  const [currentVideoId, setCurrentVideoId] = useState(openingVideo);
   const { congestion, isPlaying } = useContext(AuthContext);
 
   const onReady = (event: any) => {

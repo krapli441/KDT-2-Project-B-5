@@ -9,7 +9,7 @@ import SignUp from "../view/pages/signUpPage/signUpSecond";
 import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
-import Youtube from "../view/pages/youtubeText/youtubeTextScreen";
+import Youtube from "../view/pages/youtubePlayer/youtubeTextScreen";
 import { AuthProvider } from "../utils/trafficCongestionContext";
 
 export default function App() {

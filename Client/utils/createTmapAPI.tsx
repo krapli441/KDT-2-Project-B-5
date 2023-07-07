@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react";
 // 리액트 컴포넌트
 import TrafficPointData from "./getTrafficPointData";
 import { AuthContext } from "./trafficCongestionContext";
-import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
+import VideoPlayer from "../view/pages/youtubePlayer/youtubePlayer";
 import Header from "../view/fragments/header";
 
 declare global {
