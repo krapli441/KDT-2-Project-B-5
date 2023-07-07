@@ -124,12 +124,8 @@ const MapContainer: React.FC = () => {
             // 특정 거리 이상 벗어날 때만 교통정보 요청
             setUserRealTimeLocation(position.coords);
             prevPosition.current = position.coords;
-            console.log("4. watchPosition으로 실시간 위치 및 교통 정보를 수집");
+            console.log("4. watchPosition으로 실시간 위치 정보를 수집");
             getPointTrafficData();
-          } else {
-            console.log(
-              `사용자의 현재 위치는 (${position.coords.latitude}, ${position.coords.longitude})이며, 이전 위치에 비해 50m 이상 멀어지지 않았습니다.`
-            );
           }
         });
 
@@ -145,7 +141,7 @@ const MapContainer: React.FC = () => {
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
     // console.log("5. 실시간 위치 정보를 토대로 마커 갱신");
-    if (userRealTimeLocation && map) {
+    if (userRealTimeLocation) {
       const centerLatLng = new window.Tmapv3.LatLng(
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude
@@ -176,7 +172,7 @@ const MapContainer: React.FC = () => {
         );
       }
     }
-  }, [userRealTimeLocation, map]);
+  }, [userRealTimeLocation]);
 
   // ? 사용자 위치 교통 정보를 요청하는 함수
   const getPointTrafficData = () => {
