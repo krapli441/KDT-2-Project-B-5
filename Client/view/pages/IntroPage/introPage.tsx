@@ -25,7 +25,7 @@ function IntroPage() {
         backgroundColor={"white"}
       >
         <dotlottie-player
-          src="../../components/asphalt.lottie"
+          src="https://lottie.host/888a741c-ec55-4062-8b3c-38b8cd81acf3/DmmLc53jSv.json"
           autoplay
           style={{ width: "100%", height: "100%" }}
         />
