@@ -136,7 +136,7 @@ const MapContainer: React.FC = () => {
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
-  }, [userRealTimeLocation, map]);
+  }, [map]);
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
@@ -146,31 +146,34 @@ const MapContainer: React.FC = () => {
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude
       );
-      map.setCenter(centerLatLng);
+      // map.setCenter(centerLatLng);
 
       if (markerRef.current) {
         // 기존 마커 객체 제거
-        markerRef.current.setMap(null);
+        markerRef.current.setPosition(centerLatLng);
+      } else {
+        // 새로운 마커 객체 생성 및 설정
+        const newMarker = new window.Tmapv3.Marker({
+          position: centerLatLng,
+          map: map,
+        });
+        markerRef.current = newMarker;
       }
-
-      // 새로운 마커 객체 생성 및 설정
-      const newMarker = new window.Tmapv3.Marker({
-        position: centerLatLng,
-        map: map,
-      });
-
-      markerRef.current = newMarker;
 
       if (
         prevPosition.current &&
         getDistance(prevPosition.current, userRealTimeLocation) >= 50
       ) {
         console.log("현재 위치가 50m 이상 벗어났습니다.");
+        setTimeout(() => {
+          getPointTrafficData();
+        }, 0);
       } else {
         console.log(
           `사용자의 현재 위치는 (${userRealTimeLocation.latitude}, ${userRealTimeLocation.longitude})이며, 이전 위치에 비해 50m 이상 멀어지지 않았습니다.`
         );
       }
+      prevPosition.current = userRealTimeLocation;
     }
   }, [userRealTimeLocation]);
 
