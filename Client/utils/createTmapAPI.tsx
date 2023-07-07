@@ -86,7 +86,7 @@ const MapContainer: React.FC = () => {
     }
   }, [userCurrentLocation]);
 
-  // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 마커 생성
+  // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 지도를 사용자 위치로 정렬
   useEffect(() => {
     if (map && userCurrentLocation) {
       // console.log("3. 사용자 위치를 토대로 마커 생성");
@@ -124,8 +124,12 @@ const MapContainer: React.FC = () => {
             // 특정 거리 이상 벗어날 때만 교통정보 요청
             setUserRealTimeLocation(position.coords);
             prevPosition.current = position.coords;
-            console.log("4. watchPosition으로 실시간 위치 정보를 수집");
+            console.log("4. watchPosition으로 실시간 위치 및 교통 정보를 수집");
             getPointTrafficData();
+          } else {
+            console.log(
+              `사용자의 현재 위치는 (${position.coords.latitude}, ${position.coords.longitude})이며, 이전 위치에 비해 50m 이상 멀어지지 않았습니다.`
+            );
           }
         });
 
@@ -136,12 +140,12 @@ const MapContainer: React.FC = () => {
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
-  }, [userCurrentLocation, map]);
+  }, [userRealTimeLocation, map]);
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
     // console.log("5. 실시간 위치 정보를 토대로 마커 갱신");
-    if (userRealTimeLocation) {
+    if (userRealTimeLocation && map) {
       const centerLatLng = new window.Tmapv3.LatLng(
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude
@@ -167,10 +171,12 @@ const MapContainer: React.FC = () => {
       ) {
         console.log("현재 위치가 50m 이상 벗어났습니다.");
       } else {
-        console.log("현재 위치가 50m 이내에 있습니다.");
+        console.log(
+          `사용자의 현재 위치는 (${userRealTimeLocation.latitude}, ${userRealTimeLocation.longitude})이며, 이전 위치에 비해 50m 이상 멀어지지 않았습니다.`
+        );
       }
     }
-  }, [userRealTimeLocation]);
+  }, [userRealTimeLocation, map]);
 
   // ? 사용자 위치 교통 정보를 요청하는 함수
   const getPointTrafficData = () => {
