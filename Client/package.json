@@ -26,6 +26,7 @@
     "@fontsource/staatliches": "^5.0.3",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.8.1",
+    "firebase": "^9.23.0",
     "framer-motion": "^10.12.17",
     "googleapis": "^120.0.0",
     "react": "^18.2.0",
