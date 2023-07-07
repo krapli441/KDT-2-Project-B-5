@@ -115,7 +115,7 @@ const MapContainer: React.FC = () => {
         const watchId = navigator.geolocation.watchPosition((position) => {
           if (
             !prevPosition.current ||
-            getDistance(prevPosition.current, position.coords) >= 50
+            getDistance(prevPosition.current, position.coords) >= 1
           ) {
             setUserRealTimeLocation(position.coords);
             prevPosition.current = position.coords;
@@ -161,42 +161,63 @@ const MapContainer: React.FC = () => {
 
   // ? 사용자 위치 교통 정보를 요청하는 함수
   const getPointTrafficData = () => {
-    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+    if (
+      !userRealTimeLocation ||
+      !prevPosition.current ||
+      getDistance(prevPosition.current, userRealTimeLocation) >= 1
+    ) {
+      const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
 
-    fetch(requestURI)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("요청이 실패하였습니다.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("요청이 성공하였습니다.");
-        const resultData = data.features;
-        const congestionValues = resultData.map(
-          (item: any) => item.properties.congestion
-        );
-        // 혼잡도 정보를 useContext로 관리
-        setCongestion(congestionValues[0]);
-        setColor(congestionValues[0]);
-        //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      fetch(requestURI)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("요청이 실패하였습니다.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("요청이 성공하였습니다.");
+          const resultData = data.features;
+          const congestionValues = resultData.map(
+            (item: any) => item.properties.congestion
+          );
+          // 혼잡도 정보를 useContext로 관리
+          setCongestion(congestionValues[0]);
+          setColor(congestionValues[0]);
+          //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
+  // ! 10초 뒤에 교통정보 요청 함수를 실행
   // ! 5초 뒤에 교통정보 요청 함수를 실행
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
-      // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
-      const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
-      // const intervalAround = setInterval(getAroundTrafficData, 10000); // 10초마다 반복 실행
+      if (
+        userRealTimeLocation &&
+        (!prevPosition.current ||
+          getDistance(prevPosition.current, userRealTimeLocation) >= 1)
+      ) {
+        getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
+        prevPosition.current = userRealTimeLocation;
+      }
+      const intervalPoint = setInterval(() => {
+        if (
+          userRealTimeLocation &&
+          (!prevPosition.current ||
+            getDistance(prevPosition.current, userRealTimeLocation) >= 1)
+        ) {
+          getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
+          prevPosition.current = userRealTimeLocation;
+        }
+      }, 10000); // 10초마다 반복 실행
+
       // 컴포넌트가 언마운트될 때 interval 제거
       return () => {
         clearInterval(intervalPoint);
-        // clearInterval(intervalAround);
       };
     }, 100);
 
@@ -205,7 +226,6 @@ const MapContainer: React.FC = () => {
       clearTimeout(timeoutId);
     };
   }, [userRealTimeLocation]);
-
   return (
     <>
       <>
