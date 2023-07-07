@@ -96,9 +96,9 @@ const MapContainer: React.FC = () => {
       );
       map.setCenter(centerLatLng);
 
-      if (marker) {
-        marker.setPosition(centerLatLng);
-      }
+      // if (marker) {
+      //   marker.setPosition(centerLatLng);
+      // }
     }
   }, [map, userCurrentLocation]);
 
