@@ -74,8 +74,10 @@ const MapContainer: React.FC = () => {
         return { map };
       };
 
+      
       const isTmapv3Loaded = checkTmapv3Loaded();
       if (isTmapv3Loaded) {
+        //* generateMap 함수는 현재 위치의 지도 정보를 반환함
         const { map } = generateMap();
         setMap(map);
         setMapReady(false);
@@ -111,6 +113,7 @@ const MapContainer: React.FC = () => {
       };
 
       const isLatLngLoaded = checkLatLngLoaded();
+      //* 마커와 지도가 생성 되었을 경우
       if (isLatLngLoaded) {
         const watchId = navigator.geolocation.watchPosition(
           (position) => {
@@ -129,7 +132,7 @@ const MapContainer: React.FC = () => {
             maximumAge: 10000,
           }
         );
-
+          //* 현재 위치 감지 중지
         return () => {
           navigator.geolocation.clearWatch(watchId);
         };
@@ -178,6 +181,9 @@ const MapContainer: React.FC = () => {
       .then((data) => {
         console.log("요청이 성공하였습니다.");
         const resultData = data.features;
+        // console.log('resultdata= ',resultData) 
+        //resultdata.properties.congestion:"3"
+        
         const congestionValues = resultData.map(
           (item: any) => item.properties.congestion
         );
@@ -193,7 +199,9 @@ const MapContainer: React.FC = () => {
 
   // ! 5초 뒤에 교통정보 요청 함수를 실행
   useEffect(() => {
+
     const timeoutId = setTimeout(() => {
+      console.log("traffic test")
       getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
       // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
       const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
@@ -203,7 +211,7 @@ const MapContainer: React.FC = () => {
         clearInterval(intervalPoint);
         // clearInterval(intervalAround);
       };
-    }, 100);
+    },5000);
 
     // 컴포넌트가 언마운트될 때 timeout 제거
     return () => {
