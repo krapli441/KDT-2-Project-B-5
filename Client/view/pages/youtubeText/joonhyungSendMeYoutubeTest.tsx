@@ -9,7 +9,7 @@ const VideoPlayer = () => {
   const trafficStatusThree = ["CP9PXe74mW8", "00LLwjonJv4", "w4qYzE9hTto"];
   const trafficStatusFour = ["4Ukh9aQBzWc", "hAjiKVEWZSk", "kON9fn01rUQ"];
   const videoId2 = "Y3fMr-gLkis";
-  const videoId1 = "LtbrEnpVEDI";
+  const videoId1 = "DLr8m_W3HbU";
 
   const opts = {
     height: "100%",
@@ -25,31 +25,6 @@ const VideoPlayer = () => {
   const onReady = (event: any) => {
     event.target.playVideo();
   };
-  const selectCongestionArray= (congestion:any) =>{
-    let value
-    switch(congestion){
-      case 0:
-        value = trafficStatusZero;
-        break
-      case 1:
-        value= trafficStatusOne;
-        break
-      case 2:
-        value= trafficStatusTwo;
-        break
-      case 3:
-        value= trafficStatusThree;
-        break
-      case 4:
-        value= trafficStatusFour;
-        break
-      default:
-        value= trafficStatusZero;
-        
-    }
-    console.log('valueText',value)
-    return value;
-  }
 
   const onPlayerStateChange = (event: any) => {
     if (event.data === 0) {
@@ -63,15 +38,15 @@ const VideoPlayer = () => {
         const randomIndex = Math.floor(Math.random() * 3);
         console.log("randomIndex:", randomIndex);
 
-        if (congestion === 0) {
+        if (congestion === "정보 없음") {
           randomVideoId = trafficStatusZero[randomIndex];
-        } else if (congestion === 1) {
+        } else if (congestion === "원활") {
           randomVideoId = trafficStatusOne[randomIndex];
-        } else if (congestion === 2) {
+        } else if (congestion === "서행") {
           randomVideoId = trafficStatusTwo[randomIndex];
-        } else if (congestion === 3) {
+        } else if (congestion === "지체") {
           randomVideoId = trafficStatusThree[randomIndex];
-        } else if (congestion === 4) {
+        } else if (congestion === "정체") {
           randomVideoId = trafficStatusFour[randomIndex];
         }
       }
@@ -94,7 +69,6 @@ const VideoPlayer = () => {
 
   return (
     <>
-  
       <YouTube
         id="youtube-player"
         className="player"
