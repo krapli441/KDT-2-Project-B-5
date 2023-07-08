@@ -40,7 +40,7 @@ export default function Login() {
           flexDirection={"column"}
           justifyContent={"space-evenly"}
           width={"100%"}
-          height={"180px"}
+          height={"250px"}
         >
           <Link to={"/signup"}>
             <Button
@@ -72,7 +72,22 @@ export default function Login() {
               로그인
             </Button>
           </Link>
-          <Link to="/tMap">티맵으로 이동하기</Link>
+
+          <Link to="/tMap">
+            <Button
+              className="loginButton"
+              style={buttonStyling}
+              backgroundColor={"#FFB703"}
+              color={"white"}
+              _hover={{ bg: "#FF8B03" }}
+              _active={{
+                bg: "#FF7C03",
+                transform: "scale(0.98)",
+              }}
+            >
+              티맵으로 이동하기
+            </Button>
+          </Link>
         </Box>
       </Box>
     </>
