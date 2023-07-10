@@ -58,6 +58,35 @@ const MapContainer: React.FC = () => {
     console.log("사용자의 currentPosition 좌표 : ", userCurrentLocation);
   }, [userCurrentLocation]);
 
+  // * currentPosition으로 가져온 정보를 토대로 티맵 지도 생성
+
+  useEffect(() => {
+    if (userCurrentLocation) {
+      const checkTmapv3Loaded = () => {
+        if (window.Tmapv3) {
+          return true;
+        } else {
+          setTimeout(checkTmapv3Loaded, 1);
+        }
+      };
+
+      const generateMap = () => {
+        const map = new window.Tmapv3.Map("tMapContainer", {
+          width: "100%",
+          height: "70%",
+          zoom: 15,
+        });
+        return { map };
+      };
+      const isTmapv3Loaded = checkTmapv3Loaded();
+
+      if (isTmapv3Loaded) {
+        const { map } = generateMap();
+        setMap(map), setMapReady(false);
+      }
+    }
+  }, [userCurrentLocation]);
+
   return (
     <>
       <>
