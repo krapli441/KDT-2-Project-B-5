@@ -7,6 +7,9 @@ interface AuthContextProps {
   setColor: (color: string) => void;
   isPlaying: boolean;
   setIsPlaying: (isPlaying: boolean) => void;
+  handleCongestion: boolean;
+  setHandleCongestion: (handleCongestion: boolean) => void;
+
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -16,6 +19,8 @@ export const AuthContext = createContext<AuthContextProps>({
   setIsPlaying: () => {},
   color: "",
   setColor: () => {},
+  handleCongestion:false,
+  setHandleCongestion: () => {}
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -24,6 +29,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [congestion, setCongestion] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [color, setColor] = useState("");
+  const [handleCongestion,setHandleCongestion] = useState(false);
 
   const getCongestionLabel = (value: string) => {
     switch (value) {
@@ -67,6 +73,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsPlaying,
         color: getColorLabel(color),
         setColor,
+        handleCongestion,
+        setHandleCongestion
       }}
     >
       {children}

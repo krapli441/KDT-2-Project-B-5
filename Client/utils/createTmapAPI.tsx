@@ -30,6 +30,7 @@ const MapContainer: React.FC = () => {
   const markerRef = useRef<any>(null);
   const { congestion, setCongestion } = useContext(AuthContext);
   const { color, setColor } = useContext(AuthContext);
+  const {handleCongestion} = useContext(AuthContext)
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -82,7 +83,6 @@ const MapContainer: React.FC = () => {
         //* generateMap 함수는 현재 위치의 지도 정보를 반환함
         const { map } = generateMap();
         setMap(map);
-        console.log('map 값 테스트', map)
         setMapReady(false);
       }
     }
@@ -192,7 +192,6 @@ const MapContainer: React.FC = () => {
         );
         // 혼잡도 정보를 useContext로 관리
         setCongestion(congestionValues[0]);
-        console.log('test revceive congestion',congestion)
         setColor(congestionValues[0]);
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
       })
@@ -205,24 +204,22 @@ const MapContainer: React.FC = () => {
   useEffect(() => {
 
     const timeoutId = setTimeout(() => {
-      console.log("traffic test", congestion)
       getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
-      console.log('congestion test this is in useeffct', congestion)
       // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
-      const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
+      // const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
       // const intervalAround = setInterval(getAroundTrafficData, 10000); // 10초마다 반복 실행
       // 컴포넌트가 언마운트될 때 interval 제거
-      return () => {
-        clearInterval(intervalPoint);
+      // return () => {
+        // clearInterval(intervalPoint);
         // clearInterval(intervalAround);
-      };
+      // };
     },5000);
 
     // 컴포넌트가 언마운트될 때 timeout 제거
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [map]);
+  }, [handleCongestion]);
 
   return (
     <>

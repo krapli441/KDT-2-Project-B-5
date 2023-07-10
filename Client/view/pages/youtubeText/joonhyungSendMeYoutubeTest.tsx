@@ -1,3 +1,4 @@
+import { Auth } from "googleapis";
 import React, { useContext, useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import { AuthContext } from "../../../utils/trafficCongestionContext";
@@ -10,6 +11,8 @@ const VideoPlayer = () => {
   const trafficStatusFour = ["4Ukh9aQBzWc", "hAjiKVEWZSk", "kON9fn01rUQ"];
   const videoId2 = "Y3fMr-gLkis";
   const videoId1 = "DLr8m_W3HbU";
+  let count = 0
+
 
   const opts = {
     height: "100%",
@@ -21,6 +24,7 @@ const VideoPlayer = () => {
 
   const [currentVideoId, setCurrentVideoId] = useState(videoId1);
   const { congestion, isPlaying } = useContext(AuthContext);
+  const {setHandleCongestion}= useContext(AuthContext);
 
   const onReady = (event: any) => {
     event.target.playVideo();
@@ -28,7 +32,14 @@ const VideoPlayer = () => {
 
   const onPlayerStateChange = (event: any) => {
     if (event.data === 0) {
-      console.log("test=", congestion);
+      if(count%2 ==0){
+        setHandleCongestion(true)
+        count++
+      }
+      else{
+        setHandleCongestion(false)
+        count++
+      }
 
       // 랜덤 Video ID 선택
       let randomVideoId = currentVideoId;
