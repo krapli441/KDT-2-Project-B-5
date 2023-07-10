@@ -198,10 +198,12 @@ const MapContainer: React.FC = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("혼잡도 요청이 성공하였습니다.");
         const resultData = data.features;
         const congestionValues = resultData.map(
           (item: any) => item.properties.congestion
+        );
+        console.log(
+          `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
         );
         // ! 도로 혼잡도를 useContext로 관리한다.
         // ! setCongestion은 혼잡도를 나타내며
