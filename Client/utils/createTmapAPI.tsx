@@ -9,6 +9,8 @@ import TrafficPointData from "./getTrafficPointData";
 import { AuthContext } from "./trafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 import Header from "../view/fragments/header";
+import { ContextExclusionPlugin } from "webpack";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 declare global {
   interface Window {
@@ -80,6 +82,7 @@ const MapContainer: React.FC = () => {
         //* generateMap 함수는 현재 위치의 지도 정보를 반환함
         const { map } = generateMap();
         setMap(map);
+        console.log('map 값 테스트', map)
         setMapReady(false);
       }
     }
@@ -140,7 +143,7 @@ const MapContainer: React.FC = () => {
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
-  },);
+  }, [userCurrentLocation,map]);
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
@@ -189,6 +192,7 @@ const MapContainer: React.FC = () => {
         );
         // 혼잡도 정보를 useContext로 관리
         setCongestion(congestionValues[0]);
+        console.log('test revceive congestion',congestion)
         setColor(congestionValues[0]);
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
       })
@@ -201,8 +205,9 @@ const MapContainer: React.FC = () => {
   useEffect(() => {
 
     const timeoutId = setTimeout(() => {
-      console.log("traffic test")
+      console.log("traffic test", congestion)
       getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
+      console.log('congestion test this is in useeffct', congestion)
       // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
       const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
       // const intervalAround = setInterval(getAroundTrafficData, 10000); // 10초마다 반복 실행
@@ -217,7 +222,7 @@ const MapContainer: React.FC = () => {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [userRealTimeLocation]);
+  }, [map]);
 
   return (
     <>
