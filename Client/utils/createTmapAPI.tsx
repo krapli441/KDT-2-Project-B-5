@@ -10,9 +10,6 @@ import { AuthContext } from "./trafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubePlayer/youtubePlayer";
 import Header from "../view/fragments/header";
 
-// 모듈
-import getDistance from "./getDistance";
-
 declare global {
   interface Window {
     Tmapv3: any;
@@ -25,12 +22,12 @@ const MapContainer: React.FC = () => {
   const [userRealTimeLocation, setUserRealTimeLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
+  const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const [marker, setMarker] = useState<any>(null);
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
   const { congestion, setCongestion } = useContext(AuthContext);
   const { color, setColor } = useContext(AuthContext);
-  const prevPosition = useRef<GeolocationCoordinates | null>(null);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -63,7 +60,7 @@ const MapContainer: React.FC = () => {
         if (window.Tmapv3) {
           return true;
         } else {
-          setTimeout(checkTmapv3Loaded, 1);
+          setTimeout(checkTmapv3Loaded, 50);
         }
       };
 
@@ -86,7 +83,7 @@ const MapContainer: React.FC = () => {
     }
   }, [userCurrentLocation]);
 
-  // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 지도를 사용자 위치로 정렬
+  // * 지도가 생성되었을 경우 currentPosition 정보를 토대로 마커 생성
   useEffect(() => {
     if (map && userCurrentLocation) {
       // console.log("3. 사용자 위치를 토대로 마커 생성");
@@ -115,19 +112,23 @@ const MapContainer: React.FC = () => {
 
       const isLatLngLoaded = checkLatLngLoaded();
       if (isLatLngLoaded) {
-        const watchId = navigator.geolocation.watchPosition((position) => {
-          if (
-            // 현재 위치에서 50m 이상 벗어났을 때 교통정보 요청
-            !prevPosition.current ||
-            getDistance(prevPosition.current, position.coords) >= 50
-          ) {
-            // 특정 거리 이상 벗어날 때만 교통정보 요청
+        const watchId = navigator.geolocation.watchPosition(
+          (position) => {
             setUserRealTimeLocation(position.coords);
-            prevPosition.current = position.coords;
-            console.log("4. watchPosition으로 실시간 위치 정보를 수집");
-            getPointTrafficData();
+            console.log(
+              "4. watchPosition으로 실시간 위치 정보를 수집",
+              position.coords.latitude,
+              position.coords.longitude
+            );
+          },
+          (error) => {
+            console.log(error);
+          },
+          {
+            enableHighAccuracy: false,
+            maximumAge: 10000,
           }
-        });
+        );
 
         return () => {
           navigator.geolocation.clearWatch(watchId);
@@ -136,7 +137,7 @@ const MapContainer: React.FC = () => {
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
-  }, [map]);
+  }, [userCurrentLocation, map]);
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
@@ -146,34 +147,20 @@ const MapContainer: React.FC = () => {
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude
       );
-      // map.setCenter(centerLatLng);
+      map.setCenter(centerLatLng);
 
       if (markerRef.current) {
         // 기존 마커 객체 제거
-        markerRef.current.setPosition(centerLatLng);
-      } else {
-        // 새로운 마커 객체 생성 및 설정
-        const newMarker = new window.Tmapv3.Marker({
-          position: centerLatLng,
-          map: map,
-        });
-        markerRef.current = newMarker;
+        markerRef.current.setMap(null);
       }
 
-      if (
-        prevPosition.current &&
-        getDistance(prevPosition.current, userRealTimeLocation) >= 50
-      ) {
-        console.log("현재 위치가 50m 이상 벗어났습니다.");
-        setTimeout(() => {
-          getPointTrafficData();
-        }, 0);
-      } else {
-        console.log(
-          `사용자의 현재 위치는 (${userRealTimeLocation.latitude}, ${userRealTimeLocation.longitude})이며, 이전 위치에 비해 50m 이상 멀어지지 않았습니다.`
-        );
-      }
-      prevPosition.current = userRealTimeLocation;
+      // 새로운 마커 객체 생성 및 설정
+      const newMarker = new window.Tmapv3.Marker({
+        position: centerLatLng,
+        map: map,
+      });
+
+      markerRef.current = newMarker;
     }
   }, [userRealTimeLocation]);
 
@@ -204,16 +191,18 @@ const MapContainer: React.FC = () => {
       });
   };
 
-  // ! 10초마다 교통정보 요청 함수를 실행
+  // ! 5초 뒤에 교통정보 요청 함수를 실행
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
-      // const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
+      // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
+      const intervalPoint = setInterval(getPointTrafficData, 50000); // 10초마다 반복 실행
+      // const intervalAround = setInterval(getAroundTrafficData, 10000); // 10초마다 반복 실행
       // 컴포넌트가 언마운트될 때 interval 제거
-      // return () => {
-      //   clearInterval(intervalPoint);
-      //   // clearInterval(intervalAround);
-      // };
+      return () => {
+        clearInterval(intervalPoint);
+        // clearInterval(intervalAround);
+      };
     }, 100);
 
     // 컴포넌트가 언마운트될 때 timeout 제거
