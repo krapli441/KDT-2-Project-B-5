@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 
 // 외부 라이브러리
-import { Box, position } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
 import TrafficPointData from "./getTrafficPointData";
@@ -147,6 +147,41 @@ const MapContainer: React.FC = () => {
         markerRef.current = newMarker;
       }
     }
+  }, [userRealTimeLocation]);
+
+  const getPointTrafficData = () => {
+    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+
+    fetch(requestURI)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("요청이 실패하였습니다.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("혼잡도 요청이 성공하였습니다.");
+        const resultData = data.features;
+        const congestionValues = resultData.map(
+          (item: any) => item.properties.congestion
+        );
+        // ! 도로 혼잡도를 useContext로 관리한다.
+        // ! setCongestion은 혼잡도를 나타내며
+        // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
+        setCongestion(congestionValues[0]);
+        setColor(congestionValues[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(getPointTrafficData, 10000); // 10초마다 실행
+
+    return () => {
+      clearInterval(intervalId); // 컴포넌트 언마운트 시 interval 제거
+    };
   }, [userRealTimeLocation]);
 
   return (
