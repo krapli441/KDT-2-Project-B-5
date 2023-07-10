@@ -58,8 +58,7 @@ const MapContainer: React.FC = () => {
     console.log("사용자의 currentPosition 좌표 : ", userCurrentLocation);
   }, [userCurrentLocation]);
 
-  // * currentPosition으로 가져온 정보를 토대로 티맵 지도 생성
-
+  // * 2. currentPosition으로 가져온 정보를 토대로 티맵 지도 생성
   useEffect(() => {
     if (userCurrentLocation) {
       const checkTmapv3Loaded = () => {
@@ -87,6 +86,68 @@ const MapContainer: React.FC = () => {
     }
   }, [userCurrentLocation]);
 
+  // * 지도가 생성되었을 경우 currentPosition 정보를 토대로
+  // * 지도를 사용자 위치로 정렬함.
+
+  useEffect(() => {
+    if (map && userCurrentLocation) {
+      const centerLatLng = new window.Tmapv3.LatLng(
+        userCurrentLocation.latitude,
+        userCurrentLocation.longitude
+      );
+      map.setCenter(centerLatLng);
+    }
+  }, [map, userCurrentLocation]);
+
+  // * currentPosition과 지도가 모두 준비되었을 경우
+  // * 실행하는 useEffect 훅.
+  // * watchPosition으로 사용자의 실시간 위치를 불러옴
+  useEffect(() => {
+    if (userCurrentLocation && map) {
+      const checkLatLngLoaded = () => {
+        if (window.Tmapv3 && window.Tmapv3.LatLng) {
+          return true;
+        } else {
+          setTimeout(checkLatLngLoaded, 100);
+        }
+      };
+
+      const isLatLngLoaded = checkLatLngLoaded();
+      if (isLatLngLoaded) {
+        const watchId = navigator.geolocation.watchPosition((position) => {
+          setUserRealTimeLocation(position.coords);
+          console.log("watchPosition으로 위치 수집 : ", position.coords);
+        });
+        return () => {
+          navigator.geolocation.clearWatch(watchId);
+        };
+      }
+    } else {
+      console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
+    }
+  }, [map]);
+
+  // * watchPosition에서 가져온 값을 토대로
+  // * 지도의 마커를 갱신함
+
+  useEffect(() => {
+    if (userRealTimeLocation) {
+      const centerLatLng = new window.Tmapv3.LatLng(
+        userRealTimeLocation?.latitude,
+        userRealTimeLocation?.longitude
+      );
+      if (markerRef.current) {
+        markerRef.current.setPosition(centerLatLng);
+      } else {
+        const newMarker = new window.Tmapv3.Marker({
+          position: centerLatLng,
+          map: map,
+        });
+        markerRef.current = newMarker;
+      }
+    }
+  }, [userRealTimeLocation]);
+
   return (
     <>
       <>
@@ -112,10 +173,7 @@ const MapContainer: React.FC = () => {
             backgroundColor={"#21325E"}
             borderRadius={"10% 10% 0% 0%;"}
           >
-            {/* 현재 혼잡도 : {congestion} */}
             <VideoPlayer />
-            {/* <MusicController />
-            <NavigationController /> */}
           </Box>
         )}
       </>
