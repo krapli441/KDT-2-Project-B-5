@@ -1,7 +1,11 @@
 // 리액트 라이브러리
 import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+// 외부 라이브러리
 import { Box } from "@chakra-ui/react";
+import { useMediaQuery } from "react-responsive";
+
 // 리액트 컴포넌트
 import Intro from "../view/pages/introPage/introPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
@@ -13,13 +17,15 @@ import Youtube from "../view/pages/youtubePlayer/youtubeTextScreen";
 import { AuthProvider } from "../utils/trafficCongestionContext";
 
 export default function App() {
+  const isMobile = useMediaQuery({ maxWidth: 428, maxHeight: 932 });
+
   return (
     <Box
       className="container"
       display={"flex"}
       flexDirection={"column"}
-      width={"430px"}
-      height={"932px"}
+      width={isMobile ? "100%" : "430px"}
+      height={isMobile ? "100%" : "932px"}
       justifyContent={"center"}
       alignItems={"center"}
       backgroundColor={"white"}
