@@ -140,7 +140,7 @@ const MapContainer: React.FC = () => {
     } else {
       console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
     }
-  }, [userCurrentLocation, map]);
+  },);
 
   // * watchPosition으로 가져온 위치 정보를 토대로 marker 포지션 재설정
   useEffect(() => {
