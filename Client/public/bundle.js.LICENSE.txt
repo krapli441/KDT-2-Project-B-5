@@ -86,7 +86,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * @remix-run/router v1.7.0
+ * @remix-run/router v1.7.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -97,7 +97,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * React Router DOM v6.14.0
+ * React Router DOM v6.14.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -108,7 +108,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * React Router v6.14.0
+ * React Router v6.14.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -131,5 +131,3 @@ PERFORMANCE OF THIS SOFTWARE.
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-//! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
