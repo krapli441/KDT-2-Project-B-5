@@ -136,6 +136,7 @@ const MapContainer: React.FC = () => {
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude
       );
+      map.setCenter(centerLatLng);
       if (markerRef.current) {
         markerRef.current.setPosition(centerLatLng);
       } else {
