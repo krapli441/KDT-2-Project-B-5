@@ -157,8 +157,8 @@ const MapContainer: React.FC = () => {
   const getTrafficDataFirst = () => {
     setTimeout(() => {
       getTrafficData(
-        userRealTimeLocation?.latitude,
-        userRealTimeLocation?.longitude,
+        userCurrentLocation?.latitude,
+        userCurrentLocation?.longitude,
         setCongestion,
         setColor
       );
