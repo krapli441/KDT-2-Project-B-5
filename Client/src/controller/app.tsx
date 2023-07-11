@@ -13,8 +13,8 @@ import SignUp from "../view/pages/signUpPage/signUpSecond";
 import Login from "../view/pages/loginPage/loginSecond";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
-import Youtube from "../view/pages/youtubePlayer/youtubeTextScreen";
-import { AuthProvider } from "../../utils/trafficCongestionContext";
+import Youtube from "../view/pages/youtubePlayer/youtubeScreen";
+import { AuthProvider } from "../model/trafficCongestionContext";
 
 export default function App() {
   const isMobile = useMediaQuery({ maxWidth: 428, maxHeight: 932 });

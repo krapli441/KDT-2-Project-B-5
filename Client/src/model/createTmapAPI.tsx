@@ -7,8 +7,8 @@ import { Box } from "@chakra-ui/react";
 // 리액트 컴포넌트
 import TrafficPointData from "./getTrafficPointData";
 import { AuthContext } from "./trafficCongestionContext";
-import VideoPlayer from "../src/view/pages/youtubePlayer/youtubePlayer";
-import Header from "../src/view/fragments/header";
+import YoutubePlayer from "../view/pages/youtubePlayer/youtubePlayer";
+import Header from "../view/components/header";
 
 declare global {
   interface Window {
@@ -254,7 +254,7 @@ const MapContainer: React.FC = () => {
             backgroundColor={"#21325E"}
             borderRadius={"10% 10% 0% 0%;"}
           >
-            <VideoPlayer />
+            <YoutubePlayer />
           </Box>
         )}
       </>

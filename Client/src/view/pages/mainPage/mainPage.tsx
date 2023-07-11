@@ -1,5 +1,5 @@
 import React from "react";
-import Tmap from "../../../../utils/createTmapAPI";
+import Tmap from "../../../model/createTmapAPI";
 
 export default function main() {
   return (
