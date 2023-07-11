@@ -7,14 +7,14 @@ import { Box } from "@chakra-ui/react";
 import { useMediaQuery } from "react-responsive";
 
 // 리액트 컴포넌트
-import Intro from "./view/pages/introPage/introPageScreen";
-import FirstAccess from "./view/pages/firstAccessPage/firstAccessScreen";
-import SignUp from "./view/pages/signUpPage/signUpSecond";
-import Login from "./view/pages/loginPage/loginSecond";
-import Home from "./view/pages/mainPage/mainScreen";
-import Tmap from "./view/pages/mapPage/mapScreen";
-import Youtube from "./view/pages/youtubePlayer/youtubeTextScreen";
-import { AuthProvider } from "../utils/trafficCongestionContext";
+import Intro from "../view/pages/introPage/introPageScreen";
+import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
+import SignUp from "../view/pages/signUpPage/signUpSecond";
+import Login from "../view/pages/loginPage/loginSecond";
+import Home from "../view/pages/mainPage/mainScreen";
+import Tmap from "../view/pages/mapPage/mapScreen";
+import Youtube from "../view/pages/youtubePlayer/youtubeTextScreen";
+import { AuthProvider } from "../../utils/trafficCongestionContext";
 
 export default function App() {
   const isMobile = useMediaQuery({ maxWidth: 428, maxHeight: 932 });
