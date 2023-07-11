@@ -2,6 +2,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
+
 import { Box } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 // 리액트 컴포넌트

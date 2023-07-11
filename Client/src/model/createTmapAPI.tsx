@@ -9,6 +9,7 @@ import TrafficPointData from "./getTrafficPointData";
 import { AuthContext } from "./trafficCongestionContext";
 import YoutubePlayer from "../view/pages/youtubePlayer/youtubePlayer";
 import Header from "../view/components/header";
+import RequestTrafficData from "./trafficRequestURI";
 
 declare global {
   interface Window {

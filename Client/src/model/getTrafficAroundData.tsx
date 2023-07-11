@@ -1,4 +1,4 @@
-const RequestAroundPointData = {
+const RequestTrafficAroundData = {
   // ! api의 버전 정보
   version: 1,
 
@@ -68,4 +68,4 @@ const RequestAroundPointData = {
   appKey: "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV",
 };
 
-export default RequestAroundPointData;
+export default RequestTrafficAroundData;
