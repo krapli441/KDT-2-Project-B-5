@@ -156,67 +156,67 @@ const MapContainer: React.FC = () => {
     }
   }, [userRealTimeLocation]);
 
-  const getFirstPointTrafficData = () => {
-    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userCurrentLocation?.latitude}&centerLon=${userCurrentLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+  // const getFirstPointTrafficData = () => {
+  //   const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userCurrentLocation?.latitude}&centerLon=${userCurrentLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
 
-    fetch(requestURI)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("요청이 실패하였습니다.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const resultData = data.features;
-        const congestionValues = resultData.map(
-          (item: any) => item.properties.congestion
-        );
-        console.log(
-          `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
-        );
-        // ! 도로 혼잡도를 useContext로 관리한다.
-        // ! setCongestion은 혼잡도를 나타내며
-        // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
-        setCongestion(congestionValues[0]);
-        setColor(congestionValues[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   fetch(requestURI)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("요청이 실패하였습니다.");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       const resultData = data.features;
+  //       const congestionValues = resultData.map(
+  //         (item: any) => item.properties.congestion
+  //       );
+  //       console.log(
+  //         `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
+  //       );
+  //       // ! 도로 혼잡도를 useContext로 관리한다.
+  //       // ! setCongestion은 혼잡도를 나타내며
+  //       // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
+  //       setCongestion(congestionValues[0]);
+  //       setColor(congestionValues[0]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-  const getPointTrafficData = () => {
-    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+  // const getPointTrafficData = () => {
+  //   const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
 
-    fetch(requestURI)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("요청이 실패하였습니다.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const resultData = data.features;
-        const congestionValues = resultData.map(
-          (item: any) => item.properties.congestion
-        );
-        console.log(
-          `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
-        );
-        // ! 도로 혼잡도를 useContext로 관리한다.
-        // ! setCongestion은 혼잡도를 나타내며
-        // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
-        setCongestion(congestionValues[0]);
-        setColor(congestionValues[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   fetch(requestURI)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("요청이 실패하였습니다.");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       const resultData = data.features;
+  //       const congestionValues = resultData.map(
+  //         (item: any) => item.properties.congestion
+  //       );
+  //       console.log(
+  //         `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
+  //       );
+  //       // ! 도로 혼잡도를 useContext로 관리한다.
+  //       // ! setCongestion은 혼잡도를 나타내며
+  //       // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
+  //       setCongestion(congestionValues[0]);
+  //       setColor(congestionValues[0]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const getTrafficDataFirst = () => {
     setTimeout(() => {
-      getFirstPointTrafficData();
+      RequestTrafficData();
     }, 3500); // 3.5초 후에 교통 정보 요청 실행
   };
 
@@ -226,7 +226,7 @@ const MapContainer: React.FC = () => {
 
   useEffect(() => {
     if (currentTime) {
-      getPointTrafficData();
+      RequestTrafficData();
     }
   }, [currentTime]);
 

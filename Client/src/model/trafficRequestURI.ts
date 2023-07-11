@@ -5,36 +5,8 @@ import { AuthContext } from "./trafficCongestionContext";
 // 리액트 컴포넌트
 import RequestTrafficPointData from "./getTrafficPointData";
 
-interface RequestDataType {
-  version: number;
-  minLat: number;
-  minLon: number;
-  maxLat: number;
-  maxLon: number;
-  centerLat: number;
-  centerLon: number;
-  reqCoordType: string;
-  resCoordType: string;
-  trafficType: string;
-  radius: number;
-  zoomLevel: number;
-  sort: string;
-  callback: string;
-  appKey: string;
-}
+const RequestTrafficData = () => {
 
-const RequestTrafficData = (data: RequestDataType) => {
-  const {
-    version,
-    reqCoordType,
-    resCoordType,
-    centerLat,
-    centerLon,
-    trafficType,
-    zoomLevel,
-    callback,
-    appKey,
-  } = data;
   const { setCongestion, setColor } = useContext(AuthContext);
   // const { color, setColor } = useContext(AuthContext);
 
