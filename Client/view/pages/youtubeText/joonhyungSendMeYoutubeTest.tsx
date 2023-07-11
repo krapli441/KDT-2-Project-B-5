@@ -11,7 +11,7 @@ const VideoPlayer = () => {
   const trafficStatusFour = ["4Ukh9aQBzWc", "hAjiKVEWZSk", "kON9fn01rUQ"];
   const videoId2 = "Y3fMr-gLkis";
   const videoId1 = "DLr8m_W3HbU";
-  let count = 0
+  
 
 
   const opts = {
@@ -24,21 +24,26 @@ const VideoPlayer = () => {
 
   const [currentVideoId, setCurrentVideoId] = useState(videoId1);
   const { congestion, isPlaying } = useContext(AuthContext);
-  const {setHandleCongestion}= useContext(AuthContext);
+  const {handleCongestion,setHandleCongestion}= useContext(AuthContext);
+  const [count,setCount] = useState(0)
 
   const onReady = (event: any) => {
     event.target.playVideo();
   };
 
   const onPlayerStateChange = (event: any) => {
+    //* 음악이 끝날 떄 마다 handleCongestion 값만 변경함. (스위치 껐다 켰다 하는 느낌)
     if (event.data === 0) {
-      if(count%2 ==0){
+      console.log('count',count)
+      if(count%2 == 0){
         setHandleCongestion(true)
-        count++
+        setCount(count+1)
+        console.log('handleCongestion1',handleCongestion)
       }
       else{
         setHandleCongestion(false)
-        count++
+        setCount(count+1)
+        console.log('handleCongestion2',handleCongestion)
       }
 
       // 랜덤 Video ID 선택
