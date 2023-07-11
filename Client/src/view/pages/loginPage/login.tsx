@@ -1,94 +1,126 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// 리액트 라이브러리
+import React, { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function Main() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+// 외부 라이브러리
+import { Box, FormControl, Input, Button, Text } from "@chakra-ui/react";
+import "@fontsource/staatliches";
+
+// 리액트 컴포넌트
+
+const CreateAccount: React.FC = () => {
+  const [input, setInput] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const data = {
-      userId: email,
-      password: password,
-    };
-
-    fetch("/signIn", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("POST 요청이 실패했습니다.");
-        }
-      })
-      /*       .then((data) => {
-        if (data.boolean === true) {
-          if (data.result[0].lastAccess === null) {
-            setCookie("userId", data.result[0].userId);
-            setCookie("userNum", data.result[0].userNum);
-            setCookie("userName", data.result[0].userName);
-            navigate("/welcome_1");
-          } else {
-            setCookie("userNum", data.result[0].userNum);
-            setCookie("userId", data.result[0].userId);
-            setCookie("userName", data.result[0].userName);
-            navigate("/home");
-            // 로그인 성공했을 때 쿠키 생성
-          }
-        } else {
-          alert("로그인 실패");
-        }
-      })
- */ .catch((error) => {
-        console.error(error);
-      });
+    // 여기에서 formData를 처리하는 작업을 수행합니다.
+    // 예: 서버로 데이터 전송 등
+    console.log(formData);
   };
 
   return (
     <>
-      <div className={``}>
-        <form className="main" onSubmit={handleSubmit}>
-          <div className={``}>
-            <div className={``}>로그인</div>
-            <div className={``}>회원 정보를 입력해주세요.</div>
-          </div>
-          <div className={``}>
-            <input
-              className="inputText"
-              name="userId"
-              type="email"
-              placeholder="이메일"
-              value={email}
-              onChange={handleChangeEmail}
-            />
-            <input
-              className="inputText"
-              name="password"
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={handleChangePassword}
-            />
-            <button type="submit" className={``}>
-              로그인
-            </button>
-          </div>
-        </form>
-      </div>
+      <Box
+        className="header"
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        width={"80%"}
+      >
+        <Box className="signUpInfoText">
+          <Text fontSize={"24px"}>로그인</Text>
+        </Box>
+        <Box className="serviceLogoText">
+          <Text fontFamily={"Staatliches"} fontSize={"50px"}>
+            ASPHALT
+          </Text>
+        </Box>
+      </Box>
+      <FormControl
+        className="loginForm"
+        display={"flex"}
+        flexDirection={"column"}
+        width={"80%"}
+        gap={"10px"}
+        isRequired
+        onSubmit={handleSubmit}
+      >
+        <Input
+          type="email"
+          placeholder="아이디 (이메일)"
+          height={"60px"}
+          required
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+
+        <Input
+          type="password"
+          placeholder="비밀번호"
+          height={"60px"}
+          required
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+        />
+        <Text fontSize={"16px"} textAlign={"right"}>
+          계정 및 비밀번호 찾기
+        </Text>
+        <Box
+          className="buttons"
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Button
+            mt={4}
+            backgroundColor="#FFB703"
+            color="white"
+            type="submit"
+            width={"340px"}
+            height={"60px"}
+            _hover={{ bg: "#FF8B03" }}
+            _active={{
+              bg: "#FF7C03",
+              transform: "scale(0.98)",
+            }}
+          >
+            로그인
+          </Button>
+        </Box>
+      </FormControl>
+      <Link to={"/first"}>
+        <Button
+          mt={4}
+          backgroundColor="#D9D9D9"
+          color="white"
+          width={"340px"}
+          height={"60px"}
+          _hover={{ bg: "#C9C9C9" }}
+          _active={{
+            bg: "#B3B3B3",
+            transform: "scale(0.98)",
+          }}
+        >
+          돌아가기
+        </Button>
+      </Link>
     </>
   );
-}
+};
+
+export default CreateAccount;

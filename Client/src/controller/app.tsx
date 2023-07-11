@@ -9,8 +9,8 @@ import { useMediaQuery } from "react-responsive";
 // 리액트 컴포넌트
 import Intro from "../view/pages/introPage/introPageScreen";
 import FirstAccess from "../view/pages/firstAccessPage/firstAccessScreen";
-import SignUp from "../view/pages/signUpPage/signUpSecond";
-import Login from "../view/pages/loginPage/loginSecond";
+import SignUp from "../view/pages/signUpPage/signUp";
+import Login from "../view/pages/loginPage/login";
 import Home from "../view/pages/mainPage/mainScreen";
 import Tmap from "../view/pages/mapPage/mapScreen";
 import Youtube from "../view/pages/youtubePlayer/youtubeScreen";

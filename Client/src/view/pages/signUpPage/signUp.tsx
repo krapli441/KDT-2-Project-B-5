@@ -1,251 +1,154 @@
 // 리액트 라이브러리
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
+
+// 외부 라이브러리
 import {
+  Box,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
+  Input,
+  Button,
+  Text,
+  NumberInput,
+  NumberInputField,
 } from "@chakra-ui/react";
+import "@fontsource/staatliches";
 
 // 리액트 컴포넌트
+import CreateAccountCheckBox from "./signUpCheckBox";
 
-export default function CreateAcount() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setpasswordConfirm] = useState("");
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [allCheck, setAllCheck] = useState(false);
-  const [ageCheck, setAgeCheck] = useState(false);
-  const [termOfUseCheck, setTermOfUseCheck] = useState(false);
-  const [eftUseCheck, setEftUseCheck] = useState(false);
-  const [piaUseCheck, setPiaUseCheck] = useState(false);
-  const [marketingUseCheck, setMarketingUseCheck] = useState(false);
-  const [advertisementCheck, setAdvertisementCheck] = useState(false);
-  // useNavigate 훅을 사용하여 navigate 함수를 가져옵니다. 이후 navigate 함수를 사용하여 페이지 전환 및 브라우저 내비게이션을 수행할 수 있습니다.
-  const navigate = useNavigate();
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+const CreateAccount: React.FC = () => {
+  const [input, setInput] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    phoneNumber: "",
+  });
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-  const handleChangePasswordConfirm = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setpasswordConfirm(e.target.value);
-  };
-  const passwordMatchMessage =
-    passwordConfirm !== "" && password === passwordConfirm ? (
-      <div className="password-match">비밀번호가 일치합니다</div>
-    ) : null;
-  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-  const handleChangePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(e.target.value);
-  };
-  // ! 이 영역부터 약관 동의에 관한 내용
-  const handleAgeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAgeCheck(e.target.checked);
-  };
-  const handleTermsOfUseCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTermOfUseCheck(e.target.checked);
-  };
-  const handleEftUseCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEftUseCheck(e.target.checked);
-  };
-  const handlePiaUseCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPiaUseCheck(e.target.checked);
-  };
-  const handleMarketingUseCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMarketingUseCheck(e.target.checked);
-  };
-  const handleAdvertisementCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAdvertisementCheck(e.target.checked);
-  };
-  const handleAllCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    setAllCheck(isChecked);
-    setAgeCheck(isChecked);
-    setTermOfUseCheck(isChecked);
-    setEftUseCheck(isChecked);
-    setPiaUseCheck(isChecked);
-    setMarketingUseCheck(isChecked);
-    setAdvertisementCheck(isChecked);
-  };
-  // ! 이 영역까지 약관 동의에 관한 내용
-  /*   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("회원가입이 완료되었습니다");
-    const data = {
-      email: email,
-      password: password,
-      name: name,
-      phoneNumber: phoneNumber,
-    };
-    fetch("/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("POST 요청이 실패했습니다.");
-        }
-      })
-      .then((data) => {
-        if (data === true) {
-          console.log("data =", data); // 서버의 응답을 출력하거나 원하는 작업을 수행합니다.
-          navigate("/first");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }; */
+    // 여기에서 formData를 처리하는 작업을 수행합니다.
+    // 예: 서버로 데이터 전송 등
+    console.log(formData);
+  };
+
   return (
     <>
-      <div className="main">
-        <div className="signUpText">회원 정보를 입력해주세요.</div>
-        <form className="BackgroundColorGray" /* onSubmit={handleSubmit} */>
-          <input
-            className="inputText"
-            name="userId"
-            type="email"
-            placeholder="이메일"
-            value={email}
-            onChange={handleChangeEmail}
-          />
-          <input
-            className="inputText"
-            name="password"
-            type="password"
-            placeholder="비밀번호"
-            value={password}
-            onChange={handleChangePassword}
-          />
-          <input
-            className="inputText"
-            name="passwordConfirm"
-            type="password"
-            placeholder="비밀번호 확인"
-            value={passwordConfirm}
-            onChange={handleChangePasswordConfirm}
-          />
-          {passwordMatchMessage}
-          <input
-            className="inputText"
-            name="userName"
-            type="text"
-            placeholder="이름"
-            value={name}
-            onChange={handleChangeName}
-          />
-          <input
-            className="inputText"
-            name="phoneNum"
-            type="number"
+      <Box
+        className="header"
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        width={"80%"}
+      >
+        <Box className="signUpInfoText">
+          <Text fontSize={"24px"}>회원가입</Text>
+          <Text fontSize={"13px"}>회원 정보를 입력해주세요.</Text>
+        </Box>
+        <Box className="serviceLogoText">
+          <Text fontFamily={"Staatliches"} fontSize={"50px"}>
+            ASPHALT
+          </Text>
+        </Box>
+      </Box>
+      <FormControl
+        className="createAccountForm"
+        display={"flex"}
+        flexDirection={"column"}
+        width={"80%"}
+        gap={"27px"}
+        isRequired
+        onSubmit={handleSubmit}
+      >
+        <Input
+          type="email"
+          placeholder="아이디 (이메일)"
+          height={"60px"}
+          required
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+
+        <Input
+          type="password"
+          placeholder="비밀번호"
+          height={"60px"}
+          required
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+        />
+
+        <Input
+          type="password"
+          placeholder="비밀번호 확인"
+          height={"60px"}
+          required
+        />
+        <Input
+          type="text"
+          placeholder="이름"
+          height={"60px"}
+          required
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+        />
+        <NumberInput>
+          <NumberInputField
+            height={"60px"}
             placeholder="휴대전화번호"
-            value={phoneNumber}
-            onChange={handleChangePhoneNumber}
-          />
-          <div>
-            <div className="allCheck">
-              <input
-                id="allCheck"
-                type="checkbox"
-                checked={allCheck}
-                onChange={handleAllCheckChange}
-              />
-              <label htmlFor="allCheck">모두 확인하였으며, 동의합니다.</label>
-            </div>
-            {/* <input id="allCheck" type="checkbox" /> */}
-            <div className="inputWhiteBox">
-              <div>
-                <input
-                  id="ageCheck"
-                  name="ageCheck"
-                  type="checkbox"
-                  checked={ageCheck}
-                  onChange={handleAgeCheck}
-                />
-                <label htmlFor="ageCheck">[필수] 만 나이 14세</label>
-              </div>
-              <div>
-                <input
-                  id="TermOfUseCheck"
-                  name="TermOfUseCheck"
-                  type="checkbox"
-                  checked={termOfUseCheck}
-                  onChange={handleTermsOfUseCheck}
-                />
-                <label htmlFor="TermOfUseCheck">
-                  [필수] 아스팔트 이용약관 동의
-                </label>
-                {/* EFT : Electronic Financial Transaction, 전자금융거래  */}
-              </div>
-              <div>
-                <input
-                  id="EFTUseCheck"
-                  name="TermOfUseCheck"
-                  type="checkbox"
-                  checked={eftUseCheck}
-                  onChange={handleEftUseCheck}
-                />
-                <label htmlFor="EFTUseCheck">
-                  [필수] 전자금융거래 이용약관 동의
-                </label>
-              </div>
-              {/* Personal Information Agreement, 개인정보 제 3자 제공 동의) */}
-              <div>
-                <input
-                  id="PIAUseCheck"
-                  name="PIAUseCheck"
-                  type="checkbox"
-                  checked={piaUseCheck}
-                  onChange={handlePiaUseCheck}
-                />
-                <label htmlFor="PIAUseCheck">
-                  [필수] 개인정보 제 3자 제공 동의
-                </label>
-              </div>
-              <div>
-                <input
-                  id="marketingUseCheck"
-                  name="marketingUseCheck"
-                  type="checkbox"
-                  checked={marketingUseCheck}
-                  onChange={handleMarketingUseCheck}
-                />
-                <label htmlFor="marketingUseCheck">
-                  [선택] 마케팅 목적의 개인정보 수집 및 이용 동의
-                </label>
-              </div>
-              <div>
-                <input
-                  id="advertisement"
-                  name="advertisement"
-                  type="checkbox"
-                  checked={advertisementCheck}
-                  onChange={handleAdvertisementCheck}
-                />
-                <label htmlFor="advertisement">
-                  [선택] 광고성 정보 수신 동의
-                </label>
-              </div>
-            </div>
-          </div>
-          <button type="submit" className={``}>
-            회원가입
-          </button>
-        </form>
-      </div>
+            name="number"
+            onChange={handleInputChange}
+            value={formData.phoneNumber}
+          ></NumberInputField>
+        </NumberInput>
+        <CreateAccountCheckBox />
+        <Button
+          mt={4}
+          backgroundColor="#FFB703"
+          color="white"
+          type="submit"
+          width={"340px"}
+          height={"60px"}
+          _hover={{ bg: "#FF8B03" }}
+          _active={{
+            bg: "#FF7C03",
+            transform: "scale(0.98)",
+          }}
+        >
+          회원가입
+        </Button>
+      </FormControl>
+      <Link to="/first">
+        <Button
+          mt={4}
+          backgroundColor="#D9D9D9"
+          color="white"
+          width={"340px"}
+          height={"60px"}
+          _hover={{ bg: "#C9C9C9" }}
+          _active={{
+            bg: "#B3B3B3",
+            transform: "scale(0.98)",
+          }}
+        >
+          돌아가기
+        </Button>
+      </Link>
     </>
   );
-}
+};
+
+export default CreateAccount;
