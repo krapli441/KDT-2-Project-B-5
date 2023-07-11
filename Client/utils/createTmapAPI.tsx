@@ -201,27 +201,27 @@ const MapContainer: React.FC = () => {
   };
 
   // ! 5초 뒤에 교통정보 요청 함수를 실행
-  useEffect(() => {
+  // useEffect(() => {
 
-    const timeoutId = setTimeout(() => {
-      getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
-      // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
-      const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
-      // const intervalAround = setInterval(getAroundTrafficData, 10000); // 10초마다 반복 실행
-      // 컴포넌트가 언마운트될 때 interval 제거
-      return () => {
-        clearInterval(intervalPoint);
-        // clearInterval(intervalAround);
-      };
-    },5000);
+  //   const timeoutId = setTimeout(() => {
+  //     getPointTrafficData(); // 사용자 위치 교통정보 요청 함수 실행
+  //     // getAroundTrafficData(); // 사용자 주변 교통정보 요청 함수 실행
+  //     const intervalPoint = setInterval(getPointTrafficData, 10000); // 10초마다 반복 실행
+  //     // const intervalAround = setInterval(getAroundTrafficData, 10000); // 10초마다 반복 실행
+  //     // 컴포넌트가 언마운트될 때 interval 제거
+  //     return () => {
+  //       clearInterval(intervalPoint);
+  //       // clearInterval(intervalAround);
+  //     };
+  //   },5000);
 
-    // 컴포넌트가 언마운트될 때 timeout 제거
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
+  //   // 컴포넌트가 언마운트될 때 timeout 제거
+  //   return () => {
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, []);
+  // ! 노래 끝날 때 마다 교통정보 요청.
   useEffect(() => {
-    console.log("노래 끝날 떄 마다 useEffect 발동")
     getPointTrafficData();
 
   }, [handleCongestion]);
