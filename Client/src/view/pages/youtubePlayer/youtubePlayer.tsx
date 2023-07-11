@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import YouTube from "react-youtube";
-import { AuthContext } from "../../../utils/trafficCongestionContext";
+import { AuthContext } from "../../../../utils/trafficCongestionContext";
 
 const VideoPlayer = () => {
   const trafficStatusZero = [

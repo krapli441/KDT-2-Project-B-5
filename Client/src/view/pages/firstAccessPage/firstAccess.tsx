@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 // 리액트 컴포넌트
 import IntroLogo from "../introPage/introLogo.png";
-import AudioPlayer from "../../../utils/musicPlayer";
+import AudioPlayer from "../../../../utils/musicPlayer";
 
 const flexCenter = {
   display: "flex",
