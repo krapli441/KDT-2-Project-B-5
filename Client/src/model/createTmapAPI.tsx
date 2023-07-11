@@ -1,6 +1,6 @@
 // 리액트 라이브러리
 import React, { useState, useEffect, useRef, useContext } from "react";
-
+import { AuthContext } from "./trafficCongestionContext";
 // 외부 라이브러리
 import { Box } from "@chakra-ui/react";
 
@@ -24,6 +24,8 @@ const MapContainer: React.FC = () => {
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
   const [currentTime, setCurrentTime] = useState(Date.now());
+  const { congestion, setCongestion } = useContext(AuthContext);
+  const { color, setColor } = useContext(AuthContext);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -156,7 +158,9 @@ const MapContainer: React.FC = () => {
     setTimeout(() => {
       getTrafficData(
         userRealTimeLocation?.latitude,
-        userRealTimeLocation?.longitude
+        userRealTimeLocation?.longitude,
+        setCongestion,
+        setColor
       );
     }, 3500); // 3.5초 후에 교통 정보 요청 실행
   };
@@ -169,7 +173,9 @@ const MapContainer: React.FC = () => {
     if (currentTime) {
       getTrafficData(
         userRealTimeLocation?.latitude,
-        userRealTimeLocation?.longitude
+        userRealTimeLocation?.longitude,
+        setCongestion,
+        setColor
       );
     }
   }, [currentTime]);
