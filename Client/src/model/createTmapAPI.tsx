@@ -5,10 +5,9 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
-import TrafficPointData from "./getTrafficPointData";
-import { AuthContext } from "./trafficCongestionContext";
 import YoutubePlayer from "../view/pages/youtubePlayer/youtubePlayer";
 import Header from "../view/components/header";
+import getTrafficData from "./trafficRequestURI";
 
 declare global {
   interface Window {
@@ -24,8 +23,6 @@ const MapContainer: React.FC = () => {
   const [map, setMap] = useState<any>(null);
   const [isMapReady, setMapReady] = useState(true);
   const markerRef = useRef<any>(null);
-  const { congestion, setCongestion } = useContext(AuthContext);
-  const { color, setColor } = useContext(AuthContext);
   const [currentTime, setCurrentTime] = useState(Date.now());
 
   useEffect(() => {
@@ -155,67 +152,12 @@ const MapContainer: React.FC = () => {
     }
   }, [userRealTimeLocation]);
 
-  const getFirstPointTrafficData = () => {
-    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userCurrentLocation?.latitude}&centerLon=${userCurrentLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
-
-    fetch(requestURI)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("요청이 실패하였습니다.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const resultData = data.features;
-        const congestionValues = resultData.map(
-          (item: any) => item.properties.congestion
-        );
-        console.log(
-          `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
-        );
-        // ! 도로 혼잡도를 useContext로 관리한다.
-        // ! setCongestion은 혼잡도를 나타내며
-        // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
-        setCongestion(congestionValues[0]);
-        setColor(congestionValues[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getPointTrafficData = () => {
-    const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
-
-    fetch(requestURI)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("요청이 실패하였습니다.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const resultData = data.features;
-        const congestionValues = resultData.map(
-          (item: any) => item.properties.congestion
-        );
-        console.log(
-          `혼잡도 요청에 성공하였습니다. 현재 혼잡도는 ${congestionValues}입니다.`
-        );
-        // ! 도로 혼잡도를 useContext로 관리한다.
-        // ! setCongestion은 혼잡도를 나타내며
-        // ! setColor는 혼잡도에 따른 색깔을 나타낸다.
-        setCongestion(congestionValues[0]);
-        setColor(congestionValues[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const getTrafficDataFirst = () => {
     setTimeout(() => {
-      getFirstPointTrafficData();
+      getTrafficData(
+        userRealTimeLocation?.latitude,
+        userRealTimeLocation?.longitude
+      );
     }, 3500); // 3.5초 후에 교통 정보 요청 실행
   };
 
@@ -225,7 +167,10 @@ const MapContainer: React.FC = () => {
 
   useEffect(() => {
     if (currentTime) {
-      getPointTrafficData();
+      getTrafficData(
+        userRealTimeLocation?.latitude,
+        userRealTimeLocation?.longitude
+      );
     }
   }, [currentTime]);
 
