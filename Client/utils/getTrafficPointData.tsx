@@ -47,7 +47,10 @@ const SampleData = {
   // ? ACC : 돌발 정보를 요청한다.
   // ! minLat, minLon, maxLat, maxLon의 값은 필히 입력해야 한다.
 
-  trafficType: "POINT",
+  trafficType1: "POINT",
+  trafficType2: "AROUND",
+
+
 
   // ? radius : 주변 교통 정보 반경을 지정한다.
   radius: 3,
