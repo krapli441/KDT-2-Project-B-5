@@ -15,3 +15,9 @@ declare module ".*mp3" {
   const value: any;
   export default value;
 }
+
+declare global {
+  interface Window {
+    Tmapv3: any;
+  }
+}
