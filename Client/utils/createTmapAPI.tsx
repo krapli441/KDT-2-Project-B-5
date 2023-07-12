@@ -6,11 +6,10 @@ import { Box } from "@chakra-ui/react";
 
 // 리액트 컴포넌트
 import TrafficPointData from "./getTrafficPointData";
+import getCurrentPosition from "./getCurrentPosition";
 import { AuthContext } from "./trafficCongestionContext";
 import VideoPlayer from "../view/pages/youtubeText/joonhyungSendMeYoutubeTest";
 import Header from "../view/fragments/header";
-import { ContextExclusionPlugin } from "webpack";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 declare global {
   interface Window {
@@ -19,8 +18,8 @@ declare global {
 }
 
 const MapContainer: React.FC = () => {
-  const [userCurrentLocation, setUserCurrentLocation] =
-    useState<GeolocationCoordinates | null>(null);
+  
+  const {userCurrentLocation} = useContext(AuthContext)
   const [userRealTimeLocation, setUserRealTimeLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
@@ -34,26 +33,7 @@ const MapContainer: React.FC = () => {
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserCurrentLocation(position.coords);
-          // console.log(position.coords.latitude, position.coords.longitude);
-          // console.log("1. 최초 위치 불러옴");
-        },
-        (error) => {
-          console.log(error);
-        },
-        {
-          enableHighAccuracy: true,
-        }
-      );
-      return () => {
-        userCurrentLocation;
-      };
-    } else {
-      console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
-    }
+    getCurrentPosition()
   }, []);
 
   // * currentPosition으로 가져온 정보를 토대로 tMap 지도 생성
