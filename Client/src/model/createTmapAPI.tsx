@@ -26,7 +26,7 @@ const MapContainer: React.FC = () => {
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const markerRef = useRef<any>(null);
   const [userLocationCurrentTime, setCurrentTime] = useState(Date.now());
-  const [userAroundTrafficCurrentTime, setuserAroundTrafficCurrentTime] =
+  const [userAroundTrafficCurrentTime, setUserAroundTrafficCurrentTime] =
     useState(Date.now());
 
   const { congestion, setCongestion } = useContext(AuthContext);
@@ -44,7 +44,7 @@ const MapContainer: React.FC = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setuserAroundTrafficCurrentTime(Date.now());
+      setUserAroundTrafficCurrentTime(Date.now());
     }, 240000);
     return () => {
       clearInterval(intervalId);
@@ -269,9 +269,14 @@ const MapContainer: React.FC = () => {
         setCongestion,
         setColor
       );
-      drawingAroundTrafficCongestion();
     }
   }, [userLocationCurrentTime]);
+
+  useEffect(() => {
+    if (userAroundTrafficCurrentTime) {
+      drawingAroundTrafficCongestion();
+    }
+  }, [userAroundTrafficCurrentTime]);
 
   return (
     <>
