@@ -100,6 +100,8 @@ const MapContainer: React.FC = () => {
 
       if (isTmapv3Loaded) {
         const { map } = generateMap();
+        drawingAroundTrafficCongestion();
+
         setMap(map), setMapReady(false);
       }
     }
