@@ -1,4 +1,9 @@
 import React, { useState, createContext } from "react";
+interface coordinates{
+  latitude: number;
+  longitude: number;
+}
+
 
 interface AuthContextProps {
   congestion: string|number;
@@ -9,8 +14,9 @@ interface AuthContextProps {
   setIsPlaying: (isPlaying: boolean) => void;
   handleCongestion: boolean;
   setHandleCongestion: (handleCongestion: boolean) => void;
-  userCurrentLocation:Object; 
-  setUserCurrentLocation: (userCurrentLocation:Object) => void;
+  userCurrentLocation:coordinates;
+  setUserCurrentLocation: (userCurrentLocation:coordinates) => void;
+  
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -22,7 +28,7 @@ export const AuthContext = createContext<AuthContextProps>({
   setColor: () => {},
   handleCongestion:false,
   setHandleCongestion: () => {},
-  userCurrentLocation:{},
+  userCurrentLocation:{latitude:0, longitude:0 },
   setUserCurrentLocation: () => {},
 
 
@@ -35,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [color, setColor] = useState("");
   const [handleCongestion,setHandleCongestion] = useState(false);
-  const [userCurrentLocation, setUserCurrentLocation]= useState({})
+  const [userCurrentLocation, setUserCurrentLocation]= useState<coordinates>({latitude:0,longitude:0})
 
   const getCongestionLabel = (value: string) => {
     switch (value) {

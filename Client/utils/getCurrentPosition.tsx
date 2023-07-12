@@ -1,5 +1,6 @@
 import React, { useEffect, useState,useContext } from "react";
 import { AuthContext } from "./trafficCongestionContext";
+
 const getCurrentPosition= () => {
     const {userCurrentLocation,setUserCurrentLocation} =useContext(AuthContext)
 
