@@ -25,7 +25,10 @@ const MapContainer: React.FC = () => {
   const [isMapReady, setMapReady] = useState(true);
   const [polyLineArr, setPolyLineArr] = useState<any[]>([]);
   const markerRef = useRef<any>(null);
-  const [currentTime, setCurrentTime] = useState(Date.now());
+  const [userLocationCurrentTime, setCurrentTime] = useState(Date.now());
+  const [userAroundTrafficCurrentTime, setuserAroundTrafficCurrentTime] =
+    useState(Date.now());
+
   const { congestion, setCongestion } = useContext(AuthContext);
   const { color, setColor } = useContext(AuthContext);
 
@@ -37,7 +40,16 @@ const MapContainer: React.FC = () => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentTime]);
+  }, [userLocationCurrentTime]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setuserAroundTrafficCurrentTime(Date.now());
+    }, 240000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [userAroundTrafficCurrentTime]);
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
@@ -250,7 +262,7 @@ const MapContainer: React.FC = () => {
   }, [userCurrentLocation]);
 
   useEffect(() => {
-    if (currentTime) {
+    if (userLocationCurrentTime) {
       getTrafficData(
         userRealTimeLocation?.latitude,
         userRealTimeLocation?.longitude,
@@ -259,7 +271,7 @@ const MapContainer: React.FC = () => {
       );
       drawingAroundTrafficCongestion();
     }
-  }, [currentTime]);
+  }, [userLocationCurrentTime]);
 
   return (
     <>
