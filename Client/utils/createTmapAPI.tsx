@@ -214,12 +214,14 @@ const MapContainer: React.FC = () => {
         );
         //! 사용자 위치의 도로 교통 정보(혼잡도)를 나타내는 부분
         // console.log("AROUND 혼잡도:" + congestionValues); // ['2'], length: 1, Prototype: Array(0)
-        //! 현재 아래의 부분이 옳바르게 진행되지 않는 것으로 보임.
+
+
         if (polyLineArr.length > 0) {
           console.log("폴리라인"+polyLineArr);
           polyLineArr.forEach((polyline) => {
             polyline.setMap(null);
           });
+          //? API 공식 문서에서는 removeAllFeatures(); 을 사용 했지만, polyLineArr 엔 removeAllFeatures() 속성 없음.
         }
         setTimeout(() => {
           const newPolyLineArr: any[] = [];
@@ -259,7 +261,7 @@ const MapContainer: React.FC = () => {
               } else if (sectionCongestion === 4) {
                 lineColor = "#FF0000";
               }
-      
+              // ? 폴리라인 그리는 코드
               const polyline = new window.Tmapv3.Polyline({
                 path: drawInfoArr,
                 strokeColor: lineColor,
@@ -271,7 +273,7 @@ const MapContainer: React.FC = () => {
           }
       
           setPolyLineArr(newPolyLineArr);
-        }, 1000);  
+        }, 100);  
       })
       .catch((error) => {
         console.log(error);
