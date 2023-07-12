@@ -157,7 +157,7 @@ const MapContainer: React.FC = () => {
   }, [userRealTimeLocation]);
 
   const drawingAroundTrafficCongestion = () => {
-    const trafficCongestionRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficAroundData.version}&format=json&reqCoordType=${TrafficAroundData.reqCoordType}&resCoordType=${TrafficAroundData.resCoordType}&centerLat=${userCurrentLocation?.latitude}&centerLon=${userCurrentLocation?.longitude}&trafficType=${TrafficAroundData.trafficType}&zoomLevel=${TrafficAroundData.zoomLevel}&callback=${TrafficAroundData.callback}&appKey=${TrafficAroundData.appKey}`;
+    const trafficCongestionRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficAroundData.version}&format=json&reqCoordType=${TrafficAroundData.reqCoordType}&resCoordType=${TrafficAroundData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficAroundData.trafficType}&radius=${TrafficAroundData.radius}&zoomLevel=${TrafficAroundData.zoomLevel}&callback=${TrafficAroundData.callback}&appKey=${TrafficAroundData.appKey}`;
 
     fetch(trafficCongestionRequestURI)
       .then((response) => {
