@@ -3,7 +3,7 @@ import { AuthContext } from "./trafficCongestionContext";
 
 
 
-function getCurrentPosition() {
+function getCurrentPosition():Promise<GeolocationCoordinates> {
     const {userCurrentLocation,setUserCurrentLocation}= useContext(AuthContext)     
       return new Promise((resolve,reject)=>{
     if (navigator.geolocation) {
