@@ -1,13 +1,15 @@
 // 리액트 컴포넌트
 import TrafficPointData from "./getTrafficPointData";
 
+const apikey = process.env.APIKEY_FIRST;
+
 const getTrafficData = (
   latitude: number | undefined,
   longitude: number | undefined,
   setCongestion: (congestion: string) => void,
   setColor: (color: string) => void
 ) => {
-  const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${latitude}&centerLon=${longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${TrafficPointData.appKey}`;
+  const requestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficPointData.version}&format=json&reqCoordType=${TrafficPointData.reqCoordType}&resCoordType=${TrafficPointData.resCoordType}&centerLat=${latitude}&centerLon=${longitude}&trafficType=${TrafficPointData.trafficType}&zoomLevel=${TrafficPointData.zoomLevel}&callback=${TrafficPointData.callback}&appKey=${apikey}`;
 
   fetch(requestURI)
     .then((response) => {

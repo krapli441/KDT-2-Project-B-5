@@ -65,7 +65,7 @@ const RequestTrafficAroundData = {
   callback: "function",
 
   // ? appKey : 발급받은 APP Key
-  appKey: "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV",
+  // appKey: "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV",
 };
 
 export default RequestTrafficAroundData;

@@ -10,6 +10,10 @@ import Header from "../view/components/header";
 import getTrafficData from "./trafficRequestURI";
 import TrafficAroundData from "./getTrafficAroundData";
 
+// API 환경변수
+
+const apikey = process.env.APIKEY_FIRST;
+
 declare global {
   interface Window {
     Tmapv3: any;
@@ -171,7 +175,7 @@ const MapContainer: React.FC = () => {
   }, [userRealTimeLocation]);
 
   const drawingAroundTrafficCongestion = () => {
-    const trafficCongestionRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficAroundData.version}&format=json&reqCoordType=${TrafficAroundData.reqCoordType}&resCoordType=${TrafficAroundData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficAroundData.trafficType}&radius=${TrafficAroundData.radius}&zoomLevel=${TrafficAroundData.zoomLevel}&callback=${TrafficAroundData.callback}&appKey=${TrafficAroundData.appKey}`;
+    const trafficCongestionRequestURI = `https://apis.openapi.sk.com/tmap/traffic?version=${TrafficAroundData.version}&format=json&reqCoordType=${TrafficAroundData.reqCoordType}&resCoordType=${TrafficAroundData.resCoordType}&centerLat=${userRealTimeLocation?.latitude}&centerLon=${userRealTimeLocation?.longitude}&trafficType=${TrafficAroundData.trafficType}&radius=${TrafficAroundData.radius}&zoomLevel=${TrafficAroundData.zoomLevel}&callback=${TrafficAroundData.callback}&appKey=${apikey}`;
 
     fetch(trafficCongestionRequestURI)
       .then((response) => {
