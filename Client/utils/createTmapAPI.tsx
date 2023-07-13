@@ -19,7 +19,7 @@ declare global {
 
 const MapContainer: React.FC = () => {
   
-  const {userCurrentLocation} = useContext(AuthContext)
+  const {userCurrentLocation,setUserCurrentLocation} = useContext(AuthContext)
   const [userRealTimeLocation, setUserRealTimeLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
