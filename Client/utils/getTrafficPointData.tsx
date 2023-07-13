@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-dotenv.config()
+// dotenv.config()
 const SampleData = {
   // ! api의 버전 정보
   version: 1,
@@ -72,7 +72,8 @@ const SampleData = {
   callback: "function",
 
   // ? appKey : 발급받은 APP Key
-  appKey: process.env.TmapAppkey1
+  // appKey: process.env.TmapAppkey1
+  appKey:"FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe"
 };
 
 export default SampleData;
