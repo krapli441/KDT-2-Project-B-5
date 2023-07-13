@@ -6,7 +6,7 @@ import { AuthContext } from "./trafficCongestionContext";
 function getCurrentPosition() {
   const {userCurrentLocation,setUserCurrentLocation}= useContext(AuthContext)    
 
-  useEffect(() => {
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -28,7 +28,7 @@ function getCurrentPosition() {
         console.log("사용자 환경이 위치 정보를 제공하지 않습니다.");
       }
 
-  }, []);
+  
 };
 
 export default getCurrentPosition;
