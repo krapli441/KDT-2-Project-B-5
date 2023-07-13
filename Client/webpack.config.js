@@ -45,6 +45,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".png"],
+    fallback:{
+      crypto: require.resolve("crypto-browserify")
+    }
   },
   devtool: "source-map",
 };
