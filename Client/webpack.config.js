@@ -1,4 +1,5 @@
 const path = require("path");
+const dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -45,9 +46,9 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".png"],
-    fallback:{
-      crypto: require.resolve("crypto-browserify")
-    }
   },
   devtool: "source-map",
+  plugins:[
+    new dotenv(),
+  ],
 };
