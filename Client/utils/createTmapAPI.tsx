@@ -19,7 +19,9 @@ declare global {
 
 const MapContainer: React.FC = () => {
   
-  const {userCurrentLocation,setUserCurrentLocation} = useContext(AuthContext)
+  // const {userCurrentLocation,setUserCurrentLocation} = useContext(AuthContext)
+  const [userCurrentLocation, setUserCurrentLocation] =
+    useState<GeolocationCoordinates | null>(null);
   const [userRealTimeLocation, setUserRealTimeLocation] =
     useState<GeolocationCoordinates | null>(null);
   const [map, setMap] = useState<any>(null);
@@ -56,6 +58,7 @@ const MapContainer: React.FC = () => {
           height: "70%",
           zoom: 15,
         });
+        console.log('지도가 생성되었습니다')
         return { map };
       };
 
@@ -64,6 +67,7 @@ const MapContainer: React.FC = () => {
       if (isTmapv3Loaded) {
         //* generateMap 함수는 현재 위치의 지도 정보를 반환함
         const { map } = generateMap();
+        console.log('generate map으로 지도를 생성하였습니다')
         setMap(map);
         setMapReady(false);
       }

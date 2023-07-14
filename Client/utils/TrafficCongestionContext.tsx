@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 interface coordinates{
-  latitude: number;
-  longitude: number;
+  latitude: number | null;
+  longitude: number | null;
 }
 
 
@@ -41,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [color, setColor] = useState("");
   const [handleCongestion,setHandleCongestion] = useState(false);
-  const [userCurrentLocation, setUserCurrentLocation]= useState<coordinates>({latitude:0,longitude:0})
+  const [userCurrentLocation, setUserCurrentLocation]= useState<coordinates>({latitude:null,longitude:null})
 
   const getCongestionLabel = (value: string) => {
     switch (value) {
