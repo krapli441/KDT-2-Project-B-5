@@ -33,7 +33,9 @@ const MapContainer: React.FC = () => {
 
   // * currentPosition으로 1차적으로 위치 정보 수집
   useEffect(() => {
-    getCurrentPosition()
+    getCurrentPosition().then(data=>{
+      setUserCurrentLocation(data)
+    })
   }, []);
 
   // * currentPosition으로 가져온 정보를 토대로 tMap 지도 생성

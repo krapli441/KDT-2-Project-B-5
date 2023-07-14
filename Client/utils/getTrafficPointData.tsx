@@ -1,7 +1,12 @@
 import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config({})
+
+const apikey = process.env.REACT_APP_TmapAppkey
+
+
 const SampleData = {
+  
   // ! api의 버전 정보
   version: 1,
 
@@ -72,7 +77,7 @@ const SampleData = {
   callback: "function",
 
   // ? appKey : 발급받은 APP Key
-  appKey: process.env.REACT_APP_TmapAppkey
+  appKey: apikey
   // appKey:"FB8ThRVZHU4x1zUhC432j3DKfPOdkpmrajEOCYZe"
 };
 

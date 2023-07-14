@@ -45,7 +45,7 @@ module.exports = {
     port: 8085,
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".png"],
+    extensions: [".js ", ".jsx", ".ts", ".tsx", ".css", ".png"],
     fallback: {
       path: require.resolve('path-browserify'),
       os: require.resolve('os-browserify/browser'),
