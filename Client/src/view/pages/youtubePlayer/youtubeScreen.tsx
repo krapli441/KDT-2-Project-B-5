@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Youtube from "./youtubePlayer";
+import Youtube from "./youtubePlayerVer1";
 
 const Screen: React.FC = () => {
   return (

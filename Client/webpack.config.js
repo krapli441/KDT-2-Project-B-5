@@ -5,7 +5,7 @@ module.exports = {
     index: "./src/controller/index.tsx",
   },
   output: {
-    path: path.join(__dirname, "./public"),
+    path: path.join(__dirname, "/../server/public"),
     filename: "bundle.js",
   },
   module: {

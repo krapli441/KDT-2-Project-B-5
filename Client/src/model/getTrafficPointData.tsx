@@ -1,3 +1,5 @@
+const apikey = process.env.REACT_APP_TmapAppkey
+
 const RequestTrafficPointData = {
   // ! api의 버전 정보
   version: 1,
@@ -47,8 +49,8 @@ const RequestTrafficPointData = {
   // ? ACC : 돌발 정보를 요청한다.
   // ! minLat, minLon, maxLat, maxLon의 값은 필히 입력해야 한다.
 
-  trafficType: "POINT",
-
+  trafficType1: "POINT",
+  trafficType2: "AROUND",
   // ? radius : 주변 교통 정보 반경을 지정한다.
   radius: 3,
 
@@ -64,7 +66,7 @@ const RequestTrafficPointData = {
   // ? application/javascript일 때 필수로 입력해야 함.
   callback: "function",
 
-  // ? appKey : 발급받은 APP Key
+  appKey : apikey
   // appKey: "4AfhmXH1W616IshxuKXD27orRe3ufLzD4EHChwyV",
 };
 
