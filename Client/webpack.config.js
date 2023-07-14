@@ -1,16 +1,11 @@
 const path = require("path");
-const dotenv = require('dotenv-webpack');
-
+const Dotenv = require("dotenv-webpack");
 module.exports = {
   entry: {
     index: "./src/index.tsx",
   },
   output: {
-    path: path.join(__dirname, "./public"),
-    filename: "bundle.js",
-  },
-  output: {
-    path: path.join(__dirname, "../server/public"),
+    path: path.join(__dirname, "/../server/public"),
     filename: "bundle.js",
   },
   module: {
@@ -45,15 +40,8 @@ module.exports = {
     port: 8085,
   },
   resolve: {
-    extensions: [".js ", ".jsx", ".ts", ".tsx", ".css", ".png"],
-    fallback: {
-      path: require.resolve('path-browserify'),
-      os: require.resolve('os-browserify/browser'),
-      crypto: require.resolve('crypto-browserify'),
-       stream: require.resolve('stream-browserify'),
-      buffer: require.resolve('buffer/'),
-    },
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".png"],
   },
+  plugins: [new Dotenv()],
   devtool: "source-map",
-  
 };

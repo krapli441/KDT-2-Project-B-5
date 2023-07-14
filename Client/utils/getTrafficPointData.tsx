@@ -1,6 +1,3 @@
-import dotenv from 'dotenv'
-
-dotenv.config({})
 
 const apikey = process.env.REACT_APP_TmapAppkey
 
