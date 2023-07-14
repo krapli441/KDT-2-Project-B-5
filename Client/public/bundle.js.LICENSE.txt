@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 /*
           object-assign
           (c) Sindre Sorhus
           @license MIT
           */
 
+=======
+>>>>>>> codeModuling
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -19,6 +22,7 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
+<<<<<<< HEAD
 /*! ./Component */
 
 /*! ./Context */
@@ -133,6 +137,10 @@ PERFORMANCE OF THIS SOFTWARE.
           !*** external {"commonjs":"react","commonjs2":"react","amd":"react","root":"React"} ***!
           \**************************************************************************************/
 
+=======
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+>>>>>>> codeModuling
 /**
    * @license
    * Copyright 2017 Google LLC
@@ -242,6 +250,7 @@ PERFORMANCE OF THIS SOFTWARE.
 */
 
 /** @license React v16.13.1
+<<<<<<< HEAD
            * react-is.development.js
            *
            * Copyright (c) Facebook, Inc. and its affiliates.
@@ -251,6 +260,8 @@ PERFORMANCE OF THIS SOFTWARE.
            */
 
 /** @license React v16.13.1
+=======
+>>>>>>> codeModuling
  * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
